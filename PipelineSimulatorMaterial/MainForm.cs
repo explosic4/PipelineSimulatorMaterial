@@ -286,24 +286,6 @@ namespace PipelineSimulatorMaterial
             //btnProcessOptions.Hide( );
             //btnStop.Show( );
 
-            timer1.Interval = 1000;
-            if ( rbtn1Hz.Checked )
-            {
-                timer1.Interval = 1000;
-            }
-            if ( rbtn5Hz.Checked )
-            {
-                timer1.Interval = 200;
-            }
-            if ( rbtn10Hz.Checked )
-            {
-                timer1.Interval = 100;
-            }
-            if ( rbtn50Hz.Checked )
-            {
-                timer1.Interval = 20;
-            }
-
             if ( !Pipeline.IsRuning )
             {
                 Pipeline.StartRuning( );
@@ -323,6 +305,7 @@ namespace PipelineSimulatorMaterial
             btnProcessOptions.Hide( );
             btnStop.Show( );
 
+           
 
             timer2.Interval = 1000;
             if ( rbtn1Hz.Checked )
@@ -346,6 +329,10 @@ namespace PipelineSimulatorMaterial
             {
                 Pipeline.StartRuning( );
             }
+
+            Pipeline.Step( this );
+            Process_Display( );
+            TabpageAnimation( );
 
             timer2.Start( );
         }
