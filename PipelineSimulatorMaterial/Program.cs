@@ -16,7 +16,8 @@ namespace PipelineSimulatorMaterial
         {
             Application.EnableVisualStyles( );
             Application.SetCompatibleTextRenderingDefault( false );
-            Application.Run( new Form1( ) );
+            MainForm mainForm = new MainForm(  );
+            Application.Run( mainForm );
         }
     }
 }
