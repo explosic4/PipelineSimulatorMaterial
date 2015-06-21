@@ -833,7 +833,6 @@ namespace PipelineSimulatorMaterial
             this.dicode.TabIndex = 1;
             this.dicode.Text = "icode  0";
             this.dicode.UseVisualStyleBackColor = true;
-            this.dicode.Click += new System.EventHandler(this.materialFlatButton5_Click_1);
             // 
             // dinstr
             // 
@@ -1514,7 +1513,6 @@ namespace PipelineSimulatorMaterial
             this.rbtn5Hz.Text = "5Hz";
             this.rbtn5Hz.UseVisualStyleBackColor = true;
             this.rbtn5Hz.Visible = false;
-            this.rbtn5Hz.CheckedChanged += new System.EventHandler(this.materialRadioButton2_CheckedChanged);
             // 
             // btnConfirmSpeed
             // 
@@ -1614,7 +1612,6 @@ namespace PipelineSimulatorMaterial
             this.lblABout.Size = new System.Drawing.Size(48, 18);
             this.lblABout.TabIndex = 0;
             this.lblABout.Text = "About";
-            this.lblABout.Click += new System.EventHandler(this.materialLabel1_Click_1);
             // 
             // labelMdstm
             // 

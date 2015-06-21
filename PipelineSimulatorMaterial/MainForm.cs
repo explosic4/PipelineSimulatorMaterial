@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MaterialSkin;
@@ -11,6 +9,8 @@ namespace PipelineSimulatorMaterial
 {
     public partial class MainForm : MaterialForm
     {
+        private static ListViewItem foundItem;
+
         public MainForm( )
         {
             InitializeComponent( );
@@ -18,17 +18,20 @@ namespace PipelineSimulatorMaterial
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage( this );
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme( Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE );
+            materialSkinManager.ColorScheme = new ColorScheme( Primary.Indigo500, Primary.Indigo700, Primary.Indigo100,
+                Accent.Pink200, TextShade.WHITE );
             //materialSkinManager.ColorScheme = new ColorScheme( Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE );
         }
 
         private void BtnOpenInstrFile_Click( object sender, EventArgs e )
         {
-
             var dialog = new OpenFileDialog( );
             var info = new DirectoryInfo( Application.ExecutablePath );
-            dialog.InitialDirectory = info.Parent.FullName;
-            dialog.Filter = "所有文件(*.*)|*.*";
+            if ( info.Parent != null )
+            {
+                dialog.InitialDirectory = info.Parent.FullName;
+            }
+            dialog.Filter = @"所有文件(*.*)|*.*";
             if ( dialog.ShowDialog( ) == DialogResult.OK )
             {
                 if ( Pipeline.IsRuning )
@@ -41,7 +44,7 @@ namespace PipelineSimulatorMaterial
                 FileHandler.ReadInstrFile( path );
 
                 lvCode_Display( );
-                lvMemory_DisplayImmediate(  );
+                lvMemory_DisplayImmediate( );
                 tabNavbar.SelectTab( "tpCode" );
             }
         }
@@ -52,7 +55,7 @@ namespace PipelineSimulatorMaterial
 
             //Add
             ListViewItem item = null;
-            foreach ( string property in data )
+            foreach ( var property in data )
             {
                 if ( item == null )
                 {
@@ -63,32 +66,36 @@ namespace PipelineSimulatorMaterial
                     item.SubItems.Add( property );
                 }
             }
-            item.SubItems[ 1 ].Text = ( lvCode.Items.Count + 1 ).ToString( );
+            if ( item != null )
+            {
+                item.SubItems[ 1 ].Text = ( lvCode.Items.Count + 1 ).ToString( );
 
-            lvCode.Items.Add( item );
+                lvCode.Items.Add( item );
+            }
         }
 
         public static bool Delay( int delayTime ) // seconds
         {
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
             int s;
             do
             {
-                TimeSpan spand = DateTime.Now - now;
+                var spand = DateTime.Now - now;
                 s = spand.Seconds;
                 Application.DoEvents( );
-            }
-            while ( s < delayTime );
+            } while ( s < delayTime );
             return true;
         }
 
         private void BtnOpenBinaryFile_Click( object sender, EventArgs e )
         {
-
             var dialog = new OpenFileDialog( );
             var info = new DirectoryInfo( Application.ExecutablePath );
-            dialog.InitialDirectory = info.Parent.FullName;
-            dialog.Filter = "所有文件(*.*)|*.*";
+            if ( info.Parent != null )
+            {
+                dialog.InitialDirectory = info.Parent.FullName;
+            }
+            dialog.Filter = @"所有文件(*.*)|*.*";
             if ( dialog.ShowDialog( ) == DialogResult.OK )
             {
                 if ( Pipeline.IsRuning )
@@ -119,8 +126,6 @@ namespace PipelineSimulatorMaterial
             EnableBreakpoint_Click( sender, e );
         }
 
-     
-
         private void btnProcessOption_Click( object sender, EventArgs e )
         {
             btnPlay.Hide( );
@@ -138,7 +143,6 @@ namespace PipelineSimulatorMaterial
 
         private void btnPlay_Click( object sender, EventArgs e )
         {
-
             btnPlay.Hide( );
             btnNextStep.Hide( );
             btnNextBreakpoint.Hide( );
@@ -189,44 +193,20 @@ namespace PipelineSimulatorMaterial
 
         private void btnStop_Click( object sender, EventArgs e )
         {
-            if ( timer1.Enabled ) timer1.Stop( );
-            if ( timer2.Enabled ) timer2.Stop( );
+            if ( timer1.Enabled )
+            {
+                timer1.Stop( );
+            }
+            if ( timer2.Enabled )
+            {
+                timer2.Stop( );
+            }
             btnStop.Hide( );
             btnPlay.Show( );
             btnNextStep.Show( );
             btnNextBreakpoint.Show( );
             btnReset.Show( );
             btnProcessOptions.Show( );
-        }
-
-        private void materialRadioButton2_CheckedChanged( object sender, EventArgs e )
-        {
-
-        }
-
-        private void materialTabSelector1_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void materialLabel1_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void label24_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void materialLabel1_Click_1( object sender, EventArgs e )
-        {
-
-        }
-
-        private void materialFlatButton5_Click_1( object sender, EventArgs e )
-        {
-
         }
 
         public void TabpageAnimation( )
@@ -243,24 +223,15 @@ namespace PipelineSimulatorMaterial
 
         private void timer1_Tick( object sender, EventArgs e )
         {
-
-
-            //tabProcess.Update(  );
-            //Process_Display( );
-
             Pipeline.Step( this );
-            //TabpageAnimation( );
         }
 
         private void timer2_Tick( object sender, EventArgs e )
         {
-
-
             //tabProcess.Update(  );
             // Process_Display( );
             Pipeline.StepBreakPoint( this );
             // TabpageAnimation( );
-
         }
 
         public void Process_Display( )
@@ -284,9 +255,8 @@ namespace PipelineSimulatorMaterial
             tabProcess.SelectTab( 0 );
         }
 
-        public void btnChange( )
+        public void BtnChange( )
         {
-
             btnStop.Hide( );
             btnPlay.Show( );
             btnNextStep.Show( );
@@ -324,7 +294,6 @@ namespace PipelineSimulatorMaterial
             btnProcessOptions.Hide( );
             btnStop.Show( );
 
-           
 
             timer2.Interval = 1000;
             if ( rbtn1Hz.Checked )
@@ -357,29 +326,6 @@ namespace PipelineSimulatorMaterial
             timer2.Start( );
         }
 
-
-        private void lvCode_DoubleClick( object sender, EventArgs e )
-        {
-            /* var item = lvCode.SelectedItems;
-             var addr = PipeConvert.LitEnd2I( item[ 0 ].Text );
-             ArrayList bp = Pipeline.Breakpoints;
-
-             if ( bp.Contains( addr ) )
-             {
-                 bp.Remove( addr );
-                 //Pipeline.Breakpoints.Sort( );
-             }
-             else
-             {
-                 bp.Add( addr );
-                 Debug.WriteLine( "Pipeline"  + Pipeline.Breakpoints.Count );
-                 Debug.WriteLine( "bp" + bp.Count );
-                 item[ 0 ].Text += "B";
-                 //Pipeline.Breakpoints.Sort( );
-                 //lvCode.SelectedItems[ 0 ].BackColor = BackColor;
-             }*/
-        }
-
         private void DisableBreakpoint_Click( object sender, EventArgs e )
         {
             DisableBreakpoint( );
@@ -398,7 +344,7 @@ namespace PipelineSimulatorMaterial
 
             var addr = PipeConvert.BigEnd2I( item.SubItems[ 2 ].Text.Substring( 2 ) );
 
-            ArrayList bp = Pipeline.Breakpoints;
+            var bp = Pipeline.Breakpoints;
 
             if ( !bp.Contains( addr ) )
             {
@@ -411,7 +357,6 @@ namespace PipelineSimulatorMaterial
                 bp.Sort( );
             }
             item.SubItems[ 0 ].Text = "";
-
         }
 
         private void EnableBreakpoint_Click( object sender, EventArgs e )
@@ -433,7 +378,7 @@ namespace PipelineSimulatorMaterial
             Debug.WriteLine( addr );
 
 
-            ArrayList bp = Pipeline.Breakpoints;
+            var bp = Pipeline.Breakpoints;
 
             if ( bp.Contains( addr ) )
             {
@@ -441,16 +386,16 @@ namespace PipelineSimulatorMaterial
             }
 
             bp.Add( addr );
-            item.SubItems[ 0 ].Text = "-";
+            item.SubItems[ 0 ].Text = @"-";
             if ( bp.Count >= 2 )
             {
                 bp.Sort( );
             }
         }
 
-        public void lvMemory_Display(  )
+        public void lvMemory_Display( )
         {
-            if ( tabNavbar.SelectedTab != this.tpMemory)
+            if ( tabNavbar.SelectedTab != tpMemory )
             {
                 return;
             }
@@ -470,7 +415,7 @@ namespace PipelineSimulatorMaterial
         {
             //Add
             ListViewItem item = null;
-            foreach ( string property in data )
+            foreach ( var property in data )
             {
                 if ( item == null )
                 {
@@ -480,18 +425,19 @@ namespace PipelineSimulatorMaterial
                 {
                     item.SubItems.Add( property );
                 }
-            }        
+            }
 
-            lvMemory.Items.Add( item );
+            if ( item != null )
+            {
+                lvMemory.Items.Add( item );
+            }
         }
 
         private void mnuitSearch_Click( object sender, EventArgs e )
         {
-           //textBox1.Focus(  );
-            searchText.Focus(  );
+            //textBox1.Focus(  );
+            searchText.Focus( );
         }
-
-        private static ListViewItem foundItem;
 
         private void searchText_TextChanged( object sender, EventArgs e )
         {
@@ -521,54 +467,32 @@ namespace PipelineSimulatorMaterial
             }
         }
 
-
         private void searchText_LostFocus( object sender, EventArgs e )
         {
-            pnlUnderLine.Hide(  );
+            pnlUnderLine.Hide( );
             searchText.Text = "";
-        }
-
-        private void searchText_KeyPress( object sender, KeyPressEventArgs e )
-        {
-            Debug.WriteLine( "key " + (int)( e.KeyChar ) );
-            if ( (int)(e.KeyChar) == 13 ) // press enter
-            {
-                SearchNextText( );
-            }
-
-            if ( (int) (e.KeyChar) == 120 ) // press f9
-            {
-                Debug.WriteLine( "F9" );
-                EnableBreakpoint(  );
-            }
-
-            if ( (int) ( e.KeyChar ) == 119 ) // press f8
-            {
-                Debug.WriteLine( "F8" );
-                DisableBreakpoint(  );
-            }
         }
 
         private void searchText_Keydown( object sender, KeyEventArgs e )
         {
-            Debug.WriteLine( "key " + (int) ( e.KeyValue) );
-            if ( (int) ( e.KeyValue ) == 13 ) // press enter
+            Debug.WriteLine( "key " + e.KeyValue );
+            if ( e.KeyValue == 13 ) // press enter
             {
                 SearchNextText( );
             }
 
-            if ( (int) ( e.KeyValue ) == 120 ) // press f9
+            if ( e.KeyValue == 120 ) // press f9
             {
                 Debug.WriteLine( "F9" );
                 EnableBreakpoint( );
             }
 
-            if ( (int) ( e.KeyValue ) == 119 ) // press f8
+            if ( e.KeyValue == 119 ) // press f8
             {
                 Debug.WriteLine( "F8" );
                 DisableBreakpoint( );
                 Debug.WriteLine( "Focus" );
-                searchText.Focus(  );
+                searchText.Focus( );
             }
         }
 
@@ -594,7 +518,7 @@ namespace PipelineSimulatorMaterial
             }
         }
 
-        private void btnDisableBreakpoint_Click(object sender, EventArgs e)
+        private void btnDisableBreakpoint_Click( object sender, EventArgs e )
         {
             DisableBreakpoint_Click( sender, e );
         }

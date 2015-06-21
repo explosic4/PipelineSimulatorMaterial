@@ -47,6 +47,7 @@ namespace MaterialSkin.Controls
             Padding = new Padding(0);
         }
 
+        [ Localizable( false ) ]
         public override string Text
         {
             get { return base.Text; }

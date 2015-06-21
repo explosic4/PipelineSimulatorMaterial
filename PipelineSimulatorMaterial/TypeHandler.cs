@@ -6,37 +6,37 @@ namespace PipelineSimulatorMaterial
         {
             switch ( c )
             {
-                case '0':
+                case '0' :
                     return 0;
-                case '1':
+                case '1' :
                     return 1;
-                case '2':
+                case '2' :
                     return 2;
-                case '3':
+                case '3' :
                     return 3;
-                case '4':
+                case '4' :
                     return 4;
-                case '5':
+                case '5' :
                     return 5;
-                case '6':
+                case '6' :
                     return 6;
-                case '7':
+                case '7' :
                     return 7;
-                case '8':
+                case '8' :
                     return 8;
-                case '9':
+                case '9' :
                     return 9;
-                case 'a':
+                case 'a' :
                     return 10;
-                case 'b':
+                case 'b' :
                     return 11;
-                case 'c':
+                case 'c' :
                     return 12;
-                case 'd':
+                case 'd' :
                     return 13;
-                case 'e':
+                case 'e' :
                     return 14;
-                case 'f':
+                case 'f' :
                     return 15;
             }
             return 16;
@@ -52,37 +52,37 @@ namespace PipelineSimulatorMaterial
             b &= 0xf;
             switch ( b )
             {
-                case 0:
+                case 0 :
                     return '0';
-                case 1:
+                case 1 :
                     return '1';
-                case 2:
+                case 2 :
                     return '2';
-                case 3:
+                case 3 :
                     return '3';
-                case 4:
+                case 4 :
                     return '4';
-                case 5:
+                case 5 :
                     return '5';
-                case 6:
+                case 6 :
                     return '6';
-                case 7:
+                case 7 :
                     return '7';
-                case 8:
+                case 8 :
                     return '8';
-                case 9:
+                case 9 :
                     return '9';
-                case 10:
+                case 10 :
                     return 'a';
-                case 11:
+                case 11 :
                     return 'b';
-                case 12:
+                case 12 :
                     return 'c';
-                case 13:
+                case 13 :
                     return 'd';
-                case 14:
+                case 14 :
                     return 'e';
-                case 15:
+                case 15 :
                     return 'f';
             }
             return 'f';
@@ -144,7 +144,8 @@ namespace PipelineSimulatorMaterial
             return ret;
         }
 
-        public static string LitEnd2S( byte[ ] b ) // convert a 8-bits hex number in Lit end ecoding bytes array to string with a prefix of "0x"
+        public static string LitEnd2S( byte[ ] b )
+            // convert a 8-bits hex number in Lit end ecoding bytes array to string with a prefix of "0x"
         {
             var ret = "0x";
             ret = ret + new string( Byte2C_Array( b[ 3 ] ) );
@@ -152,7 +153,6 @@ namespace PipelineSimulatorMaterial
             ret = ret + new string( Byte2C_Array( b[ 1 ] ) );
             ret = ret + new string( Byte2C_Array( b[ 0 ] ) );
             return ret;
-
         }
 
         public static string LitEnd2S( int t ) // convert a int number to Lit end ecoding string
@@ -188,7 +188,7 @@ namespace PipelineSimulatorMaterial
             b[ 2 ] = (byte) ( t >> 8 );
             t &= 0xff;
             b[ 3 ] = (byte) ( t );
-            return BigEnd2S( b);
+            return BigEnd2S( b );
         }
     }
 
@@ -198,19 +198,19 @@ namespace PipelineSimulatorMaterial
         {
             switch ( ifun )
             {
-                case 0:
+                case 0 :
                     return "rrmovl ";
-                case 1:
+                case 1 :
                     return "cmovle ";
-                case 2:
+                case 2 :
                     return "cmovl ";
-                case 3:
+                case 3 :
                     return "cmove ";
-                case 4:
+                case 4 :
                     return "cmovne ";
-                case 5:
+                case 5 :
                     return "cmovge ";
-                case 6:
+                case 6 :
                     return "cmovg ";
             }
             return "error";
@@ -220,13 +220,13 @@ namespace PipelineSimulatorMaterial
         {
             switch ( ifun )
             {
-                case 0:
+                case 0 :
                     return "addl ";
-                case 1:
+                case 1 :
                     return "subl ";
-                case 2:
+                case 2 :
                     return "andl ";
-                case 3:
+                case 3 :
                     return "xorl ";
             }
             return "error";
@@ -236,19 +236,19 @@ namespace PipelineSimulatorMaterial
         {
             switch ( ifun )
             {
-                case 0:
+                case 0 :
                     return "jmp ";
-                case 1:
+                case 1 :
                     return "jle ";
-                case 2:
+                case 2 :
                     return "jl ";
-                case 3:
+                case 3 :
                     return "je ";
-                case 4:
+                case 4 :
                     return "jne ";
-                case 5:
+                case 5 :
                     return "jge ";
-                case 6:
+                case 6 :
                     return "jg ";
             }
             return "error";
@@ -258,29 +258,29 @@ namespace PipelineSimulatorMaterial
         {
             switch ( icode )
             {
-                case 0:
+                case 0 :
                     return "nop";
-                case 1:
+                case 1 :
                     return "halt";
-                case 2:
+                case 2 :
                     return InstrMove( ifun );
-                case 3:
+                case 3 :
                     return "irmovl ";
-                case 4:
+                case 4 :
                     return "rmmovl ";
-                case 5:
+                case 5 :
                     return "mrmovl ";
-                case 6:
+                case 6 :
                     return InstrOpl( ifun );
-                case 7:
+                case 7 :
                     return InstrJmp( ifun );
-                case 8:
+                case 8 :
                     return "call ";
-                case 9:
+                case 9 :
                     return "ret";
-                case 10:
+                case 10 :
                     return "pushl ";
-                case 11:
+                case 11 :
                     return "popl ";
             }
             return "error";
@@ -290,21 +290,21 @@ namespace PipelineSimulatorMaterial
         {
             switch ( register )
             {
-                case 0:
+                case 0 :
                     return "%eax";
-                case 1:
+                case 1 :
                     return "%ecx";
-                case 2:
+                case 2 :
                     return "%edx";
-                case 3:
+                case 3 :
                     return "%ebx";
-                case 4:
+                case 4 :
                     return "%esp";
-                case 5:
+                case 5 :
                     return "%ebp";
-                case 6:
+                case 6 :
                     return "%esi";
-                case 7:
+                case 7 :
                     return "%edi";
             }
             return "error";
@@ -326,29 +326,29 @@ namespace PipelineSimulatorMaterial
 
             switch ( icode )
             {
-                case 0:
+                case 0 :
                     return "";
-                case 1:
+                case 1 :
                     return "";
-                case 2:
+                case 2 :
                     return rA + ", " + rB;
-                case 3:
+                case 3 :
                     return "$" + valc + ", " + rB;
-                case 4:
+                case 4 :
                     return rA + ", " + "$" + valc + "(" + rB + ")";
-                case 5:
+                case 5 :
                     return "$" + valc + "(" + rB + "), " + rA;
-                case 6:
+                case 6 :
                     return rA + ", " + rB;
-                case 7:
+                case 7 :
                     return vald;
-                case 8:
+                case 8 :
                     return vald;
-                case 9:
+                case 9 :
                     return "";
-                case 10:
+                case 10 :
                     return rA;
-                case 11:
+                case 11 :
                     return rA;
             }
             return "error";
@@ -362,28 +362,27 @@ namespace PipelineSimulatorMaterial
             icode &= 0xf;
             switch ( icode )
             {
-                case 0:
-                case 1:
-                case 9:
+                case 0 :
+                case 1 :
+                case 9 :
                     return 1;
 
-                case 2:
-                case 6:  
-                case 10: 
-                case 11:
+                case 2 :
+                case 6 :
+                case 10 :
+                case 11 :
                     return 2;
-              
-                case 7:
-                case 8:
+
+                case 7 :
+                case 8 :
                     return 5;
 
-                case 3:
-                case 4:
-                case 5:
+                case 3 :
+                case 4 :
+                case 5 :
                     return 6;
             }
             return 1;
         }
     }
-
 }

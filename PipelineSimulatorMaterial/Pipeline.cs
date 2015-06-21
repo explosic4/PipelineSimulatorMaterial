@@ -105,25 +105,20 @@ namespace PipelineSimulatorMaterial
             W_dstE,
             W_dstM;
 
-        public static int Cycle = 0;
+        public static int Cycle;
         public static int InstrFileLen = 0;
         public static string InstrString = "";
-
         public static int[ ] Registers = new int[ 9 ];
         public static int zf, sf, of;
         public static Stats f_stat, D_stat, d_stat, E_stat, e_stat, M_stat, m_stat, W_stat, w_stat;
         public static Instrs f_icode, D_icode, d_icode, E_icode, e_icode, M_icode, m_icode, W_icode;
         public static string f_code, D_code, d_code, E_code, e_code, M_code, m_code, W_code;
-        
         private static readonly ArrayList InstrAddrs = new ArrayList( );
         public static ArrayList Breakpoints = new ArrayList( );
-       
         public static byte[ ] Memory = new byte[ 2049 ];
-        public static byte[ ] MemoryClone = new byte[2049 ];
-
-        public static bool IsRuning = false;
-
-       // public static ArrayList 
+        public static byte[ ] MemoryClone = new byte[ 2049 ];
+        public static bool IsRuning;
+        // public static ArrayList 
 
         public static ArrayList InstrAddrs1
         {
@@ -132,8 +127,8 @@ namespace PipelineSimulatorMaterial
 
         public static void Reset( )
         {
-            Init(  );
-            Memory = (byte[]) MemoryClone.Clone( );
+            Init( );
+            Memory = (byte[ ]) MemoryClone.Clone( );
         }
 
         public static void Init( )
@@ -143,7 +138,7 @@ namespace PipelineSimulatorMaterial
             sf = 0;
             of = 0;
 
-            InstrAddrs.Clear(  );
+            InstrAddrs.Clear( );
 
             for ( var i = 0; i < 9; i++ )
             {
@@ -167,11 +162,11 @@ namespace PipelineSimulatorMaterial
             D_icode = Instrs.INOP;
             D_ifun = 0;
             D_rA = 8;
-            D_rB = 8;   
+            D_rB = 8;
             D_valC = 0;
             D_valP = 0;
             D_code = "nop";
-            
+
             d_stat = Stats.SAOK;
             d_icode = Instrs.INOP;
             d_ifun = 0;
@@ -187,29 +182,19 @@ namespace PipelineSimulatorMaterial
             d_dstM = 8;
             d_rvalA = 0;
             d_rvalB = 0;
-           
+
             E_stat = Stats.SAOK;
-            
             E_icode = Instrs.INOP;
-            
             E_ifun = 0;
-            
             E_valC = 0;
-            
             E_valA = 0;
-            
             E_valB = 0;
-            
             E_dstE = 8;
-            
             E_dstM = 8;
-            
             E_srcA = 8;
-            
             E_srcB = 8;
-            
             E_code = "nop";
-            
+
             e_stat = Stats.SAOK;
             e_icode = Instrs.INOP;
             e_ifun = 0;
@@ -223,27 +208,20 @@ namespace PipelineSimulatorMaterial
             e_Cnd = 0;
             e_valE = 0;
             e_alufun = 0;
-           
+
             e_aluA = 0;
             e_aluB = 0;
-         
             e_setcc = 0;
+
             M_stat = Stats.SAOK;
-            
             M_icode = Instrs.INOP;
-            
             M_Cnd = 0;
-            
             M_valE = 0;
-            
             M_valA = 0;
-            
             M_dstE = 8;
-            
             M_dstM = 8;
-            
             M_code = "nop";
-            
+
             m_stat = Stats.SAOK;
             m_icode = Instrs.INOP;
             m_valE = 0;
@@ -255,28 +233,21 @@ namespace PipelineSimulatorMaterial
             m_Memread = 0;
             m_Memwrite = 0;
             W_stat = Stats.SAOK;
-            
-            W_icode = Instrs.INOP;
-            
-            W_valE = 0;
-            
-            W_valM = 0;
-            
-            W_dstE = 8;
-            
-            W_dstM = 8;
-            
-            W_code = "nop";
-            
-            w_stat = Stats.SAOK;
 
+            W_icode = Instrs.INOP;
+            W_valE = 0;
+            W_valM = 0;
+            W_dstE = 8;
+            W_dstM = 8;
+            W_code = "nop";
+            w_stat = Stats.SAOK;
         }
 
         private static void WriteBack( )
         {
             //W
             W_stall = W_stat != Stats.SAOK ? 1 : 0;
-            
+
             if ( W_stall != 0 )
             {
                 return;
@@ -312,71 +283,70 @@ namespace PipelineSimulatorMaterial
                 m_Memwrite = 0;
                 return;
             }
-            
-                switch ( m_icode )
-                {
-                    case Instrs.IRMMOVL :
-                    case Instrs.IPUSHL :
-                    case Instrs.ICALL :
-                    case Instrs.IMRMOVL :
-                        m_addr = m_valE;
-                        break;
 
-                    case Instrs.IPOPL :
-                    case Instrs.IRET :
-                        m_addr = m_valA;
-                        break;
-                }
+            switch ( m_icode )
+            {
+                case Instrs.IRMMOVL :
+                case Instrs.IPUSHL :
+                case Instrs.ICALL :
+                case Instrs.IMRMOVL :
+                    m_addr = m_valE;
+                    break;
 
-                if ( m_icode == Instrs.IMRMOVL || m_icode == Instrs.IPOPL || m_icode == Instrs.IRET )
+                case Instrs.IPOPL :
+                case Instrs.IRET :
+                    m_addr = m_valA;
+                    break;
+            }
+
+            if ( m_icode == Instrs.IMRMOVL || m_icode == Instrs.IPOPL || m_icode == Instrs.IRET )
+            {
+                m_Memread = 1;
+            }
+            else
+            {
+                m_Memread = 0;
+            }
+
+            if ( M_icode == Instrs.IRMMOVL || m_icode == Instrs.IPUSHL || m_icode == Instrs.ICALL )
+            {
+                m_Memwrite = 1;
+            }
+            else
+            {
+                m_Memwrite = 0;
+            }
+
+            if ( m_Memread == 1 )
+            {
+                if ( m_addr >= 0 && m_addr < 2049 )
                 {
-                    m_Memread = 1;
+                    m_valM = 0;
+                    m_valM = ( m_valM << 8 ) | Memory[ m_addr ];
+                    m_valM = ( m_valM << 8 ) | Memory[ m_addr + 1 ];
+                    m_valM = ( m_valM << 8 ) | Memory[ m_addr + 2 ];
+                    m_valM = ( m_valM << 8 ) | Memory[ m_addr + 3 ];
                 }
                 else
                 {
-                    m_Memread = 0;
+                    m_stat = Stats.SADR;
                 }
+            }
 
-                if ( M_icode == Instrs.IRMMOVL || m_icode == Instrs.IPUSHL || m_icode == Instrs.ICALL )
+            if ( m_Memwrite == 1 )
+            {
+                if ( m_addr >= 0 && m_addr < 2049 )
                 {
-                    m_Memwrite = 1;
+                    Memory[ m_addr ] = Convert.ToByte( ( m_valA & 0xff000000 ) >> 24 );
+                    Memory[ m_addr + 1 ] = Convert.ToByte( ( m_valA & 0x00ff0000 ) >> 16 );
+                    Memory[ m_addr + 2 ] = Convert.ToByte( ( m_valA & 0x0000ff00 ) >> 8 );
+                    Memory[ m_addr + 3 ] = Convert.ToByte( m_valA & 0x000000ff );
                 }
                 else
                 {
-                    m_Memwrite = 0;
+                    m_stat = Stats.SADR;
                 }
-
-                if ( m_Memread == 1 )
-                {
-                    if ( m_addr >= 0 && m_addr < 2049 )
-                    {
-                        m_valM = 0;
-                        m_valM = ( m_valM << 8 ) | Memory[ m_addr ];
-                        m_valM = ( m_valM << 8 ) | Memory[ m_addr + 1 ];
-                        m_valM = ( m_valM << 8 ) | Memory[ m_addr + 2 ];
-                        m_valM = ( m_valM << 8 ) | Memory[ m_addr + 3 ];
-                    }
-                    else
-                    {
-                        m_stat = Stats.SADR;
-                    }
-                }
-
-                if ( m_Memwrite == 1 )
-                {
-                    if ( m_addr >= 0 && m_addr < 2049 )
-                    {
-                        Memory[ m_addr ] = System.Convert.ToByte( ( m_valA & 0xff000000 ) >> 24 );
-                        Memory[ m_addr + 1 ] = System.Convert.ToByte( ( m_valA & 0x00ff0000 ) >> 16 );
-                        Memory[ m_addr + 2 ] = System.Convert.ToByte( ( m_valA & 0x0000ff00 ) >> 8 );
-                        Memory[ m_addr + 3 ] = System.Convert.ToByte( m_valA & 0x000000ff );
-                    }
-                    else
-                    {
-                        m_stat = Stats.SADR;
-                    }
-                }
-            
+            }
         }
 
         private static void Execute( )
@@ -577,12 +547,12 @@ namespace PipelineSimulatorMaterial
                 case Instrs.IPUSHL :
                     d_srcA = d_rA;
                     break;
-                    
+
                 case Instrs.IPOPL :
                 case Instrs.IRET :
                     d_srcA = 4;
                     break;
-                    
+
                 default :
                     d_srcA = 8;
                     break;
@@ -685,7 +655,7 @@ namespace PipelineSimulatorMaterial
 
         public static byte[ ] GetBytesArray( int addr ) //read a 4 bytes long bytes array from memory at adrress of addr
         {
-            var ret= new byte[ 4 ];
+            var ret = new byte[ 4 ];
             ret[ 0 ] = Memory[ addr ];
             ret[ 1 ] = Memory[ addr + 1 ];
             ret[ 2 ] = Memory[ addr + 2 ];
@@ -709,7 +679,7 @@ namespace PipelineSimulatorMaterial
             else
             {
                 f_pc = F_predPC;
-            } 
+            }
 
             // IsSADR
             if ( InstrAddrs.Count != 0 && !InstrAddrs.Contains( f_pc ) )
@@ -730,15 +700,15 @@ namespace PipelineSimulatorMaterial
             }
 
             var addr = f_pc;
-            var icode = (byte)( Memory[ addr ] / 16 );
-            var ifun = (byte)( Memory[ addr ] % 16 );
+            var icode = (byte) ( Memory[ addr ] / 16 );
+            var ifun = (byte) ( Memory[ addr ] % 16 );
 
-            string instr = GetString.Instr( icode, ifun );
-            string operand = GetString.InstrOperand( icode, addr );
+            var instr = GetString.Instr( icode, ifun );
+            var operand = GetString.InstrOperand( icode, addr );
 
-            
+
             // IsSINS
-            if ( instr.Equals( "error" ) || operand.Equals(  "error" ) )
+            if ( instr.Equals( "error" ) || operand.Equals( "error" ) )
             {
                 f_code = "instruction error";
                 f_stat = Stats.SINS;
@@ -781,102 +751,102 @@ namespace PipelineSimulatorMaterial
             var rA = (byte) ( Memory[ addr + 1 ] / 16 );
             var rB = (byte) ( Memory[ addr + 1 ] % 16 );
 
-            byte[ ] valc = GetBytesArray( addr + 2 );
-            byte[ ] vald = GetBytesArray( addr + 1 ); // dest of JXX and CALL
+            var valc = GetBytesArray( addr + 2 );
+            var vald = GetBytesArray( addr + 1 ); // dest of JXX and CALL
 
 
-                if ( f_icode == Instrs.IRRMOVL || f_icode == Instrs.IOPL || f_icode == Instrs.IPUSHL ||
-                     f_icode == Instrs.IPOPL || f_icode == Instrs.IIRMOVL || f_icode == Instrs.IRMMOVL || f_icode == Instrs.IMRMOVL )
-                {
-                    f_needr = 1;
-                }
-                else
-                {
-                    f_needr = 0;
-                }
+            if ( f_icode == Instrs.IRRMOVL || f_icode == Instrs.IOPL || f_icode == Instrs.IPUSHL ||
+                 f_icode == Instrs.IPOPL || f_icode == Instrs.IIRMOVL || f_icode == Instrs.IRMMOVL ||
+                 f_icode == Instrs.IMRMOVL )
+            {
+                f_needr = 1;
+            }
+            else
+            {
+                f_needr = 0;
+            }
 
-                if ( f_icode == Instrs.IIRMOVL || f_icode == Instrs.IRMMOVL || f_icode == Instrs.IMRMOVL ||
-                     f_icode == Instrs.IJXX || f_icode == Instrs.ICALL )
-                {
-                    f_needvc = 1;
-                }
-                else
-                {
-                    f_needvc = 0;
-                }
+            if ( f_icode == Instrs.IIRMOVL || f_icode == Instrs.IRMMOVL || f_icode == Instrs.IMRMOVL ||
+                 f_icode == Instrs.IJXX || f_icode == Instrs.ICALL )
+            {
+                f_needvc = 1;
+            }
+            else
+            {
+                f_needvc = 0;
+            }
 
-                if ( f_needr == 1 )
-                {
-                    f_rA = rA;
-                    f_rB = rB;
-                }
-                else
-                {
-                    f_rA = 8;
-                    f_rB = 8;
-                }
+            if ( f_needr == 1 )
+            {
+                f_rA = rA;
+                f_rB = rB;
+            }
+            else
+            {
+                f_rA = 8;
+                f_rB = 8;
+            }
 
-                if ( f_needvc == 1 && f_needr == 1 )
-                {
-                    f_valC = PipeConvert.LitEnd2I( valc );
-                }
-                else if ( f_needvc == 1 && f_needr == 0 )
-                {
-                    f_valC = PipeConvert.LitEnd2I( vald );
-                }
-                else
-                {
-                    f_valC = 0;
-                }
+            if ( f_needvc == 1 && f_needr == 1 )
+            {
+                f_valC = PipeConvert.LitEnd2I( valc );
+            }
+            else if ( f_needvc == 1 && f_needr == 0 )
+            {
+                f_valC = PipeConvert.LitEnd2I( vald );
+            }
+            else
+            {
+                f_valC = 0;
+            }
 
-                if ( f_needvc == 1 && f_needr == 1 )
-                {
-                    f_valP = f_pc + 6;
-                }
-                else if ( f_needvc == 1 && f_needr == 0 )
-                {
-                    f_valP = f_pc + 5;
-                }
-                else if ( f_needvc == 0 && f_needr == 1 )
-                {
-                    f_valP = f_pc + 2;
-                }
-                else 
-                {
-                    f_valP = f_pc + 1;
-                }
-               
+            if ( f_needvc == 1 && f_needr == 1 )
+            {
+                f_valP = f_pc + 6;
+            }
+            else if ( f_needvc == 1 && f_needr == 0 )
+            {
+                f_valP = f_pc + 5;
+            }
+            else if ( f_needvc == 0 && f_needr == 1 )
+            {
+                f_valP = f_pc + 2;
+            }
+            else
+            {
+                f_valP = f_pc + 1;
+            }
 
-                if ( f_icode == Instrs.IJXX || f_icode == Instrs.ICALL )
-                {
-                    f_predPC = f_valC;
-                }
-                else
-                {
-                    f_predPC = f_valP;
-                }
-    
+
+            if ( f_icode == Instrs.IJXX || f_icode == Instrs.ICALL )
+            {
+                f_predPC = f_valC;
+            }
+            else
+            {
+                f_predPC = f_valP;
+            }
         }
 
         public static void DisplayInstr( MainForm mainForm )
-        {   
+        {
             Debug.WriteLine( "display instr" );
-           
+
             for ( var addr = 0; addr < InstrFileLen; )
             {
                 var icode = (byte) ( Memory[ addr ] / 16 );
                 var ifun = (byte) ( Memory[ addr ] % 16 );
 
-                string instr = GetString.Instr( icode, ifun );
-                string operand = GetString.InstrOperand( icode, addr );
+                var instr = GetString.Instr( icode, ifun );
+                var operand = GetString.InstrOperand( icode, addr );
 
                 var len = GetLength.Instr( icode );
                 var bina = "";
                 for ( var i = 0; i < len; i++ )
                 {
-                    bina += new string( PipeConvert.Byte2C_Array( Memory[ addr + i ] )) ;
+                    bina += new string( PipeConvert.Byte2C_Array( Memory[ addr + i ] ) );
                 }
-                var data = new[ ]{ "", "", PipeConvert.BigEnd2S( addr ), bina, instr + " " + operand };
+                var data = new[ ] { "", "", PipeConvert.BigEnd2S( addr ), bina, instr + " " + operand };
                 mainForm.InsertListViewCode( data );
 
                 foreach ( var s in data )
@@ -1069,39 +1039,6 @@ namespace PipelineSimulatorMaterial
             W_dstM = m_dstM;
         }
 
-
-        public static void StepDebug( )
-        {
-            Cycle = 0;
-            FileHandler.InitStreamWriter( "out.txt" );
-            while ( true )
-            {
-                WriteBack( );
-                MemoryVisit( );
-                Execute( );
-                Decode( );
-                Fetch( );
-                Bubble( );
-                UpdateRegisters( );
-                Cycle++;
-                FileHandler.WrtiePipeInfo( Cycle );
-
-                if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
-                {
-                    Console.WriteLine( "程序已结束！输出文件已生成" );
-                    FileHandler.CloseStreamWriter(  );
-                    break;
-                }
-                if ( W_code == "address error" )
-                {
-                    Console.WriteLine( "程序已结束或非法终止！输出文件已生成" );
-                    FileHandler.CloseStreamWriter( );
-                    break; 
-              
-                }
-            }
-        }
-
         private static void Step( )
         {
             WriteBack( );
@@ -1118,176 +1055,164 @@ namespace PipelineSimulatorMaterial
 
         public static void Step( MainForm mainform )
         {
-            //FileHandler.InitStreamWriter( "out.txt" );
-
             Step( );
 
             mainform.TabpageAnimation( );
-            mainform.Process_Display(  );
-            //Pipeline.DisplayProcess( mainform );
+            mainform.Process_Display( );
             mainform.lvMemory_Display( );
-            
+
 
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
-                {
-                    mainform.timer1.Stop( );
-                    mainform.btnChange( );
+            {
+                mainform.timer1.Stop( );
+                mainform.BtnChange( );
 
-                    StopRunning( );
+                StopRunning( );
 
-                    MessageBox.Show( "Done. Pipeling info saved as out.txt." );
-                    
-                    
-                }
-                else if ( W_code == "address error" )
-                {
-                    mainform.timer1.Stop(  );
-                    mainform.btnChange( );
-                    StopRunning( );
-              
-                    MessageBox.Show( "Address error. Pipeling info saved as out.txt." );
-                    
-                }
+                MessageBox.Show( @"Done. Pipeling info saved as out.txt." );
+            }
+            else if ( W_code == "address error" )
+            {
+                mainform.timer1.Stop( );
+                mainform.BtnChange( );
+                StopRunning( );
+
+                MessageBox.Show( @"Address error. Pipeling info saved as out.txt." );
+            }
         }
-
-        
-
 
         public static void DisplayProcess( MainForm mainForm )
         {
             //图表刷新
 
-            mainForm.fpredPC.Text = "predpc    " + PipeConvert.LitEnd2S( Pipeline.F_predPC );
-            mainForm.fcircle.Text = "cycle    " + Convert.ToString( Pipeline.Cycle );
+            mainForm.fpredPC.Text = "predpc    " + PipeConvert.LitEnd2S( F_predPC );
+            mainForm.fcircle.Text = "cycle    " + Convert.ToString( Cycle );
 
             mainForm.dinstr.Text = "" + Convert.ToString( D_code );
             mainForm.dstat.Text = "state    " + Convert.ToString( D_stat );
-            mainForm.dicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( Pipeline.D_icode ) );
-            mainForm.difun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( Pipeline.D_ifun ) );
-            mainForm.dra.Text = "ra    " + PipeConvert.Byte2S( (byte) ( Pipeline.D_rA ) );
-            mainForm.drb.Text = "rb    " + PipeConvert.Byte2S( (byte) ( Pipeline.D_rB ) );
-            mainForm.dvalc.Text = "valc    " + PipeConvert.LitEnd2S( Pipeline.D_valC );
-            mainForm.dvalp.Text = "valp    " + PipeConvert.LitEnd2S( Pipeline.D_valP );
+            mainForm.dicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( D_icode ) );
+            mainForm.difun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( D_ifun ) );
+            mainForm.dra.Text = "ra    " + PipeConvert.Byte2S( (byte) ( D_rA ) );
+            mainForm.drb.Text = "rb    " + PipeConvert.Byte2S( (byte) ( D_rB ) );
+            mainForm.dvalc.Text = "valc    " + PipeConvert.LitEnd2S( D_valC );
+            mainForm.dvalp.Text = "valp    " + PipeConvert.LitEnd2S( D_valP );
 
 
-            
-                mainForm.einstr.Text = "" + Convert.ToString( E_code );
-                mainForm.estat.Text = "stat    " + Convert.ToString( E_stat );
-                mainForm.eicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_icode ) );
-                mainForm.eifun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_ifun ) );
+            mainForm.einstr.Text = "" + Convert.ToString( E_code );
+            mainForm.estat.Text = "stat    " + Convert.ToString( E_stat );
+            mainForm.eicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( E_icode ) );
+            mainForm.eifun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( E_ifun ) );
 
-                mainForm.evalc.Text = "valc    " + PipeConvert.LitEnd2S( Pipeline.E_valC );
-                mainForm.evala.Text = "vala    " + PipeConvert.LitEnd2S( Pipeline.E_valA );
-                mainForm.evalb.Text = "valb    " + PipeConvert.LitEnd2S( Pipeline.E_valB );
-                mainForm.edste.Text = "dste    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_dstE ) );
-                mainForm.edstm.Text = "dstm    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_dstM ) );
-                mainForm.esrca.Text = "srca    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_srcA ) );
-                mainForm.esrcb.Text = "srcb    " + PipeConvert.Byte2S( (byte) ( Pipeline.E_srcB ) );
+            mainForm.evalc.Text = "valc    " + PipeConvert.LitEnd2S( E_valC );
+            mainForm.evala.Text = "vala    " + PipeConvert.LitEnd2S( E_valA );
+            mainForm.evalb.Text = "valb    " + PipeConvert.LitEnd2S( E_valB );
+            mainForm.edste.Text = "dste    " + PipeConvert.Byte2S( (byte) ( E_dstE ) );
+            mainForm.edstm.Text = "dstm    " + PipeConvert.Byte2S( (byte) ( E_dstM ) );
+            mainForm.esrca.Text = "srca    " + PipeConvert.Byte2S( (byte) ( E_srcA ) );
+            mainForm.esrcb.Text = "srcb    " + PipeConvert.Byte2S( (byte) ( E_srcB ) );
 
-            
-           
 
-                 mainForm.minstr.Text = "" + Convert.ToString( M_code );
+            mainForm.minstr.Text = "" + Convert.ToString( M_code );
 
-                 mainForm.mstat.Text = "state    " + Convert.ToString( M_stat );
-                 mainForm.mifun.Text = "cnd    " + Convert.ToString( M_Cnd );
-                 mainForm.micode.Text       = "icode    " + PipeConvert.Byte2S( (byte) ( Pipeline.M_icode ));
-                 mainForm.mvale.Text        = "valE    " + PipeConvert.LitEnd2S( Pipeline.M_valE ) ;
-                 mainForm.mvala.Text        = "valM    " + PipeConvert.LitEnd2S( Pipeline.M_valA ) ;
-                 mainForm.mdste.Text        = "dstE    " + PipeConvert.Byte2S( (byte) ( Pipeline.M_dstE ));
-                 mainForm.mdstm.Text        = "dstM    " + PipeConvert.Byte2S( (byte) ( Pipeline.M_dstM ));
-             
-                 mainForm.mcc.Text = "ZF  " + PipeConvert.Byte2C( (byte) (zf) ) + "    SF  " + PipeConvert.Byte2C( (byte) (sf )) + "    OF  " + PipeConvert.Byte2C( (byte) (of ));
-            
-                 mainForm.winstr.Text = "" + Convert.ToString( W_code );
-                 mainForm.wstat.Text = "state    " + Convert.ToString( W_stat );
-                 mainForm.wicode.Text       = "icode    " + PipeConvert.Byte2S( (byte) ( Pipeline.W_icode ));
-                 mainForm.wvale.Text        = "valE    " + PipeConvert.LitEnd2S( Pipeline.W_valE ) ;
-                 mainForm.wvalm.Text        = "valM    " + PipeConvert.LitEnd2S( Pipeline.W_valM ) ;
-                 mainForm.wdste.Text        = "dstE    " + PipeConvert.Byte2S( (byte) ( Pipeline.W_dstE ));
-                 mainForm.wdstm.Text        = "dstM    " + PipeConvert.Byte2S( (byte) ( Pipeline.W_dstM ));
+            mainForm.mstat.Text = "state    " + Convert.ToString( M_stat );
+            mainForm.mifun.Text = "cnd    " + Convert.ToString( M_Cnd );
+            mainForm.micode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( M_icode ) );
+            mainForm.mvale.Text = "valE    " + PipeConvert.LitEnd2S( M_valE );
+            mainForm.mvala.Text = "valM    " + PipeConvert.LitEnd2S( M_valA );
+            mainForm.mdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( M_dstE ) );
+            mainForm.mdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( M_dstM ) );
 
-                if ( mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ) )
-                {
-                    // mainForm.Trigger(mainForm.eax,EventArgs.Empty);//相当于鼠标点击触发
-                    //mainForm.eax.OnClick( EventArgs.Empty );
-                }//*/
+            mainForm.mcc.Text = "ZF  " + PipeConvert.Byte2C( (byte) ( zf ) ) + "    SF  " +
+                                PipeConvert.Byte2C( (byte) ( sf ) ) + "    OF  " + PipeConvert.Byte2C( (byte) ( of ) );
 
-                mainForm.eax.Text = "eax    " +  PipeConvert.LitEnd2S( Registers[ 0 ] );
-                mainForm.ecx.Text = "ecx    " +  PipeConvert.LitEnd2S( Registers[ 1 ] );
-                mainForm.edx.Text = "edx    " +  PipeConvert.LitEnd2S( Registers[ 2 ] );
-                mainForm.ebx.Text = "ebx    " +  PipeConvert.LitEnd2S( Registers[ 3 ] );
-                mainForm.esp.Text = "esp    " +  PipeConvert.LitEnd2S( Registers[ 4 ] );
-                mainForm.ebp.Text = "ebp    " +  PipeConvert.LitEnd2S( Registers[ 5 ] );
-                mainForm.esi.Text = "esi    " +  PipeConvert.LitEnd2S( Registers[ 6 ] );
-                mainForm.edi.Text = "edi    " +  PipeConvert.LitEnd2S( Registers[ 7 ] );
+            mainForm.winstr.Text = "" + Convert.ToString( W_code );
+            mainForm.wstat.Text = "state    " + Convert.ToString( W_stat );
+            mainForm.wicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( W_icode ) );
+            mainForm.wvale.Text = "valE    " + PipeConvert.LitEnd2S( W_valE );
+            mainForm.wvalm.Text = "valM    " + PipeConvert.LitEnd2S( W_valM );
+            mainForm.wdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( W_dstE ) );
+            mainForm.wdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( W_dstM ) );
 
-                mainForm.fstall.Text = "";
-                mainForm.dstall.Text = "";
-                mainForm.estall.Text = "";
-                mainForm.mstall.Text = "";
-                mainForm.wstall.Text = "";
+            if ( mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ) )
+            {
+                // mainForm.Trigger(mainForm.eax,EventArgs.Empty);//相当于鼠标点击触发
+                //mainForm.eax.OnClick( EventArgs.Empty );
+            } //*/
 
-                mainForm.fstall.Hide( );
-                mainForm.dstall.Hide( );
-                mainForm.estall.Hide( );
-                mainForm.mstall.Hide( );
-                mainForm.wstall.Hide( );
+            mainForm.eax.Text = "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] );
+            mainForm.ecx.Text = "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] );
+            mainForm.edx.Text = "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] );
+            mainForm.ebx.Text = "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] );
+            mainForm.esp.Text = "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] );
+            mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
+            mainForm.esi.Text = "esi    " + PipeConvert.LitEnd2S( Registers[ 6 ] );
+            mainForm.edi.Text = "edi    " + PipeConvert.LitEnd2S( Registers[ 7 ] );
 
-                if ( F_stall == 1 )
-                {
-                    mainForm.fstall.Text = "stall";
-                    mainForm.fstall.Show( );
-                }
-                if ( D_stall == 1 )
-                {
-                    mainForm.dstall.Text = "stall";
-                    mainForm.dstall.Show( );
-                }
-                else if ( D_bubble == 1 )
-                {
-                    mainForm.dstall.Text = "bubble";
-                    mainForm.dstall.Show( );
-                }
-                if ( E_bubble == 1 )
-                {
-                    mainForm.estall.Text = "bubble";
-                    mainForm.estall.Show( );
-                }
-                if ( M_bubble == 1 )
-                {
-                    mainForm.mstall.Text = "bubble";
-                    mainForm.mstall.Show( );
-                }
-                if ( W_stall == 1 )
-                {
-                    mainForm.wstall.Text = "stall";
-                    mainForm.wstall.Show( );
-                }
-             
+            mainForm.fstall.Text = "";
+            mainForm.dstall.Text = "";
+            mainForm.estall.Text = "";
+            mainForm.mstall.Text = "";
+            mainForm.wstall.Text = "";
+
+            mainForm.fstall.Hide( );
+            mainForm.dstall.Hide( );
+            mainForm.estall.Hide( );
+            mainForm.mstall.Hide( );
+            mainForm.wstall.Hide( );
+
+            if ( F_stall == 1 )
+            {
+                mainForm.fstall.Text = "stall";
+                mainForm.fstall.Show( );
+            }
+            if ( D_stall == 1 )
+            {
+                mainForm.dstall.Text = "stall";
+                mainForm.dstall.Show( );
+            }
+            else if ( D_bubble == 1 )
+            {
+                mainForm.dstall.Text = "bubble";
+                mainForm.dstall.Show( );
+            }
+            if ( E_bubble == 1 )
+            {
+                mainForm.estall.Text = "bubble";
+                mainForm.estall.Show( );
+            }
+            if ( M_bubble == 1 )
+            {
+                mainForm.mstall.Text = "bubble";
+                mainForm.mstall.Show( );
+            }
+            if ( W_stall == 1 )
+            {
+                mainForm.wstall.Text = "stall";
+                mainForm.wstall.Show( );
+            }
         }
 
         public static void StopRunning( )
         {
-            if ( !Pipeline.IsRuning )
+            if ( !IsRuning )
             {
                 return;
             }
 
-            Pipeline.IsRuning = false;
-            FileHandler.CloseStreamWriter(  );
+            IsRuning = false;
+            FileHandler.CloseStreamWriter( );
         }
 
         public static void StartRuning( )
         {
-            if ( Pipeline.IsRuning )
+            if ( IsRuning )
             {
                 return;
             }
 
-            Pipeline.IsRuning = true;
-            Pipeline.Reset( );
-            FileHandler.InitStreamWriter("out.txt" );
+            IsRuning = true;
+            Reset( );
+            FileHandler.InitStreamWriter( "out.txt" );
         }
 
         public static void StepBreakPoint( MainForm mainform )
@@ -1303,9 +1228,9 @@ namespace PipelineSimulatorMaterial
             if ( Breakpoints.Contains( f_pc ) )
             {
                 mainform.timer2.Stop( );
-                mainform.btnChange( );
-                
-                MessageBox.Show( "Breakpoint. To Complete previous instructions you can insert 3 bubbles" );
+                mainform.BtnChange( );
+
+                MessageBox.Show( @"Breakpoint. To Complete previous instructions you can insert 3 bubbles" );
                 return;
             }
 
@@ -1313,7 +1238,7 @@ namespace PipelineSimulatorMaterial
             Cycle++;
 
             mainform.TabpageAnimation( );
-            mainform.Process_Display(  );
+            mainform.Process_Display( );
             //Pipeline.DisplayProcess( mainform );
             mainform.lvMemory_Display( );
 
@@ -1322,27 +1247,24 @@ namespace PipelineSimulatorMaterial
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
             {
                 mainform.timer2.Stop( );
-                mainform.btnChange( );
+                mainform.BtnChange( );
 
                 StopRunning( );
 
-                MessageBox.Show( "Done. Pipeling info saved as out.txt." );
-               
+                MessageBox.Show( @"Done. Pipeling info saved as out.txt." );
             }
             else if ( W_code == "address error" )
             {
                 mainform.timer2.Stop( );
-                mainform.btnChange( );
+                mainform.BtnChange( );
                 StopRunning( );
 
-                MessageBox.Show( "Address error. Pipeling info saved as out.txt." );
+                MessageBox.Show( @"Address error. Pipeling info saved as out.txt." );
             }
-            
         }
 
         public static void DisplyMemory( MainForm mainForm )
         {
-
             for ( var addr = 0; addr + 3 < 2049; addr += 4 )
             {
                 var addr_ = PipeConvert.BigEnd2S( addr );
@@ -1356,7 +1278,5 @@ namespace PipelineSimulatorMaterial
                 mainForm.InsertListViewMemory( data );
             }
         }
-
     }
-
 }
