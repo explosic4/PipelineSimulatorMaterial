@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PipelineSimulatorMaterial
@@ -117,8 +118,8 @@ namespace PipelineSimulatorMaterial
         private static readonly ArrayList InstrAddrs = new ArrayList( );
         public static ArrayList Breakpoints = new ArrayList( );
        
-        public static byte[ ] Memory = new byte[ 2049 * 1000];
-        public static byte[ ] MemoryClone = new byte[2049 * 1000];
+        public static byte[ ] Memory = new byte[ 2049 ];
+        public static byte[ ] MemoryClone = new byte[2049 ];
 
         public static bool IsRuning = false;
 
@@ -858,7 +859,8 @@ namespace PipelineSimulatorMaterial
         }
 
         public static void DisplayInstr( MainForm mainForm )
-        {
+        {   
+            Debug.WriteLine( "display instr" );
            
             for ( var addr = 0; addr < InstrFileLen; )
             {
@@ -876,8 +878,12 @@ namespace PipelineSimulatorMaterial
                 }
                 var data = new[ ]{ "", "", PipeConvert.BigEnd2S( addr ), bina, instr + " " + operand };
                 mainForm.InsertListViewCode( data );
-                
-                
+
+                foreach ( var s in data )
+                {
+                    Debug.Write( s );
+                }
+                Debug.WriteLine( "" );
                 addr += bina.Length / 2;
             }
         }
@@ -1117,7 +1123,9 @@ namespace PipelineSimulatorMaterial
             Step( );
 
             mainform.TabpageAnimation( );
-            Pipeline.DisplayProcess( mainform );
+            mainform.Process_Display(  );
+            //Pipeline.DisplayProcess( mainform );
+            mainform.lvMemory_Display( );
             
 
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
@@ -1148,7 +1156,6 @@ namespace PipelineSimulatorMaterial
         public static void DisplayProcess( MainForm mainForm )
         {
             //图表刷新
-
 
             mainForm.fpredPC.Text = "predpc    " + PipeConvert.LitEnd2S( Pipeline.F_predPC );
             mainForm.fcircle.Text = "cycle    " + Convert.ToString( Pipeline.Cycle );
@@ -1306,7 +1313,9 @@ namespace PipelineSimulatorMaterial
             Cycle++;
 
             mainform.TabpageAnimation( );
-            Pipeline.DisplayProcess( mainform );
+            mainform.Process_Display(  );
+            //Pipeline.DisplayProcess( mainform );
+            mainform.lvMemory_Display( );
 
             FileHandler.WrtiePipeInfo( Cycle );
 
@@ -1330,6 +1339,24 @@ namespace PipelineSimulatorMaterial
             }
             
         }
+
+        public static void DisplyMemory( MainForm mainForm )
+        {
+
+            for ( var addr = 0; addr + 3 < 2049; addr += 4 )
+            {
+                var addr_ = PipeConvert.BigEnd2S( addr );
+                var mem0 = new string( PipeConvert.Byte2C_Array( Memory[ addr ] ) );
+                var mem1 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 1 ] ) );
+                var mem2 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 2 ] ) );
+                var mem3 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 3 ] ) );
+                var mem = mem0 + " " + mem1 + " " + mem2 + " " + mem3;
+
+                var data = new[ ] { addr_, mem };
+                mainForm.InsertListViewMemory( data );
+            }
+        }
+
     }
 
 }
