@@ -34,6 +34,7 @@ namespace MaterialSkin.Controls
         public void SelectAll() { baseTextBox.SelectAll(); }
         public void Clear() { baseTextBox.Clear(); }
 
+        public void Focus() { baseTextBox.Focus(); }
 
         # region Forwarding events to baseTextBox
         public event EventHandler AcceptsTabChanged
@@ -1066,6 +1067,14 @@ namespace MaterialSkin.Controls
                 });
             }
 
+            public new void Focus( )
+            {
+                BeginInvoke( (MethodInvoker) delegate( )
+                {
+                    base.Focus( );
+                    //base.SelectAll( );
+                } );
+            }
 
             private char useSystemPasswordChar = EmptyChar;
             public new bool UseSystemPasswordChar

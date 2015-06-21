@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MaterialSkin;
@@ -115,9 +116,10 @@ namespace PipelineSimulatorMaterial
 
         private void btnCodeOptions_Click( object sender, EventArgs e )
         {
-            btnCodeOptions.Text = "Changed";
-
+            EnableBreakpoint_Click( sender, e );
         }
+
+     
 
         private void btnProcessOption_Click( object sender, EventArgs e )
         {
@@ -355,15 +357,6 @@ namespace PipelineSimulatorMaterial
             timer2.Start( );
         }
 
-        private void materialSingleLineTextField1_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void lvCode_SelectedIndexChanged( object sender, EventArgs e )
-        {
-
-        }
 
         private void lvCode_DoubleClick( object sender, EventArgs e )
         {
@@ -389,6 +382,11 @@ namespace PipelineSimulatorMaterial
 
         private void DisableBreakpoint_Click( object sender, EventArgs e )
         {
+            DisableBreakpoint( );
+        }
+
+        private void DisableBreakpoint( )
+        {
             Debug.WriteLine( "Disable" );
 
             if ( lvCode.SelectedItems.Count == 0 )
@@ -405,29 +403,24 @@ namespace PipelineSimulatorMaterial
             if ( !bp.Contains( addr ) )
             {
                 return;
-
             }
 
             bp.Remove( addr );
-            if ( bp.Count >= 2 ) bp.Sort( );
+            if ( bp.Count >= 2 )
+            {
+                bp.Sort( );
+            }
             item.SubItems[ 0 ].Text = "";
 
-            //debug
-            Debug.WriteLine( "Disable" );
-            foreach ( int bpaddr in bp )
-            {
-                Debug.Write( PipeConvert.LitEnd2S( bpaddr ) );
-            }
-            Debug.WriteLine( "" );
-            foreach ( int bpaddr in Pipeline.Breakpoints )
-            {
-                Debug.Write( PipeConvert.LitEnd2S( bpaddr ) );
-            }
         }
 
         private void EnableBreakpoint_Click( object sender, EventArgs e )
         {
+            EnableBreakpoint( );
+        }
 
+        private void EnableBreakpoint( )
+        {
             Debug.WriteLine( "Enable" );
             if ( lvCode.SelectedItems.Count == 0 )
             {
@@ -449,18 +442,9 @@ namespace PipelineSimulatorMaterial
 
             bp.Add( addr );
             item.SubItems[ 0 ].Text = "-";
-            if ( bp.Count >= 2 ) bp.Sort( );
-
-            //debug
-            Debug.WriteLine( "Enable" );
-            foreach ( int bpaddr in bp )
+            if ( bp.Count >= 2 )
             {
-                Debug.Write( PipeConvert.LitEnd2S( bpaddr ) );
-            }
-            Debug.WriteLine( "" );
-            foreach ( int bpaddr in Pipeline.Breakpoints )
-            {
-                Debug.Write( PipeConvert.LitEnd2S( bpaddr ) );
+                bp.Sort( );
             }
         }
 
@@ -499,6 +483,120 @@ namespace PipelineSimulatorMaterial
             }        
 
             lvMemory.Items.Add( item );
+        }
+
+        private void mnuitSearch_Click( object sender, EventArgs e )
+        {
+           //textBox1.Focus(  );
+            searchText.Focus(  );
+        }
+
+        private static ListViewItem foundItem;
+
+        private void searchText_TextChanged( object sender, EventArgs e )
+        {
+            SearchFisrtText( );
+        }
+
+        private void SearchFisrtText( )
+        {
+            if ( searchText.Text == "" )
+            {
+                return;
+            }
+
+            foundItem = lvCode.FindItemWithText( searchText.Text, true, 0, true );
+            if ( foundItem != null )
+            {
+                lvCode.BeginUpdate( );
+                lvCode.Update( );
+                lvCode.TopItem = foundItem;
+                foundItem.Selected = true;
+                lvCode.EndUpdate( );
+                pnlUnderLine.Show( );
+            }
+            else
+            {
+                pnlUnderLine.Hide( );
+            }
+        }
+
+
+        private void searchText_LostFocus( object sender, EventArgs e )
+        {
+            pnlUnderLine.Hide(  );
+            searchText.Text = "";
+        }
+
+        private void searchText_KeyPress( object sender, KeyPressEventArgs e )
+        {
+            Debug.WriteLine( "key " + (int)( e.KeyChar ) );
+            if ( (int)(e.KeyChar) == 13 ) // press enter
+            {
+                SearchNextText( );
+            }
+
+            if ( (int) (e.KeyChar) == 120 ) // press f9
+            {
+                Debug.WriteLine( "F9" );
+                EnableBreakpoint(  );
+            }
+
+            if ( (int) ( e.KeyChar ) == 119 ) // press f8
+            {
+                Debug.WriteLine( "F8" );
+                DisableBreakpoint(  );
+            }
+        }
+
+        private void searchText_Keydown( object sender, KeyEventArgs e )
+        {
+            Debug.WriteLine( "key " + (int) ( e.KeyValue) );
+            if ( (int) ( e.KeyValue ) == 13 ) // press enter
+            {
+                SearchNextText( );
+            }
+
+            if ( (int) ( e.KeyValue ) == 120 ) // press f9
+            {
+                Debug.WriteLine( "F9" );
+                EnableBreakpoint( );
+            }
+
+            if ( (int) ( e.KeyValue ) == 119 ) // press f8
+            {
+                Debug.WriteLine( "F8" );
+                DisableBreakpoint( );
+                Debug.WriteLine( "Focus" );
+                searchText.Focus(  );
+            }
+        }
+
+        private void SearchNextText( )
+        {
+            if ( foundItem == null || foundItem.Index == lvCode.Items.Count - 1 )
+            {
+                return;
+            }
+
+            foundItem = lvCode.FindItemWithText( searchText.Text, true, foundItem.Index + 1, true );
+            if ( foundItem != null )
+            {
+                lvCode.BeginUpdate( );
+                lvCode.Update( );
+
+                lvCode.TopItem = foundItem;
+                foundItem.Selected = true;
+
+
+                lvCode.EndUpdate( );
+                pnlUnderLine.Show( );
+            }
+        }
+
+        private void btnDisableBreakpoint_Click(object sender, EventArgs e)
+        {
+            DisableBreakpoint_Click( sender, e );
         }
     }
 }

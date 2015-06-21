@@ -38,8 +38,9 @@ namespace PipelineSimulatorMaterial
             this.BtnOpenBinaryFile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.BtnOpenInstrFile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.tpCode = new System.Windows.Forms.TabPage();
+            this.pnlUnderLine = new System.Windows.Forms.Panel();
             this.searchText = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.btnCodeOptions = new MaterialSkin.Controls.MaterialFlatButton();
+            this.btnEnableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
             this.lvCode = new MaterialSkin.Controls.MaterialListView();
             this.chBreakpoint = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chLineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -145,6 +146,7 @@ namespace PipelineSimulatorMaterial
             this.tabsNavbar = new MaterialSkin.Controls.MaterialTabSelector();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.btnDisableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
             this.tabNavbar.SuspendLayout();
             this.tpFile.SuspendLayout();
             this.tpCode.SuspendLayout();
@@ -223,8 +225,10 @@ namespace PipelineSimulatorMaterial
             // tpCode
             // 
             this.tpCode.BackColor = System.Drawing.Color.White;
+            this.tpCode.Controls.Add(this.btnDisableBreakpoint);
+            this.tpCode.Controls.Add(this.pnlUnderLine);
             this.tpCode.Controls.Add(this.searchText);
-            this.tpCode.Controls.Add(this.btnCodeOptions);
+            this.tpCode.Controls.Add(this.btnEnableBreakpoint);
             this.tpCode.Controls.Add(this.lvCode);
             this.tpCode.Location = new System.Drawing.Point(4, 24);
             this.tpCode.Name = "tpCode";
@@ -233,11 +237,21 @@ namespace PipelineSimulatorMaterial
             this.tpCode.TabIndex = 1;
             this.tpCode.Text = "Code";
             // 
+            // pnlUnderLine
+            // 
+            this.pnlUnderLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlUnderLine.BackgroundImage")));
+            this.pnlUnderLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlUnderLine.Location = new System.Drawing.Point(5, 85);
+            this.pnlUnderLine.Name = "pnlUnderLine";
+            this.pnlUnderLine.Size = new System.Drawing.Size(560, 2);
+            this.pnlUnderLine.TabIndex = 5;
+            this.pnlUnderLine.Visible = false;
+            // 
             // searchText
             // 
             this.searchText.Depth = 0;
-            this.searchText.Hint = "Address,  Binary code, or Instruction";
-            this.searchText.Location = new System.Drawing.Point(720, 316);
+            this.searchText.Hint = "Search";
+            this.searchText.Location = new System.Drawing.Point(770, 313);
             this.searchText.MaxLength = 32767;
             this.searchText.MouseState = MaterialSkin.MouseState.HOVER;
             this.searchText.Name = "searchText";
@@ -245,32 +259,35 @@ namespace PipelineSimulatorMaterial
             this.searchText.SelectedText = "";
             this.searchText.SelectionLength = 0;
             this.searchText.SelectionStart = 0;
-            this.searchText.Size = new System.Drawing.Size(253, 23);
+            this.searchText.Size = new System.Drawing.Size(178, 23);
             this.searchText.TabIndex = 4;
             this.searchText.TabStop = false;
             this.searchText.UseSystemPasswordChar = false;
-            this.searchText.Visible = false;
-            this.searchText.Click += new System.EventHandler(this.materialSingleLineTextField1_Click);
+            //this.searchText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchText_KeyPress);
+            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler( this.searchText_Keydown );
+            this.searchText.LostFocus += new System.EventHandler(this.searchText_LostFocus);
+            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
-            // btnCodeOptions
+            // btnEnableBreakpoint
             // 
-            this.btnCodeOptions.AutoSize = true;
-            this.btnCodeOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCodeOptions.Depth = 0;
-            this.btnCodeOptions.Location = new System.Drawing.Point(812, 342);
-            this.btnCodeOptions.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCodeOptions.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCodeOptions.Name = "btnCodeOptions";
-            this.btnCodeOptions.Primary = true;
-            this.btnCodeOptions.Size = new System.Drawing.Size(70, 36);
-            this.btnCodeOptions.TabIndex = 3;
-            this.btnCodeOptions.Text = "Options";
-            this.btnCodeOptions.UseVisualStyleBackColor = true;
-            this.btnCodeOptions.Click += new System.EventHandler(this.btnCodeOptions_Click);
+            this.btnEnableBreakpoint.AutoSize = true;
+            this.btnEnableBreakpoint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEnableBreakpoint.Depth = 0;
+            this.btnEnableBreakpoint.Location = new System.Drawing.Point(799, 345);
+            this.btnEnableBreakpoint.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnEnableBreakpoint.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnEnableBreakpoint.Name = "btnEnableBreakpoint";
+            this.btnEnableBreakpoint.Primary = true;
+            this.btnEnableBreakpoint.Size = new System.Drawing.Size(149, 36);
+            this.btnEnableBreakpoint.TabIndex = 3;
+            this.btnEnableBreakpoint.Text = "Enable Breakpoint";
+            this.btnEnableBreakpoint.UseVisualStyleBackColor = true;
+            this.btnEnableBreakpoint.Click += new System.EventHandler(this.btnCodeOptions_Click);
             // 
             // lvCode
             // 
             this.lvCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvCode.CheckBoxes = true;
             this.lvCode.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chBreakpoint,
             this.chLineNumber,
@@ -286,13 +303,13 @@ namespace PipelineSimulatorMaterial
             this.lvCode.Location = new System.Drawing.Point(3, 3);
             this.lvCode.MouseLocation = new System.Drawing.Point(-1, -1);
             this.lvCode.MouseState = MaterialSkin.MouseState.OUT;
+            this.lvCode.MultiSelect = false;
             this.lvCode.Name = "lvCode";
             this.lvCode.OwnerDraw = true;
             this.lvCode.Size = new System.Drawing.Size(985, 435);
             this.lvCode.TabIndex = 1;
             this.lvCode.UseCompatibleStateImageBehavior = false;
             this.lvCode.View = System.Windows.Forms.View.Details;
-            this.lvCode.SelectedIndexChanged += new System.EventHandler(this.lvCode_SelectedIndexChanged);
             // 
             // chBreakpoint
             // 
@@ -343,7 +360,7 @@ namespace PipelineSimulatorMaterial
             // mnuitDisableBreakpoint
             // 
             this.mnuitDisableBreakpoint.Name = "mnuitDisableBreakpoint";
-            this.mnuitDisableBreakpoint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F9)));
+            this.mnuitDisableBreakpoint.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.mnuitDisableBreakpoint.ShowShortcutKeys = false;
             this.mnuitDisableBreakpoint.Size = new System.Drawing.Size(165, 22);
             this.mnuitDisableBreakpoint.Text = "Disable BreakPoint";
@@ -356,6 +373,7 @@ namespace PipelineSimulatorMaterial
             this.mnuitSearch.ShowShortcutKeys = false;
             this.mnuitSearch.Size = new System.Drawing.Size(165, 22);
             this.mnuitSearch.Text = "Search";
+            this.mnuitSearch.Click += new System.EventHandler(this.mnuitSearch_Click);
             // 
             // tpProcess
             // 
@@ -1750,6 +1768,22 @@ namespace PipelineSimulatorMaterial
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // btnDisableBreakpoint
+            // 
+            this.btnDisableBreakpoint.AutoSize = true;
+            this.btnDisableBreakpoint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDisableBreakpoint.Depth = 0;
+            this.btnDisableBreakpoint.Location = new System.Drawing.Point(795, 386);
+            this.btnDisableBreakpoint.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDisableBreakpoint.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDisableBreakpoint.Name = "btnDisableBreakpoint";
+            this.btnDisableBreakpoint.Primary = true;
+            this.btnDisableBreakpoint.Size = new System.Drawing.Size(153, 36);
+            this.btnDisableBreakpoint.TabIndex = 6;
+            this.btnDisableBreakpoint.Text = "Disable Breakpoint";
+            this.btnDisableBreakpoint.UseVisualStyleBackColor = true;
+            this.btnDisableBreakpoint.Click += new System.EventHandler(this.btnDisableBreakpoint_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1806,7 +1840,7 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.ColumnHeader chAddr;
         private System.Windows.Forms.ColumnHeader chBinary;
         private System.Windows.Forms.ColumnHeader chInstr;
-        private MaterialSkin.Controls.MaterialFlatButton btnCodeOptions;
+        private MaterialSkin.Controls.MaterialFlatButton btnEnableBreakpoint;
 
         private MaterialSkin.Controls.MaterialRadioButton rbtn50Hz;
         private MaterialSkin.Controls.MaterialRadioButton rbtn10Hz;
@@ -1911,6 +1945,8 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.ColumnHeader chBreakpoint;
         private System.Windows.Forms.ColumnHeader chLineNumber;
         public System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Panel pnlUnderLine;
+        private MaterialSkin.Controls.MaterialFlatButton btnDisableBreakpoint;
 
 
 
