@@ -127,7 +127,7 @@ namespace PipelineSimulatorMaterial
             this.btnConfirmSpeed = new MaterialSkin.Controls.MaterialFlatButton();
             this.tpMemory = new System.Windows.Forms.TabPage();
             this.btnMemoryOption = new MaterialSkin.Controls.MaterialFlatButton();
-            this.materialListView1 = new MaterialSkin.Controls.MaterialListView();
+            this.lvMemory = new MaterialSkin.Controls.MaterialListView();
             this.chAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpAbout = new System.Windows.Forms.TabPage();
@@ -343,7 +343,7 @@ namespace PipelineSimulatorMaterial
             // mnuitDisableBreakpoint
             // 
             this.mnuitDisableBreakpoint.Name = "mnuitDisableBreakpoint";
-            this.mnuitDisableBreakpoint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F9)));
+            this.mnuitDisableBreakpoint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F9)));
             this.mnuitDisableBreakpoint.ShowShortcutKeys = false;
             this.mnuitDisableBreakpoint.Size = new System.Drawing.Size(165, 22);
             this.mnuitDisableBreakpoint.Text = "Disable BreakPoint";
@@ -1518,7 +1518,7 @@ namespace PipelineSimulatorMaterial
             // tpMemory
             // 
             this.tpMemory.Controls.Add(this.btnMemoryOption);
-            this.tpMemory.Controls.Add(this.materialListView1);
+            this.tpMemory.Controls.Add(this.lvMemory);
             this.tpMemory.Location = new System.Drawing.Point(4, 24);
             this.tpMemory.Name = "tpMemory";
             this.tpMemory.Padding = new System.Windows.Forms.Padding(3);
@@ -1542,26 +1542,26 @@ namespace PipelineSimulatorMaterial
             this.btnMemoryOption.Text = "Options";
             this.btnMemoryOption.UseVisualStyleBackColor = true;
             // 
-            // materialListView1
+            // lvMemory
             // 
-            this.materialListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvMemory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvMemory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chAddress,
             this.chData});
-            this.materialListView1.Depth = 0;
-            this.materialListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialListView1.Font = new System.Drawing.Font("Roboto", 24F);
-            this.materialListView1.FullRowSelect = true;
-            this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.materialListView1.Location = new System.Drawing.Point(3, 3);
-            this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialListView1.Name = "materialListView1";
-            this.materialListView1.OwnerDraw = true;
-            this.materialListView1.Size = new System.Drawing.Size(985, 435);
-            this.materialListView1.TabIndex = 4;
-            this.materialListView1.UseCompatibleStateImageBehavior = false;
-            this.materialListView1.View = System.Windows.Forms.View.Details;
+            this.lvMemory.Depth = 0;
+            this.lvMemory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvMemory.Font = new System.Drawing.Font("Roboto", 24F);
+            this.lvMemory.FullRowSelect = true;
+            this.lvMemory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvMemory.Location = new System.Drawing.Point(3, 3);
+            this.lvMemory.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.lvMemory.MouseState = MaterialSkin.MouseState.OUT;
+            this.lvMemory.Name = "lvMemory";
+            this.lvMemory.OwnerDraw = true;
+            this.lvMemory.Size = new System.Drawing.Size(985, 435);
+            this.lvMemory.TabIndex = 4;
+            this.lvMemory.UseCompatibleStateImageBehavior = false;
+            this.lvMemory.View = System.Windows.Forms.View.Details;
             // 
             // chAddress
             // 
@@ -1792,7 +1792,7 @@ namespace PipelineSimulatorMaterial
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialTabControl tabNavbar;
+        public MaterialSkin.Controls.MaterialTabControl tabNavbar;
         private MaterialSkin.Controls.MaterialTabSelector tabsNavbar;
         private System.Windows.Forms.TabPage tpFile;
         private System.Windows.Forms.TabPage tpCode;
@@ -1845,7 +1845,7 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.TabPage tpRegister;
         private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
         private MaterialSkin.Controls.MaterialFlatButton btnMemoryOption;
-        private MaterialSkin.Controls.MaterialListView materialListView1;
+        private MaterialSkin.Controls.MaterialListView lvMemory;
         private System.Windows.Forms.ColumnHeader chAddress;
         private System.Windows.Forms.ColumnHeader chData;
         private MaterialSkin.Controls.MaterialLabel lblABout;

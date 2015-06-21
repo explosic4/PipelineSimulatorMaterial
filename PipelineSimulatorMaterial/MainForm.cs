@@ -39,13 +39,16 @@ namespace PipelineSimulatorMaterial
                 var path = dialog.FileName;
                 FileHandler.ReadInstrFile( path );
 
-                listViewCode_Display( );
+                lvCode_Display( );
+                lvMemory_DisplayImmediate(  );
                 tabNavbar.SelectTab( "tpCode" );
             }
         }
 
         public void InsertListViewCode( string[ ] data )
         {
+            Debug.WriteLine( "insert lvcode" );
+
             //Add
             ListViewItem item = null;
             foreach ( string property in data )
@@ -95,12 +98,14 @@ namespace PipelineSimulatorMaterial
 
                 var path = dialog.FileName;
                 FileHandler.ReadBinaryFile( path );
-                listViewCode_Display( );
+
+                lvCode_Display( );
+                lvMemory_DisplayImmediate( );
                 tabNavbar.SelectTab( "tpCode" );
             }
         }
 
-        private void listViewCode_Display( )
+        private void lvCode_Display( )
         {
             lvCode.Items.Clear( );
             lvCode.Update( );
@@ -224,6 +229,11 @@ namespace PipelineSimulatorMaterial
 
         public void TabpageAnimation( )
         {
+            if ( tabNavbar.SelectedTab != tpProcess )
+            {
+                return;
+            }
+
             var index = tabProcess.SelectedIndex;
             index = ( index + 1 ) % 5;
             tabProcess.SelectTab( index );
@@ -253,6 +263,10 @@ namespace PipelineSimulatorMaterial
 
         public void Process_Display( )
         {
+            if ( tabNavbar.SelectedTab != tpProcess )
+            {
+                return;
+            }
             Pipeline.DisplayProcess( this );
         }
 
@@ -264,6 +278,7 @@ namespace PipelineSimulatorMaterial
             }
             Pipeline.Init( );
             Process_Display( );
+            lvMemory_Display( );
             tabProcess.SelectTab( 0 );
         }
 
@@ -294,6 +309,7 @@ namespace PipelineSimulatorMaterial
 
             Pipeline.Step( this );
             Process_Display( );
+            lvMemory_Display( );
             TabpageAnimation( );
         }
 
@@ -333,6 +349,7 @@ namespace PipelineSimulatorMaterial
 
             Pipeline.Step( this );
             Process_Display( );
+            lvMemory_Display( );
             TabpageAnimation( );
 
             timer2.Start( );
@@ -445,6 +462,43 @@ namespace PipelineSimulatorMaterial
             {
                 Debug.Write( PipeConvert.LitEnd2S( bpaddr ) );
             }
+        }
+
+        public void lvMemory_Display(  )
+        {
+            if ( tabNavbar.SelectedTab != this.tpMemory)
+            {
+                return;
+            }
+
+            lvMemory_DisplayImmediate( );
+        }
+
+        public void lvMemory_DisplayImmediate( )
+        {
+            lvMemory.Items.Clear( );
+            lvMemory.Update( );
+            Pipeline.DisplyMemory( this );
+            lvMemory.EndUpdate( );
+        }
+
+        public void InsertListViewMemory( string[ ] data )
+        {
+            //Add
+            ListViewItem item = null;
+            foreach ( string property in data )
+            {
+                if ( item == null )
+                {
+                    item = new ListViewItem( property );
+                }
+                else
+                {
+                    item.SubItems.Add( property );
+                }
+            }        
+
+            lvMemory.Items.Add( item );
         }
     }
 }
