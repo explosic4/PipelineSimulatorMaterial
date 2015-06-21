@@ -264,6 +264,7 @@ namespace PipelineSimulatorMaterial
             }
             Pipeline.Init( );
             Process_Display( );
+            tabProcess.SelectTab( 0 );
         }
 
         public void btnChange( )
