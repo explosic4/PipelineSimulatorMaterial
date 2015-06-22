@@ -856,6 +856,12 @@ namespace PipelineSimulatorMaterial
                 Debug.WriteLine( "" );
                 addr += bina.Length / 2;
             }
+            var blank = new[ ] { "", "", "", "", "" };
+            for ( var i = 0; i < 10; i++ )
+            {
+                mainForm.InsertListViewCode( blank );
+            }
+
         }
 
         private static void Bubble( )

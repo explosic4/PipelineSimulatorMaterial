@@ -29,7 +29,8 @@ namespace MaterialSkin.Controls
 			OwnerDraw = true;
 			ResizeRedraw = true;
 			BorderStyle = BorderStyle.None;
-			SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle( ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true );
+            UpdateStyles( );   
 
 			//Fix for hovers, by default it doesn't redraw
 			//TODO: should only redraw when the hovered line changed, this to reduce unnecessary redraws

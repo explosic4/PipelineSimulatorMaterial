@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -9,6 +10,7 @@ namespace PipelineSimulatorMaterial
 {
     public partial class MainForm : MaterialForm
     {
+
         private static ListViewItem foundItem;
 
         public MainForm( )
@@ -66,15 +68,16 @@ namespace PipelineSimulatorMaterial
                     item.SubItems.Add( property );
                 }
             }
-            if ( item != null )
+            if ( item != null  )
             {
+                if( item.SubItems[2].Text != "")
                 item.SubItems[ 1 ].Text = ( lvCode.Items.Count + 1 ).ToString( );
 
                 lvCode.Items.Add( item );
             }
         }
 
-        public static bool Delay( int delayTime ) // seconds
+      /*  public static bool Delay( int delayTime ) // seconds
         {
             var now = DateTime.Now;
             int s;
@@ -85,6 +88,17 @@ namespace PipelineSimulatorMaterial
                 Application.DoEvents( );
             } while ( s < delayTime );
             return true;
+        }*/
+
+        [DllImport("kernel32.dll")] 
+        static extern uint GetTickCount();
+        static void Delay(uint ms) 
+        {
+            uint start = GetTickCount();
+            while (GetTickCount() - start < ms) 
+            {
+                Application.DoEvents();
+            }
         }
 
         private void BtnOpenBinaryFile_Click( object sender, EventArgs e )
@@ -454,10 +468,11 @@ namespace PipelineSimulatorMaterial
             foundItem = lvCode.FindItemWithText( searchText.Text, true, 0, true );
             if ( foundItem != null )
             {
-                lvCode.BeginUpdate( );
+                
                 lvCode.Update( );
                 lvCode.TopItem = foundItem;
                 foundItem.Selected = true;
+                
                 lvCode.EndUpdate( );
                 pnlUnderLine.Show( );
             }
@@ -506,13 +521,15 @@ namespace PipelineSimulatorMaterial
             foundItem = lvCode.FindItemWithText( searchText.Text, true, foundItem.Index + 1, true );
             if ( foundItem != null )
             {
+                Debug.WriteLine( foundItem.SubItems[ 1 ].Text );
+
                 lvCode.BeginUpdate( );
-                lvCode.Update( );
-
+                //lvCode.Update( );
                 lvCode.TopItem = foundItem;
+
+                //lvCode.EnsureVisible( foundItem.Index );
                 foundItem.Selected = true;
-
-
+                
                 lvCode.EndUpdate( );
                 pnlUnderLine.Show( );
             }
