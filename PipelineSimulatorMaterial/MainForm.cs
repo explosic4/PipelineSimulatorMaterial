@@ -586,5 +586,50 @@ namespace PipelineSimulatorMaterial
         {
             DisableBreakpoint_Click( sender, e );
         }
+
+        private void eax_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void esi_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void ebp_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void esp_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void ebx_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void edx_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void ecx_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void edi_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void dicode_Click( object sender, EventArgs e )
+        {
+
+        }
     }
 }

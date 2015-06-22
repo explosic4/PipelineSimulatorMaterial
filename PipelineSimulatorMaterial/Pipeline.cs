@@ -1151,8 +1151,8 @@ namespace PipelineSimulatorMaterial
             mainForm.ebx.Text = "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] );
             mainForm.esp.Text = "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] );
             mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
-            mainForm.esi.Text = "esi    " + PipeConvert.LitEnd2S( Registers[ 6 ] );
-            mainForm.edi.Text = "edi    " + PipeConvert.LitEnd2S( Registers[ 7 ] );
+            mainForm.esi.Text = "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] );
+            mainForm.edi.Text = "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] );
 
             mainForm.fstall.Text = "";
             mainForm.dstall.Text = "";
