@@ -1063,14 +1063,13 @@ namespace PipelineSimulatorMaterial
         {
             Step( );
 
-            mainform.TabpageAnimation( );
             mainform.Process_Display( );
             mainform.lvMemory_Display( );
 
-
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
             {
-                mainform.timer1.Stop( );
+                //mainform.timer1.Stop( );
+                mainform.timer1.Enabled = false;
                 mainform.BtnChange( );
 
                 StopRunning( );
@@ -1079,7 +1078,8 @@ namespace PipelineSimulatorMaterial
             }
             else if ( W_code == "address error" )
             {
-                mainform.timer1.Stop( );
+                //mainform.timer1.Stop( );
+                mainform.timer1.Enabled = false;
                 mainform.BtnChange( );
                 StopRunning( );
 
@@ -1230,29 +1230,35 @@ namespace PipelineSimulatorMaterial
             Fetch( );
             Bubble( );
 
-
+            Debug.WriteLine( " In stepBreakPoint breakpoints: " );
+            foreach ( var breakaddr in Breakpoints )
+            {
+                Debug.WriteLine( breakaddr + " " );
+            }
+            Debug.WriteLine( f_pc );
+            Debug.WriteLine( "" );
             if ( Breakpoints.Contains( f_pc ) )
             {
-                mainform.timer2.Stop( );
+                //mainform.timer2.Stop( );
+                mainform.timer2.Enabled = false;
                 mainform.BtnChange( );
 
-                MessageBox.Show( @"Breakpoint. To Complete previous instructions you can insert 3 bubbles" );
+                MessageBox.Show( @"Breakpoint." );
                 return;
             }
 
             UpdateRegisters( );
             Cycle++;
 
-            mainform.TabpageAnimation( );
             mainform.Process_Display( );
-            //Pipeline.DisplayProcess( mainform );
             mainform.lvMemory_Display( );
 
             FileHandler.WrtiePipeInfo( Cycle );
 
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
             {
-                mainform.timer2.Stop( );
+                //mainform.timer2.Stop( );
+                mainform.timer2.Enabled = false;
                 mainform.BtnChange( );
 
                 StopRunning( );
@@ -1261,7 +1267,8 @@ namespace PipelineSimulatorMaterial
             }
             else if ( W_code == "address error" )
             {
-                mainform.timer2.Stop( );
+                //mainform.timer2.Stop( );
+                mainform.timer2.Enabled = false;
                 mainform.BtnChange( );
                 StopRunning( );
 

@@ -187,7 +187,25 @@ namespace PipelineSimulatorMaterial
             {
                 Pipeline.StartRuning( );
             }
-            timer1.Start( );
+
+            
+            timer_Start( false ); 
+        }
+
+        private void timer_Start( bool breakpointEnable )
+        {
+            if ( breakpointEnable == false )
+            {
+                Debug.WriteLine( "time1 enable" );
+                t1 = tabProcess.SelectedIndex;
+                timer1.Enabled = true;
+            }
+            else
+            {
+                Debug.WriteLine( "time2 enable" );
+                t2 = tabProcess.SelectedIndex;
+                timer2.Enabled = true;
+            }
         }
 
         private void btnConfirmSpeed_Click( object sender, EventArgs e )
@@ -235,17 +253,40 @@ namespace PipelineSimulatorMaterial
             tabProcess.SelectTab( index );
         }
 
+        private static int t1 = 0;
         private void timer1_Tick( object sender, EventArgs e )
         {
-            Pipeline.Step( this );
+            /*if ( t1 == -1 )
+            {
+                timer1.Enabled = false;
+                return;
+            }*/
+
+            t1 %= 5;
+            if ( t1 == 0 )
+            {
+                Pipeline.Step( this );
+            }
+            tabProcess.SelectTab( t1 );
+            t1++;
         }
 
+        private static int t2 = 0;
         private void timer2_Tick( object sender, EventArgs e )
         {
-            //tabProcess.Update(  );
-            // Process_Display( );
-            Pipeline.StepBreakPoint( this );
-            // TabpageAnimation( );
+            /*if ( t2 == -1 )
+            {
+               timer1.Enabled = false;
+               return;
+            }*/
+
+            t2 %= 5;
+            if ( t2 == 0 )
+            {
+                Pipeline.StepBreakPoint( this ); 
+            }
+            tabProcess.SelectTab( t2 );
+            t2++;
         }
 
         public void Process_Display( )
@@ -337,7 +378,7 @@ namespace PipelineSimulatorMaterial
             lvMemory_Display( );
             TabpageAnimation( );
 
-            timer2.Start( );
+            timer_Start( true );
         }
 
         private void DisableBreakpoint_Click( object sender, EventArgs e )
@@ -388,7 +429,6 @@ namespace PipelineSimulatorMaterial
             var item = lvCode.SelectedItems[ 0 ];
             var addr = PipeConvert.BigEnd2I( item.SubItems[ 2 ].Text.Substring( 2 ) );
 
-            Debug.WriteLine( "" );
             Debug.WriteLine( addr );
 
 
@@ -405,6 +445,13 @@ namespace PipelineSimulatorMaterial
             {
                 bp.Sort( );
             }
+
+            Debug.Write( "bp:" );
+            foreach ( var breakaddr in bp )
+            {
+                Debug.Write( breakaddr + " " );
+            }
+            Debug.WriteLine( "" );
         }
 
         public void lvMemory_Display( )

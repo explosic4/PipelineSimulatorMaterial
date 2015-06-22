@@ -38,6 +38,7 @@ namespace PipelineSimulatorMaterial
             this.BtnOpenBinaryFile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.BtnOpenInstrFile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.tpCode = new System.Windows.Forms.TabPage();
+            this.btnDisableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
             this.pnlUnderLine = new System.Windows.Forms.Panel();
             this.searchText = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnEnableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
@@ -69,20 +70,26 @@ namespace PipelineSimulatorMaterial
             this.pnlProcess = new System.Windows.Forms.Panel();
             this.tabsProcess = new MaterialSkin.Controls.MaterialTabSelector();
             this.tabProcess = new MaterialSkin.Controls.MaterialTabControl();
-            this.tpFetch = new System.Windows.Forms.TabPage();
-            this.fstall = new MaterialSkin.Controls.MaterialFlatButton();
-            this.fcircle = new MaterialSkin.Controls.MaterialFlatButton();
-            this.fpredPC = new MaterialSkin.Controls.MaterialFlatButton();
-            this.tpDecode = new System.Windows.Forms.TabPage();
-            this.drb = new MaterialSkin.Controls.MaterialFlatButton();
-            this.difun = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dra = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dvalp = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dvalc = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dstall = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dstat = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dicode = new MaterialSkin.Controls.MaterialFlatButton();
-            this.dinstr = new MaterialSkin.Controls.MaterialFlatButton();
+            this.tpWriteBack = new System.Windows.Forms.TabPage();
+            this.wdstm = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wdste = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wvalm = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wvale = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wstall = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wstat = new MaterialSkin.Controls.MaterialFlatButton();
+            this.wicode = new MaterialSkin.Controls.MaterialFlatButton();
+            this.winstr = new MaterialSkin.Controls.MaterialFlatButton();
+            this.tpMemoryVisit = new System.Windows.Forms.TabPage();
+            this.mdstm = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mdste = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mvala = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mifun = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mvale = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mcc = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mstall = new MaterialSkin.Controls.MaterialFlatButton();
+            this.mstat = new MaterialSkin.Controls.MaterialFlatButton();
+            this.micode = new MaterialSkin.Controls.MaterialFlatButton();
+            this.minstr = new MaterialSkin.Controls.MaterialFlatButton();
             this.tpExecute = new System.Windows.Forms.TabPage();
             this.edstm = new MaterialSkin.Controls.MaterialFlatButton();
             this.edste = new MaterialSkin.Controls.MaterialFlatButton();
@@ -96,26 +103,20 @@ namespace PipelineSimulatorMaterial
             this.estat = new MaterialSkin.Controls.MaterialFlatButton();
             this.eicode = new MaterialSkin.Controls.MaterialFlatButton();
             this.einstr = new MaterialSkin.Controls.MaterialFlatButton();
-            this.tpMemoryVisit = new System.Windows.Forms.TabPage();
-            this.mdstm = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mdste = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mvala = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mifun = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mvale = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mcc = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mstall = new MaterialSkin.Controls.MaterialFlatButton();
-            this.mstat = new MaterialSkin.Controls.MaterialFlatButton();
-            this.micode = new MaterialSkin.Controls.MaterialFlatButton();
-            this.minstr = new MaterialSkin.Controls.MaterialFlatButton();
-            this.tpWriteBack = new System.Windows.Forms.TabPage();
-            this.wdstm = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wdste = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wvalm = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wvale = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wstall = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wstat = new MaterialSkin.Controls.MaterialFlatButton();
-            this.wicode = new MaterialSkin.Controls.MaterialFlatButton();
-            this.winstr = new MaterialSkin.Controls.MaterialFlatButton();
+            this.tpDecode = new System.Windows.Forms.TabPage();
+            this.drb = new MaterialSkin.Controls.MaterialFlatButton();
+            this.difun = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dra = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dvalp = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dvalc = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dstall = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dstat = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dicode = new MaterialSkin.Controls.MaterialFlatButton();
+            this.dinstr = new MaterialSkin.Controls.MaterialFlatButton();
+            this.tpFetch = new System.Windows.Forms.TabPage();
+            this.fstall = new MaterialSkin.Controls.MaterialFlatButton();
+            this.fcircle = new MaterialSkin.Controls.MaterialFlatButton();
+            this.fpredPC = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnPlay = new MaterialSkin.Controls.MaterialFlatButton();
             this.rbtn1Hz = new MaterialSkin.Controls.MaterialRadioButton();
             this.btnProcessOptions = new MaterialSkin.Controls.MaterialFlatButton();
@@ -146,7 +147,7 @@ namespace PipelineSimulatorMaterial
             this.tabsNavbar = new MaterialSkin.Controls.MaterialTabSelector();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.btnDisableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tabNavbar.SuspendLayout();
             this.tpFile.SuspendLayout();
             this.tpCode.SuspendLayout();
@@ -157,13 +158,14 @@ namespace PipelineSimulatorMaterial
             this.tpRegister.SuspendLayout();
             this.pnlProcess.SuspendLayout();
             this.tabProcess.SuspendLayout();
-            this.tpFetch.SuspendLayout();
-            this.tpDecode.SuspendLayout();
-            this.tpExecute.SuspendLayout();
-            this.tpMemoryVisit.SuspendLayout();
             this.tpWriteBack.SuspendLayout();
+            this.tpMemoryVisit.SuspendLayout();
+            this.tpExecute.SuspendLayout();
+            this.tpDecode.SuspendLayout();
+            this.tpFetch.SuspendLayout();
             this.tpMemory.SuspendLayout();
             this.tpAbout.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabNavbar
@@ -237,6 +239,22 @@ namespace PipelineSimulatorMaterial
             this.tpCode.TabIndex = 1;
             this.tpCode.Text = "Code";
             // 
+            // btnDisableBreakpoint
+            // 
+            this.btnDisableBreakpoint.AutoSize = true;
+            this.btnDisableBreakpoint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDisableBreakpoint.Depth = 0;
+            this.btnDisableBreakpoint.Location = new System.Drawing.Point(795, 386);
+            this.btnDisableBreakpoint.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDisableBreakpoint.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDisableBreakpoint.Name = "btnDisableBreakpoint";
+            this.btnDisableBreakpoint.Primary = true;
+            this.btnDisableBreakpoint.Size = new System.Drawing.Size(153, 36);
+            this.btnDisableBreakpoint.TabIndex = 6;
+            this.btnDisableBreakpoint.Text = "Disable Breakpoint";
+            this.btnDisableBreakpoint.UseVisualStyleBackColor = true;
+            this.btnDisableBreakpoint.Click += new System.EventHandler(this.btnDisableBreakpoint_Click);
+            // 
             // pnlUnderLine
             // 
             this.pnlUnderLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlUnderLine.BackgroundImage")));
@@ -263,8 +281,7 @@ namespace PipelineSimulatorMaterial
             this.searchText.TabIndex = 4;
             this.searchText.TabStop = false;
             this.searchText.UseSystemPasswordChar = false;
-            //this.searchText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchText_KeyPress);
-            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler( this.searchText_Keydown );
+            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_Keydown);
             this.searchText.LostFocus += new System.EventHandler(this.searchText_LostFocus);
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
@@ -378,6 +395,7 @@ namespace PipelineSimulatorMaterial
             // tpProcess
             // 
             this.tpProcess.BackColor = System.Drawing.Color.White;
+            this.tpProcess.Controls.Add(this.panel2);
             this.tpProcess.Controls.Add(this.btnReset);
             this.tpProcess.Controls.Add(this.panel1);
             this.tpProcess.Controls.Add(this.pnlProcess);
@@ -606,9 +624,9 @@ namespace PipelineSimulatorMaterial
             this.pnlProcess.Controls.Add(this.tabsProcess);
             this.pnlProcess.Controls.Add(this.tabProcess);
             this.pnlProcess.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlProcess.Location = new System.Drawing.Point(178, 43);
+            this.pnlProcess.Location = new System.Drawing.Point(179, 83);
             this.pnlProcess.Name = "pnlProcess";
-            this.pnlProcess.Size = new System.Drawing.Size(533, 350);
+            this.pnlProcess.Size = new System.Drawing.Size(533, 332);
             this.pnlProcess.TabIndex = 10;
             // 
             // tabsProcess
@@ -620,436 +638,159 @@ namespace PipelineSimulatorMaterial
             this.tabsProcess.Name = "tabsProcess";
             this.tabsProcess.Size = new System.Drawing.Size(525, 50);
             this.tabsProcess.TabIndex = 1;
-            this.tabsProcess.Text = "materialTabSelector1";
             // 
             // tabProcess
             // 
-            this.tabProcess.Controls.Add(this.tpFetch);
-            this.tabProcess.Controls.Add(this.tpDecode);
-            this.tabProcess.Controls.Add(this.tpExecute);
-            this.tabProcess.Controls.Add(this.tpMemoryVisit);
             this.tabProcess.Controls.Add(this.tpWriteBack);
+            this.tabProcess.Controls.Add(this.tpMemoryVisit);
+            this.tabProcess.Controls.Add(this.tpExecute);
+            this.tabProcess.Controls.Add(this.tpDecode);
+            this.tabProcess.Controls.Add(this.tpFetch);
             this.tabProcess.Depth = 0;
             this.tabProcess.Location = new System.Drawing.Point(13, 53);
             this.tabProcess.MouseState = MaterialSkin.MouseState.HOVER;
             this.tabProcess.Name = "tabProcess";
             this.tabProcess.SelectedIndex = 0;
-            this.tabProcess.Size = new System.Drawing.Size(494, 279);
+            this.tabProcess.Size = new System.Drawing.Size(494, 266);
             this.tabProcess.TabIndex = 0;
             // 
-            // tpFetch
+            // tpWriteBack
             // 
-            this.tpFetch.BackColor = System.Drawing.Color.White;
-            this.tpFetch.Controls.Add(this.fstall);
-            this.tpFetch.Controls.Add(this.fcircle);
-            this.tpFetch.Controls.Add(this.fpredPC);
-            this.tpFetch.Location = new System.Drawing.Point(4, 22);
-            this.tpFetch.Name = "tpFetch";
-            this.tpFetch.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFetch.Size = new System.Drawing.Size(486, 253);
-            this.tpFetch.TabIndex = 0;
-            this.tpFetch.Text = "Fetch";
+            this.tpWriteBack.Controls.Add(this.wdstm);
+            this.tpWriteBack.Controls.Add(this.wdste);
+            this.tpWriteBack.Controls.Add(this.wvalm);
+            this.tpWriteBack.Controls.Add(this.wvale);
+            this.tpWriteBack.Controls.Add(this.wstall);
+            this.tpWriteBack.Controls.Add(this.wstat);
+            this.tpWriteBack.Controls.Add(this.wicode);
+            this.tpWriteBack.Controls.Add(this.winstr);
+            this.tpWriteBack.Location = new System.Drawing.Point(4, 22);
+            this.tpWriteBack.Name = "tpWriteBack";
+            this.tpWriteBack.Padding = new System.Windows.Forms.Padding(3);
+            this.tpWriteBack.Size = new System.Drawing.Size(486, 240);
+            this.tpWriteBack.TabIndex = 0;
+            this.tpWriteBack.Text = "WriteBack";
+            this.tpWriteBack.UseVisualStyleBackColor = true;
             // 
-            // fstall
+            // wdstm
             // 
-            this.fstall.AutoSize = true;
-            this.fstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.fstall.Depth = 0;
-            this.fstall.Location = new System.Drawing.Point(112, 28);
-            this.fstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.fstall.MouseState = MaterialSkin.MouseState.HOVER;
-            this.fstall.Name = "fstall";
-            this.fstall.Primary = true;
-            this.fstall.Size = new System.Drawing.Size(60, 36);
-            this.fstall.TabIndex = 2;
-            this.fstall.Text = "Fstall";
-            this.fstall.UseVisualStyleBackColor = true;
+            this.wdstm.AutoSize = true;
+            this.wdstm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wdstm.Depth = 0;
+            this.wdstm.Location = new System.Drawing.Point(205, 185);
+            this.wdstm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wdstm.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wdstm.Name = "wdstm";
+            this.wdstm.Primary = false;
+            this.wdstm.Size = new System.Drawing.Size(135, 36);
+            this.wdstm.TabIndex = 43;
+            this.wdstm.Text = "dstm  0x00000000";
+            this.wdstm.UseVisualStyleBackColor = true;
             // 
-            // fcircle
+            // wdste
             // 
-            this.fcircle.AutoSize = true;
-            this.fcircle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.fcircle.Depth = 0;
-            this.fcircle.Location = new System.Drawing.Point(22, 28);
-            this.fcircle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.fcircle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.fcircle.Name = "fcircle";
-            this.fcircle.Primary = false;
-            this.fcircle.Size = new System.Drawing.Size(72, 36);
-            this.fcircle.TabIndex = 1;
-            this.fcircle.Text = "Circle  0";
-            this.fcircle.UseVisualStyleBackColor = true;
+            this.wdste.AutoSize = true;
+            this.wdste.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wdste.Depth = 0;
+            this.wdste.Location = new System.Drawing.Point(50, 183);
+            this.wdste.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wdste.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wdste.Name = "wdste";
+            this.wdste.Primary = false;
+            this.wdste.Size = new System.Drawing.Size(131, 36);
+            this.wdste.TabIndex = 42;
+            this.wdste.Text = "dste  0x00000000";
+            this.wdste.UseVisualStyleBackColor = true;
             // 
-            // fpredPC
+            // wvalm
             // 
-            this.fpredPC.AutoSize = true;
-            this.fpredPC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.fpredPC.Depth = 0;
-            this.fpredPC.Location = new System.Drawing.Point(22, 76);
-            this.fpredPC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.fpredPC.MouseState = MaterialSkin.MouseState.HOVER;
-            this.fpredPC.Name = "fpredPC";
-            this.fpredPC.Primary = false;
-            this.fpredPC.Size = new System.Drawing.Size(150, 36);
-            this.fpredPC.TabIndex = 0;
-            this.fpredPC.Text = "PredPc  0x00000000";
-            this.fpredPC.UseVisualStyleBackColor = true;
+            this.wvalm.AutoSize = true;
+            this.wvalm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wvalm.Depth = 0;
+            this.wvalm.Location = new System.Drawing.Point(304, 132);
+            this.wvalm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wvalm.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wvalm.Name = "wvalm";
+            this.wvalm.Primary = false;
+            this.wvalm.Size = new System.Drawing.Size(132, 36);
+            this.wvalm.TabIndex = 41;
+            this.wvalm.Text = "valb  0x00000000";
+            this.wvalm.UseVisualStyleBackColor = true;
             // 
-            // tpDecode
+            // wvale
             // 
-            this.tpDecode.Controls.Add(this.drb);
-            this.tpDecode.Controls.Add(this.difun);
-            this.tpDecode.Controls.Add(this.dra);
-            this.tpDecode.Controls.Add(this.dvalp);
-            this.tpDecode.Controls.Add(this.dvalc);
-            this.tpDecode.Controls.Add(this.dstall);
-            this.tpDecode.Controls.Add(this.dstat);
-            this.tpDecode.Controls.Add(this.dicode);
-            this.tpDecode.Controls.Add(this.dinstr);
-            this.tpDecode.Location = new System.Drawing.Point(4, 22);
-            this.tpDecode.Name = "tpDecode";
-            this.tpDecode.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDecode.Size = new System.Drawing.Size(486, 253);
-            this.tpDecode.TabIndex = 1;
-            this.tpDecode.Text = "Decode";
-            this.tpDecode.UseVisualStyleBackColor = true;
+            this.wvale.AutoSize = true;
+            this.wvale.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wvale.Depth = 0;
+            this.wvale.Location = new System.Drawing.Point(304, 83);
+            this.wvale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wvale.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wvale.Name = "wvale";
+            this.wvale.Primary = false;
+            this.wvale.Size = new System.Drawing.Size(132, 36);
+            this.wvale.TabIndex = 39;
+            this.wvale.Text = "vala  0x00000000";
+            this.wvale.UseVisualStyleBackColor = true;
             // 
-            // drb
+            // wstall
             // 
-            this.drb.AutoSize = true;
-            this.drb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.drb.Depth = 0;
-            this.drb.Location = new System.Drawing.Point(354, 26);
-            this.drb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.drb.MouseState = MaterialSkin.MouseState.HOVER;
-            this.drb.Name = "drb";
-            this.drb.Primary = false;
-            this.drb.Size = new System.Drawing.Size(51, 36);
-            this.drb.TabIndex = 8;
-            this.drb.Text = "rb    0";
-            this.drb.UseVisualStyleBackColor = true;
+            this.wstall.AutoSize = true;
+            this.wstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wstall.Depth = 0;
+            this.wstall.Location = new System.Drawing.Point(169, 128);
+            this.wstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wstall.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wstall.Name = "wstall";
+            this.wstall.Primary = true;
+            this.wstall.Size = new System.Drawing.Size(65, 36);
+            this.wstall.TabIndex = 37;
+            this.wstall.Text = "Wstall";
+            this.wstall.UseVisualStyleBackColor = true;
             // 
-            // difun
+            // wstat
             // 
-            this.difun.AutoSize = true;
-            this.difun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.difun.Depth = 0;
-            this.difun.Location = new System.Drawing.Point(140, 76);
-            this.difun.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.difun.MouseState = MaterialSkin.MouseState.HOVER;
-            this.difun.Name = "difun";
-            this.difun.Primary = false;
-            this.difun.Size = new System.Drawing.Size(57, 36);
-            this.difun.TabIndex = 7;
-            this.difun.Text = "ifun  0";
-            this.difun.UseVisualStyleBackColor = true;
+            this.wstat.AutoSize = true;
+            this.wstat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wstat.Depth = 0;
+            this.wstat.Location = new System.Drawing.Point(50, 130);
+            this.wstat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wstat.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wstat.Name = "wstat";
+            this.wstat.Primary = false;
+            this.wstat.Size = new System.Drawing.Size(111, 36);
+            this.wstat.TabIndex = 36;
+            this.wstat.Text = "state  Dstate";
+            this.wstat.UseVisualStyleBackColor = true;
             // 
-            // dra
+            // wicode
             // 
-            this.dra.AutoSize = true;
-            this.dra.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dra.Depth = 0;
-            this.dra.Location = new System.Drawing.Point(275, 26);
-            this.dra.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dra.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dra.Name = "dra";
-            this.dra.Primary = false;
-            this.dra.Size = new System.Drawing.Size(51, 36);
-            this.dra.TabIndex = 6;
-            this.dra.Text = "ra    0";
-            this.dra.UseVisualStyleBackColor = true;
+            this.wicode.AutoSize = true;
+            this.wicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wicode.Depth = 0;
+            this.wicode.Location = new System.Drawing.Point(50, 82);
+            this.wicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.wicode.MouseState = MaterialSkin.MouseState.HOVER;
+            this.wicode.Name = "wicode";
+            this.wicode.Primary = false;
+            this.wicode.Size = new System.Drawing.Size(66, 36);
+            this.wicode.TabIndex = 35;
+            this.wicode.Text = "icode  0";
+            this.wicode.UseVisualStyleBackColor = true;
             // 
-            // dvalp
+            // winstr
             // 
-            this.dvalp.AutoSize = true;
-            this.dvalp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dvalp.Depth = 0;
-            this.dvalp.Location = new System.Drawing.Point(275, 122);
-            this.dvalp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dvalp.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dvalp.Name = "dvalp";
-            this.dvalp.Primary = false;
-            this.dvalp.Size = new System.Drawing.Size(132, 36);
-            this.dvalp.TabIndex = 5;
-            this.dvalp.Text = "valp  0x00000000";
-            this.dvalp.UseVisualStyleBackColor = true;
-            // 
-            // dvalc
-            // 
-            this.dvalc.AutoSize = true;
-            this.dvalc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dvalc.Depth = 0;
-            this.dvalc.Location = new System.Drawing.Point(275, 76);
-            this.dvalc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dvalc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dvalc.Name = "dvalc";
-            this.dvalc.Primary = false;
-            this.dvalc.Size = new System.Drawing.Size(132, 36);
-            this.dvalc.TabIndex = 4;
-            this.dvalc.Text = "valc  0x00000000";
-            this.dvalc.UseVisualStyleBackColor = true;
-            // 
-            // dstall
-            // 
-            this.dstall.AutoSize = true;
-            this.dstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dstall.Depth = 0;
-            this.dstall.Location = new System.Drawing.Point(140, 122);
-            this.dstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dstall.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dstall.Name = "dstall";
-            this.dstall.Primary = true;
-            this.dstall.Size = new System.Drawing.Size(60, 36);
-            this.dstall.TabIndex = 3;
-            this.dstall.Text = "Fstall";
-            this.dstall.UseVisualStyleBackColor = true;
-            // 
-            // dstat
-            // 
-            this.dstat.AutoSize = true;
-            this.dstat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dstat.Depth = 0;
-            this.dstat.Location = new System.Drawing.Point(21, 124);
-            this.dstat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dstat.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dstat.Name = "dstat";
-            this.dstat.Primary = false;
-            this.dstat.Size = new System.Drawing.Size(111, 36);
-            this.dstat.TabIndex = 2;
-            this.dstat.Text = "state  Dstate";
-            this.dstat.UseVisualStyleBackColor = true;
-            // 
-            // dicode
-            // 
-            this.dicode.AutoSize = true;
-            this.dicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dicode.Depth = 0;
-            this.dicode.Location = new System.Drawing.Point(21, 76);
-            this.dicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dicode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dicode.Name = "dicode";
-            this.dicode.Primary = false;
-            this.dicode.Size = new System.Drawing.Size(66, 36);
-            this.dicode.TabIndex = 1;
-            this.dicode.Text = "icode  0";
-            this.dicode.UseVisualStyleBackColor = true;
-            // 
-            // dinstr
-            // 
-            this.dinstr.AutoSize = true;
-            this.dinstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dinstr.Depth = 0;
-            this.dinstr.Location = new System.Drawing.Point(21, 26);
-            this.dinstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.dinstr.MouseState = MaterialSkin.MouseState.HOVER;
-            this.dinstr.Name = "dinstr";
-            this.dinstr.Primary = false;
-            this.dinstr.Size = new System.Drawing.Size(51, 36);
-            this.dinstr.TabIndex = 0;
-            this.dinstr.Text = "Instr";
-            this.dinstr.UseVisualStyleBackColor = true;
-            // 
-            // tpExecute
-            // 
-            this.tpExecute.Controls.Add(this.edstm);
-            this.tpExecute.Controls.Add(this.edste);
-            this.tpExecute.Controls.Add(this.esrcb);
-            this.tpExecute.Controls.Add(this.esrca);
-            this.tpExecute.Controls.Add(this.evalb);
-            this.tpExecute.Controls.Add(this.eifun);
-            this.tpExecute.Controls.Add(this.evala);
-            this.tpExecute.Controls.Add(this.evalc);
-            this.tpExecute.Controls.Add(this.estall);
-            this.tpExecute.Controls.Add(this.estat);
-            this.tpExecute.Controls.Add(this.eicode);
-            this.tpExecute.Controls.Add(this.einstr);
-            this.tpExecute.Location = new System.Drawing.Point(4, 22);
-            this.tpExecute.Name = "tpExecute";
-            this.tpExecute.Padding = new System.Windows.Forms.Padding(3);
-            this.tpExecute.Size = new System.Drawing.Size(486, 253);
-            this.tpExecute.TabIndex = 2;
-            this.tpExecute.Text = "Execute";
-            this.tpExecute.UseVisualStyleBackColor = true;
-            // 
-            // edstm
-            // 
-            this.edstm.AutoSize = true;
-            this.edstm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.edstm.Depth = 0;
-            this.edstm.Location = new System.Drawing.Point(172, 221);
-            this.edstm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edstm.MouseState = MaterialSkin.MouseState.HOVER;
-            this.edstm.Name = "edstm";
-            this.edstm.Primary = false;
-            this.edstm.Size = new System.Drawing.Size(135, 36);
-            this.edstm.TabIndex = 21;
-            this.edstm.Text = "dstm  0x00000000";
-            this.edstm.UseVisualStyleBackColor = true;
-            // 
-            // edste
-            // 
-            this.edste.AutoSize = true;
-            this.edste.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.edste.Depth = 0;
-            this.edste.Location = new System.Drawing.Point(21, 221);
-            this.edste.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edste.MouseState = MaterialSkin.MouseState.HOVER;
-            this.edste.Name = "edste";
-            this.edste.Primary = false;
-            this.edste.Size = new System.Drawing.Size(131, 36);
-            this.edste.TabIndex = 20;
-            this.edste.Text = "dste  0x00000000";
-            this.edste.UseVisualStyleBackColor = true;
-            // 
-            // esrcb
-            // 
-            this.esrcb.AutoSize = true;
-            this.esrcb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.esrcb.Depth = 0;
-            this.esrcb.Location = new System.Drawing.Point(175, 178);
-            this.esrcb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.esrcb.MouseState = MaterialSkin.MouseState.HOVER;
-            this.esrcb.Name = "esrcb";
-            this.esrcb.Primary = false;
-            this.esrcb.Size = new System.Drawing.Size(132, 36);
-            this.esrcb.TabIndex = 19;
-            this.esrcb.Text = "srcb  0x00000000";
-            this.esrcb.UseVisualStyleBackColor = true;
-            // 
-            // esrca
-            // 
-            this.esrca.AutoSize = true;
-            this.esrca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.esrca.Depth = 0;
-            this.esrca.Location = new System.Drawing.Point(20, 178);
-            this.esrca.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.esrca.MouseState = MaterialSkin.MouseState.HOVER;
-            this.esrca.Name = "esrca";
-            this.esrca.Primary = false;
-            this.esrca.Size = new System.Drawing.Size(133, 36);
-            this.esrca.TabIndex = 18;
-            this.esrca.Text = "srca  0x00000000";
-            this.esrca.UseVisualStyleBackColor = true;
-            // 
-            // evalb
-            // 
-            this.evalb.AutoSize = true;
-            this.evalb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.evalb.Depth = 0;
-            this.evalb.Location = new System.Drawing.Point(274, 122);
-            this.evalb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.evalb.MouseState = MaterialSkin.MouseState.HOVER;
-            this.evalb.Name = "evalb";
-            this.evalb.Primary = false;
-            this.evalb.Size = new System.Drawing.Size(132, 36);
-            this.evalb.TabIndex = 17;
-            this.evalb.Text = "valb  0x00000000";
-            this.evalb.UseVisualStyleBackColor = true;
-            // 
-            // eifun
-            // 
-            this.eifun.AutoSize = true;
-            this.eifun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.eifun.Depth = 0;
-            this.eifun.Location = new System.Drawing.Point(141, 72);
-            this.eifun.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.eifun.MouseState = MaterialSkin.MouseState.HOVER;
-            this.eifun.Name = "eifun";
-            this.eifun.Primary = false;
-            this.eifun.Size = new System.Drawing.Size(57, 36);
-            this.eifun.TabIndex = 16;
-            this.eifun.Text = "ifun  0";
-            this.eifun.UseVisualStyleBackColor = true;
-            // 
-            // evala
-            // 
-            this.evala.AutoSize = true;
-            this.evala.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.evala.Depth = 0;
-            this.evala.Location = new System.Drawing.Point(274, 73);
-            this.evala.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.evala.MouseState = MaterialSkin.MouseState.HOVER;
-            this.evala.Name = "evala";
-            this.evala.Primary = false;
-            this.evala.Size = new System.Drawing.Size(132, 36);
-            this.evala.TabIndex = 14;
-            this.evala.Text = "vala  0x00000000";
-            this.evala.UseVisualStyleBackColor = true;
-            // 
-            // evalc
-            // 
-            this.evalc.AutoSize = true;
-            this.evalc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.evalc.Depth = 0;
-            this.evalc.Location = new System.Drawing.Point(274, 22);
-            this.evalc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.evalc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.evalc.Name = "evalc";
-            this.evalc.Primary = false;
-            this.evalc.Size = new System.Drawing.Size(132, 36);
-            this.evalc.TabIndex = 13;
-            this.evalc.Text = "valc  0x00000000";
-            this.evalc.UseVisualStyleBackColor = true;
-            // 
-            // estall
-            // 
-            this.estall.AutoSize = true;
-            this.estall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.estall.Depth = 0;
-            this.estall.Location = new System.Drawing.Point(139, 118);
-            this.estall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.estall.MouseState = MaterialSkin.MouseState.HOVER;
-            this.estall.Name = "estall";
-            this.estall.Primary = true;
-            this.estall.Size = new System.Drawing.Size(62, 36);
-            this.estall.TabIndex = 12;
-            this.estall.Text = "Dstall";
-            this.estall.UseVisualStyleBackColor = true;
-            // 
-            // estat
-            // 
-            this.estat.AutoSize = true;
-            this.estat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.estat.Depth = 0;
-            this.estat.Location = new System.Drawing.Point(20, 120);
-            this.estat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.estat.MouseState = MaterialSkin.MouseState.HOVER;
-            this.estat.Name = "estat";
-            this.estat.Primary = false;
-            this.estat.Size = new System.Drawing.Size(111, 36);
-            this.estat.TabIndex = 11;
-            this.estat.Text = "state  Dstate";
-            this.estat.UseVisualStyleBackColor = true;
-            // 
-            // eicode
-            // 
-            this.eicode.AutoSize = true;
-            this.eicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.eicode.Depth = 0;
-            this.eicode.Location = new System.Drawing.Point(20, 72);
-            this.eicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.eicode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.eicode.Name = "eicode";
-            this.eicode.Primary = false;
-            this.eicode.Size = new System.Drawing.Size(66, 36);
-            this.eicode.TabIndex = 10;
-            this.eicode.Text = "icode  0";
-            this.eicode.UseVisualStyleBackColor = true;
-            // 
-            // einstr
-            // 
-            this.einstr.AutoSize = true;
-            this.einstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.einstr.Depth = 0;
-            this.einstr.Location = new System.Drawing.Point(20, 22);
-            this.einstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.einstr.MouseState = MaterialSkin.MouseState.HOVER;
-            this.einstr.Name = "einstr";
-            this.einstr.Primary = false;
-            this.einstr.Size = new System.Drawing.Size(51, 36);
-            this.einstr.TabIndex = 9;
-            this.einstr.Text = "Instr";
-            this.einstr.UseVisualStyleBackColor = true;
+            this.winstr.AutoSize = true;
+            this.winstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.winstr.Depth = 0;
+            this.winstr.Location = new System.Drawing.Point(50, 32);
+            this.winstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.winstr.MouseState = MaterialSkin.MouseState.HOVER;
+            this.winstr.Name = "winstr";
+            this.winstr.Primary = false;
+            this.winstr.Size = new System.Drawing.Size(51, 36);
+            this.winstr.TabIndex = 34;
+            this.winstr.Text = "Instr";
+            this.winstr.UseVisualStyleBackColor = true;
             // 
             // tpMemoryVisit
             // 
@@ -1066,8 +807,8 @@ namespace PipelineSimulatorMaterial
             this.tpMemoryVisit.Location = new System.Drawing.Point(4, 22);
             this.tpMemoryVisit.Name = "tpMemoryVisit";
             this.tpMemoryVisit.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMemoryVisit.Size = new System.Drawing.Size(486, 253);
-            this.tpMemoryVisit.TabIndex = 3;
+            this.tpMemoryVisit.Size = new System.Drawing.Size(486, 245);
+            this.tpMemoryVisit.TabIndex = 1;
             this.tpMemoryVisit.Text = "Memoey";
             this.tpMemoryVisit.UseVisualStyleBackColor = true;
             // 
@@ -1221,143 +962,418 @@ namespace PipelineSimulatorMaterial
             this.minstr.Text = "Instr";
             this.minstr.UseVisualStyleBackColor = true;
             // 
-            // tpWriteBack
+            // tpExecute
             // 
-            this.tpWriteBack.Controls.Add(this.wdstm);
-            this.tpWriteBack.Controls.Add(this.wdste);
-            this.tpWriteBack.Controls.Add(this.wvalm);
-            this.tpWriteBack.Controls.Add(this.wvale);
-            this.tpWriteBack.Controls.Add(this.wstall);
-            this.tpWriteBack.Controls.Add(this.wstat);
-            this.tpWriteBack.Controls.Add(this.wicode);
-            this.tpWriteBack.Controls.Add(this.winstr);
-            this.tpWriteBack.Location = new System.Drawing.Point(4, 22);
-            this.tpWriteBack.Name = "tpWriteBack";
-            this.tpWriteBack.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWriteBack.Size = new System.Drawing.Size(486, 253);
-            this.tpWriteBack.TabIndex = 4;
-            this.tpWriteBack.Text = "WriteBack";
-            this.tpWriteBack.UseVisualStyleBackColor = true;
+            this.tpExecute.Controls.Add(this.edstm);
+            this.tpExecute.Controls.Add(this.edste);
+            this.tpExecute.Controls.Add(this.esrcb);
+            this.tpExecute.Controls.Add(this.esrca);
+            this.tpExecute.Controls.Add(this.evalb);
+            this.tpExecute.Controls.Add(this.eifun);
+            this.tpExecute.Controls.Add(this.evala);
+            this.tpExecute.Controls.Add(this.evalc);
+            this.tpExecute.Controls.Add(this.estall);
+            this.tpExecute.Controls.Add(this.estat);
+            this.tpExecute.Controls.Add(this.eicode);
+            this.tpExecute.Controls.Add(this.einstr);
+            this.tpExecute.Location = new System.Drawing.Point(4, 22);
+            this.tpExecute.Name = "tpExecute";
+            this.tpExecute.Padding = new System.Windows.Forms.Padding(3);
+            this.tpExecute.Size = new System.Drawing.Size(486, 245);
+            this.tpExecute.TabIndex = 2;
+            this.tpExecute.Text = "Execute";
+            this.tpExecute.UseVisualStyleBackColor = true;
             // 
-            // wdstm
+            // edstm
             // 
-            this.wdstm.AutoSize = true;
-            this.wdstm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wdstm.Depth = 0;
-            this.wdstm.Location = new System.Drawing.Point(205, 185);
-            this.wdstm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wdstm.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wdstm.Name = "wdstm";
-            this.wdstm.Primary = false;
-            this.wdstm.Size = new System.Drawing.Size(135, 36);
-            this.wdstm.TabIndex = 43;
-            this.wdstm.Text = "dstm  0x00000000";
-            this.wdstm.UseVisualStyleBackColor = true;
+            this.edstm.AutoSize = true;
+            this.edstm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.edstm.Depth = 0;
+            this.edstm.Location = new System.Drawing.Point(172, 207);
+            this.edstm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.edstm.MouseState = MaterialSkin.MouseState.HOVER;
+            this.edstm.Name = "edstm";
+            this.edstm.Primary = false;
+            this.edstm.Size = new System.Drawing.Size(135, 36);
+            this.edstm.TabIndex = 21;
+            this.edstm.Text = "dstm  0x00000000";
+            this.edstm.UseVisualStyleBackColor = true;
             // 
-            // wdste
+            // edste
             // 
-            this.wdste.AutoSize = true;
-            this.wdste.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wdste.Depth = 0;
-            this.wdste.Location = new System.Drawing.Point(50, 183);
-            this.wdste.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wdste.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wdste.Name = "wdste";
-            this.wdste.Primary = false;
-            this.wdste.Size = new System.Drawing.Size(131, 36);
-            this.wdste.TabIndex = 42;
-            this.wdste.Text = "dste  0x00000000";
-            this.wdste.UseVisualStyleBackColor = true;
+            this.edste.AutoSize = true;
+            this.edste.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.edste.Depth = 0;
+            this.edste.Location = new System.Drawing.Point(21, 205);
+            this.edste.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.edste.MouseState = MaterialSkin.MouseState.HOVER;
+            this.edste.Name = "edste";
+            this.edste.Primary = false;
+            this.edste.Size = new System.Drawing.Size(131, 36);
+            this.edste.TabIndex = 20;
+            this.edste.Text = "dste  0x00000000";
+            this.edste.UseVisualStyleBackColor = true;
             // 
-            // wvalm
+            // esrcb
             // 
-            this.wvalm.AutoSize = true;
-            this.wvalm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wvalm.Depth = 0;
-            this.wvalm.Location = new System.Drawing.Point(304, 132);
-            this.wvalm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wvalm.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wvalm.Name = "wvalm";
-            this.wvalm.Primary = false;
-            this.wvalm.Size = new System.Drawing.Size(132, 36);
-            this.wvalm.TabIndex = 41;
-            this.wvalm.Text = "valb  0x00000000";
-            this.wvalm.UseVisualStyleBackColor = true;
+            this.esrcb.AutoSize = true;
+            this.esrcb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.esrcb.Depth = 0;
+            this.esrcb.Location = new System.Drawing.Point(175, 166);
+            this.esrcb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.esrcb.MouseState = MaterialSkin.MouseState.HOVER;
+            this.esrcb.Name = "esrcb";
+            this.esrcb.Primary = false;
+            this.esrcb.Size = new System.Drawing.Size(132, 36);
+            this.esrcb.TabIndex = 19;
+            this.esrcb.Text = "srcb  0x00000000";
+            this.esrcb.UseVisualStyleBackColor = true;
             // 
-            // wvale
+            // esrca
             // 
-            this.wvale.AutoSize = true;
-            this.wvale.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wvale.Depth = 0;
-            this.wvale.Location = new System.Drawing.Point(304, 83);
-            this.wvale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wvale.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wvale.Name = "wvale";
-            this.wvale.Primary = false;
-            this.wvale.Size = new System.Drawing.Size(132, 36);
-            this.wvale.TabIndex = 39;
-            this.wvale.Text = "vala  0x00000000";
-            this.wvale.UseVisualStyleBackColor = true;
+            this.esrca.AutoSize = true;
+            this.esrca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.esrca.Depth = 0;
+            this.esrca.Location = new System.Drawing.Point(20, 166);
+            this.esrca.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.esrca.MouseState = MaterialSkin.MouseState.HOVER;
+            this.esrca.Name = "esrca";
+            this.esrca.Primary = false;
+            this.esrca.Size = new System.Drawing.Size(133, 36);
+            this.esrca.TabIndex = 18;
+            this.esrca.Text = "srca  0x00000000";
+            this.esrca.UseVisualStyleBackColor = true;
             // 
-            // wstall
+            // evalb
             // 
-            this.wstall.AutoSize = true;
-            this.wstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wstall.Depth = 0;
-            this.wstall.Location = new System.Drawing.Point(169, 128);
-            this.wstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wstall.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wstall.Name = "wstall";
-            this.wstall.Primary = true;
-            this.wstall.Size = new System.Drawing.Size(65, 36);
-            this.wstall.TabIndex = 37;
-            this.wstall.Text = "Wstall";
-            this.wstall.UseVisualStyleBackColor = true;
+            this.evalb.AutoSize = true;
+            this.evalb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.evalb.Depth = 0;
+            this.evalb.Location = new System.Drawing.Point(274, 122);
+            this.evalb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.evalb.MouseState = MaterialSkin.MouseState.HOVER;
+            this.evalb.Name = "evalb";
+            this.evalb.Primary = false;
+            this.evalb.Size = new System.Drawing.Size(132, 36);
+            this.evalb.TabIndex = 17;
+            this.evalb.Text = "valb  0x00000000";
+            this.evalb.UseVisualStyleBackColor = true;
             // 
-            // wstat
+            // eifun
             // 
-            this.wstat.AutoSize = true;
-            this.wstat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wstat.Depth = 0;
-            this.wstat.Location = new System.Drawing.Point(50, 130);
-            this.wstat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wstat.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wstat.Name = "wstat";
-            this.wstat.Primary = false;
-            this.wstat.Size = new System.Drawing.Size(111, 36);
-            this.wstat.TabIndex = 36;
-            this.wstat.Text = "state  Dstate";
-            this.wstat.UseVisualStyleBackColor = true;
+            this.eifun.AutoSize = true;
+            this.eifun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.eifun.Depth = 0;
+            this.eifun.Location = new System.Drawing.Point(141, 72);
+            this.eifun.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.eifun.MouseState = MaterialSkin.MouseState.HOVER;
+            this.eifun.Name = "eifun";
+            this.eifun.Primary = false;
+            this.eifun.Size = new System.Drawing.Size(57, 36);
+            this.eifun.TabIndex = 16;
+            this.eifun.Text = "ifun  0";
+            this.eifun.UseVisualStyleBackColor = true;
             // 
-            // wicode
+            // evala
             // 
-            this.wicode.AutoSize = true;
-            this.wicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wicode.Depth = 0;
-            this.wicode.Location = new System.Drawing.Point(50, 82);
-            this.wicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.wicode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.wicode.Name = "wicode";
-            this.wicode.Primary = false;
-            this.wicode.Size = new System.Drawing.Size(66, 36);
-            this.wicode.TabIndex = 35;
-            this.wicode.Text = "icode  0";
-            this.wicode.UseVisualStyleBackColor = true;
+            this.evala.AutoSize = true;
+            this.evala.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.evala.Depth = 0;
+            this.evala.Location = new System.Drawing.Point(274, 73);
+            this.evala.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.evala.MouseState = MaterialSkin.MouseState.HOVER;
+            this.evala.Name = "evala";
+            this.evala.Primary = false;
+            this.evala.Size = new System.Drawing.Size(132, 36);
+            this.evala.TabIndex = 14;
+            this.evala.Text = "vala  0x00000000";
+            this.evala.UseVisualStyleBackColor = true;
             // 
-            // winstr
+            // evalc
             // 
-            this.winstr.AutoSize = true;
-            this.winstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.winstr.Depth = 0;
-            this.winstr.Location = new System.Drawing.Point(50, 32);
-            this.winstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.winstr.MouseState = MaterialSkin.MouseState.HOVER;
-            this.winstr.Name = "winstr";
-            this.winstr.Primary = false;
-            this.winstr.Size = new System.Drawing.Size(51, 36);
-            this.winstr.TabIndex = 34;
-            this.winstr.Text = "Instr";
-            this.winstr.UseVisualStyleBackColor = true;
+            this.evalc.AutoSize = true;
+            this.evalc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.evalc.Depth = 0;
+            this.evalc.Location = new System.Drawing.Point(274, 22);
+            this.evalc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.evalc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.evalc.Name = "evalc";
+            this.evalc.Primary = false;
+            this.evalc.Size = new System.Drawing.Size(132, 36);
+            this.evalc.TabIndex = 13;
+            this.evalc.Text = "valc  0x00000000";
+            this.evalc.UseVisualStyleBackColor = true;
+            // 
+            // estall
+            // 
+            this.estall.AutoSize = true;
+            this.estall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.estall.Depth = 0;
+            this.estall.Location = new System.Drawing.Point(139, 118);
+            this.estall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.estall.MouseState = MaterialSkin.MouseState.HOVER;
+            this.estall.Name = "estall";
+            this.estall.Primary = true;
+            this.estall.Size = new System.Drawing.Size(62, 36);
+            this.estall.TabIndex = 12;
+            this.estall.Text = "Dstall";
+            this.estall.UseVisualStyleBackColor = true;
+            // 
+            // estat
+            // 
+            this.estat.AutoSize = true;
+            this.estat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.estat.Depth = 0;
+            this.estat.Location = new System.Drawing.Point(20, 120);
+            this.estat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.estat.MouseState = MaterialSkin.MouseState.HOVER;
+            this.estat.Name = "estat";
+            this.estat.Primary = false;
+            this.estat.Size = new System.Drawing.Size(111, 36);
+            this.estat.TabIndex = 11;
+            this.estat.Text = "state  Dstate";
+            this.estat.UseVisualStyleBackColor = true;
+            // 
+            // eicode
+            // 
+            this.eicode.AutoSize = true;
+            this.eicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.eicode.Depth = 0;
+            this.eicode.Location = new System.Drawing.Point(20, 72);
+            this.eicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.eicode.MouseState = MaterialSkin.MouseState.HOVER;
+            this.eicode.Name = "eicode";
+            this.eicode.Primary = false;
+            this.eicode.Size = new System.Drawing.Size(66, 36);
+            this.eicode.TabIndex = 10;
+            this.eicode.Text = "icode  0";
+            this.eicode.UseVisualStyleBackColor = true;
+            // 
+            // einstr
+            // 
+            this.einstr.AutoSize = true;
+            this.einstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.einstr.Depth = 0;
+            this.einstr.Location = new System.Drawing.Point(20, 22);
+            this.einstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.einstr.MouseState = MaterialSkin.MouseState.HOVER;
+            this.einstr.Name = "einstr";
+            this.einstr.Primary = false;
+            this.einstr.Size = new System.Drawing.Size(51, 36);
+            this.einstr.TabIndex = 9;
+            this.einstr.Text = "Instr";
+            this.einstr.UseVisualStyleBackColor = true;
+            // 
+            // tpDecode
+            // 
+            this.tpDecode.Controls.Add(this.drb);
+            this.tpDecode.Controls.Add(this.difun);
+            this.tpDecode.Controls.Add(this.dra);
+            this.tpDecode.Controls.Add(this.dvalp);
+            this.tpDecode.Controls.Add(this.dvalc);
+            this.tpDecode.Controls.Add(this.dstall);
+            this.tpDecode.Controls.Add(this.dstat);
+            this.tpDecode.Controls.Add(this.dicode);
+            this.tpDecode.Controls.Add(this.dinstr);
+            this.tpDecode.Location = new System.Drawing.Point(4, 22);
+            this.tpDecode.Name = "tpDecode";
+            this.tpDecode.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDecode.Size = new System.Drawing.Size(486, 245);
+            this.tpDecode.TabIndex = 3;
+            this.tpDecode.Text = "Decode";
+            this.tpDecode.UseVisualStyleBackColor = true;
+            // 
+            // drb
+            // 
+            this.drb.AutoSize = true;
+            this.drb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.drb.Depth = 0;
+            this.drb.Location = new System.Drawing.Point(354, 26);
+            this.drb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.drb.MouseState = MaterialSkin.MouseState.HOVER;
+            this.drb.Name = "drb";
+            this.drb.Primary = false;
+            this.drb.Size = new System.Drawing.Size(51, 36);
+            this.drb.TabIndex = 8;
+            this.drb.Text = "rb    0";
+            this.drb.UseVisualStyleBackColor = true;
+            // 
+            // difun
+            // 
+            this.difun.AutoSize = true;
+            this.difun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.difun.Depth = 0;
+            this.difun.Location = new System.Drawing.Point(140, 76);
+            this.difun.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.difun.MouseState = MaterialSkin.MouseState.HOVER;
+            this.difun.Name = "difun";
+            this.difun.Primary = false;
+            this.difun.Size = new System.Drawing.Size(57, 36);
+            this.difun.TabIndex = 7;
+            this.difun.Text = "ifun  0";
+            this.difun.UseVisualStyleBackColor = true;
+            // 
+            // dra
+            // 
+            this.dra.AutoSize = true;
+            this.dra.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dra.Depth = 0;
+            this.dra.Location = new System.Drawing.Point(275, 26);
+            this.dra.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dra.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dra.Name = "dra";
+            this.dra.Primary = false;
+            this.dra.Size = new System.Drawing.Size(51, 36);
+            this.dra.TabIndex = 6;
+            this.dra.Text = "ra    0";
+            this.dra.UseVisualStyleBackColor = true;
+            // 
+            // dvalp
+            // 
+            this.dvalp.AutoSize = true;
+            this.dvalp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dvalp.Depth = 0;
+            this.dvalp.Location = new System.Drawing.Point(275, 122);
+            this.dvalp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dvalp.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dvalp.Name = "dvalp";
+            this.dvalp.Primary = false;
+            this.dvalp.Size = new System.Drawing.Size(132, 36);
+            this.dvalp.TabIndex = 5;
+            this.dvalp.Text = "valp  0x00000000";
+            this.dvalp.UseVisualStyleBackColor = true;
+            // 
+            // dvalc
+            // 
+            this.dvalc.AutoSize = true;
+            this.dvalc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dvalc.Depth = 0;
+            this.dvalc.Location = new System.Drawing.Point(275, 76);
+            this.dvalc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dvalc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dvalc.Name = "dvalc";
+            this.dvalc.Primary = false;
+            this.dvalc.Size = new System.Drawing.Size(132, 36);
+            this.dvalc.TabIndex = 4;
+            this.dvalc.Text = "valc  0x00000000";
+            this.dvalc.UseVisualStyleBackColor = true;
+            // 
+            // dstall
+            // 
+            this.dstall.AutoSize = true;
+            this.dstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dstall.Depth = 0;
+            this.dstall.Location = new System.Drawing.Point(140, 122);
+            this.dstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dstall.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dstall.Name = "dstall";
+            this.dstall.Primary = true;
+            this.dstall.Size = new System.Drawing.Size(60, 36);
+            this.dstall.TabIndex = 3;
+            this.dstall.Text = "Fstall";
+            this.dstall.UseVisualStyleBackColor = true;
+            // 
+            // dstat
+            // 
+            this.dstat.AutoSize = true;
+            this.dstat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dstat.Depth = 0;
+            this.dstat.Location = new System.Drawing.Point(21, 124);
+            this.dstat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dstat.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dstat.Name = "dstat";
+            this.dstat.Primary = false;
+            this.dstat.Size = new System.Drawing.Size(111, 36);
+            this.dstat.TabIndex = 2;
+            this.dstat.Text = "state  Dstate";
+            this.dstat.UseVisualStyleBackColor = true;
+            // 
+            // dicode
+            // 
+            this.dicode.AutoSize = true;
+            this.dicode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dicode.Depth = 0;
+            this.dicode.Location = new System.Drawing.Point(21, 76);
+            this.dicode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dicode.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dicode.Name = "dicode";
+            this.dicode.Primary = false;
+            this.dicode.Size = new System.Drawing.Size(66, 36);
+            this.dicode.TabIndex = 1;
+            this.dicode.Text = "icode  0";
+            this.dicode.UseVisualStyleBackColor = true;
+            // 
+            // dinstr
+            // 
+            this.dinstr.AutoSize = true;
+            this.dinstr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dinstr.Depth = 0;
+            this.dinstr.Location = new System.Drawing.Point(21, 26);
+            this.dinstr.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dinstr.MouseState = MaterialSkin.MouseState.HOVER;
+            this.dinstr.Name = "dinstr";
+            this.dinstr.Primary = false;
+            this.dinstr.Size = new System.Drawing.Size(51, 36);
+            this.dinstr.TabIndex = 0;
+            this.dinstr.Text = "Instr";
+            this.dinstr.UseVisualStyleBackColor = true;
+            // 
+            // tpFetch
+            // 
+            this.tpFetch.BackColor = System.Drawing.Color.White;
+            this.tpFetch.Controls.Add(this.fstall);
+            this.tpFetch.Controls.Add(this.fpredPC);
+            this.tpFetch.Location = new System.Drawing.Point(4, 22);
+            this.tpFetch.Name = "tpFetch";
+            this.tpFetch.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFetch.Size = new System.Drawing.Size(486, 240);
+            this.tpFetch.TabIndex = 4;
+            this.tpFetch.Text = "Fetch";
+            // 
+            // fstall
+            // 
+            this.fstall.AutoSize = true;
+            this.fstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.fstall.Depth = 0;
+            this.fstall.Location = new System.Drawing.Point(112, 28);
+            this.fstall.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.fstall.MouseState = MaterialSkin.MouseState.HOVER;
+            this.fstall.Name = "fstall";
+            this.fstall.Primary = true;
+            this.fstall.Size = new System.Drawing.Size(60, 36);
+            this.fstall.TabIndex = 2;
+            this.fstall.Text = "Fstall";
+            this.fstall.UseVisualStyleBackColor = true;
+            // 
+            // fcircle
+            // 
+            this.fcircle.AutoSize = true;
+            this.fcircle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.fcircle.Depth = 0;
+            this.fcircle.Location = new System.Drawing.Point(30, 4);
+            this.fcircle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.fcircle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.fcircle.Name = "fcircle";
+            this.fcircle.Primary = false;
+            this.fcircle.Size = new System.Drawing.Size(72, 36);
+            this.fcircle.TabIndex = 1;
+            this.fcircle.Text = "Circle  0";
+            this.fcircle.UseVisualStyleBackColor = true;
+            // 
+            // fpredPC
+            // 
+            this.fpredPC.AutoSize = true;
+            this.fpredPC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.fpredPC.Depth = 0;
+            this.fpredPC.Location = new System.Drawing.Point(22, 76);
+            this.fpredPC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.fpredPC.MouseState = MaterialSkin.MouseState.HOVER;
+            this.fpredPC.Name = "fpredPC";
+            this.fpredPC.Primary = false;
+            this.fpredPC.Size = new System.Drawing.Size(150, 36);
+            this.fpredPC.TabIndex = 0;
+            this.fpredPC.Text = "PredPc  0x00000000";
+            this.fpredPC.UseVisualStyleBackColor = true;
             // 
             // btnPlay
             // 
@@ -1379,6 +1395,7 @@ namespace PipelineSimulatorMaterial
             // rbtn1Hz
             // 
             this.rbtn1Hz.AutoSize = true;
+            this.rbtn1Hz.Checked = true;
             this.rbtn1Hz.Depth = 0;
             this.rbtn1Hz.Font = new System.Drawing.Font("Roboto", 10F);
             this.rbtn1Hz.Location = new System.Drawing.Point(16, 50);
@@ -1765,21 +1782,14 @@ namespace PipelineSimulatorMaterial
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // btnDisableBreakpoint
+            // panel2
             // 
-            this.btnDisableBreakpoint.AutoSize = true;
-            this.btnDisableBreakpoint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDisableBreakpoint.Depth = 0;
-            this.btnDisableBreakpoint.Location = new System.Drawing.Point(795, 386);
-            this.btnDisableBreakpoint.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnDisableBreakpoint.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDisableBreakpoint.Name = "btnDisableBreakpoint";
-            this.btnDisableBreakpoint.Primary = true;
-            this.btnDisableBreakpoint.Size = new System.Drawing.Size(153, 36);
-            this.btnDisableBreakpoint.TabIndex = 6;
-            this.btnDisableBreakpoint.Text = "Disable Breakpoint";
-            this.btnDisableBreakpoint.UseVisualStyleBackColor = true;
-            this.btnDisableBreakpoint.Click += new System.EventHandler(this.btnDisableBreakpoint_Click);
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.fcircle);
+            this.panel2.Location = new System.Drawing.Point(179, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(533, 50);
+            this.panel2.TabIndex = 13;
             // 
             // MainForm
             // 
@@ -1803,20 +1813,22 @@ namespace PipelineSimulatorMaterial
             this.tpRegister.PerformLayout();
             this.pnlProcess.ResumeLayout(false);
             this.tabProcess.ResumeLayout(false);
-            this.tpFetch.ResumeLayout(false);
-            this.tpFetch.PerformLayout();
-            this.tpDecode.ResumeLayout(false);
-            this.tpDecode.PerformLayout();
-            this.tpExecute.ResumeLayout(false);
-            this.tpExecute.PerformLayout();
-            this.tpMemoryVisit.ResumeLayout(false);
-            this.tpMemoryVisit.PerformLayout();
             this.tpWriteBack.ResumeLayout(false);
             this.tpWriteBack.PerformLayout();
+            this.tpMemoryVisit.ResumeLayout(false);
+            this.tpMemoryVisit.PerformLayout();
+            this.tpExecute.ResumeLayout(false);
+            this.tpExecute.PerformLayout();
+            this.tpDecode.ResumeLayout(false);
+            this.tpDecode.PerformLayout();
+            this.tpFetch.ResumeLayout(false);
+            this.tpFetch.PerformLayout();
             this.tpMemory.ResumeLayout(false);
             this.tpMemory.PerformLayout();
             this.tpAbout.ResumeLayout(false);
             this.tpAbout.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1944,6 +1956,7 @@ namespace PipelineSimulatorMaterial
         public System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel pnlUnderLine;
         private MaterialSkin.Controls.MaterialFlatButton btnDisableBreakpoint;
+        private System.Windows.Forms.Panel panel2;
 
 
 
