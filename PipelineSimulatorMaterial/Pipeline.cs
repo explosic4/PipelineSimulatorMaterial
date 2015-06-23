@@ -1278,7 +1278,8 @@ namespace PipelineSimulatorMaterial
 
         public static void DisplyMemory( MainForm mainForm )
         {
-            for ( var addr = 0; addr + 3 < 2049; addr += 4 )
+            var idx = 0;
+            for ( var addr = 0; addr + 3 < 2049; addr += 4, idx++ )
             {
                 var addr_ = PipeConvert.BigEnd2S( addr );
                 var mem0 = new string( PipeConvert.Byte2C_Array( Memory[ addr ] ) );
@@ -1286,9 +1287,12 @@ namespace PipelineSimulatorMaterial
                 var mem2 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 2 ] ) );
                 var mem3 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 3 ] ) );
                 var mem = mem0 + " " + mem1 + " " + mem2 + " " + mem3;
+               
+                mainForm.lvMemory.Items[ idx ].SubItems[ 0 ].Text = addr_;
+                mainForm.lvMemory.Items[ idx ].SubItems[ 1 ].Text = mem;
 
-                var data = new[ ] { addr_, mem };
-                mainForm.InsertListViewMemory( data );
+                //var data = new[ ] { addr_, mem };
+                // mainForm.InsertListViewMemory( data );
             }
         }
     }

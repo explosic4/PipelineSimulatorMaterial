@@ -16,13 +16,27 @@ namespace PipelineSimulatorMaterial
         public MainForm( )
         {
             InitializeComponent( );
-
+            InitializeListViewMemory( );
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage( this );
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme( Primary.Indigo500, Primary.Indigo700, Primary.Indigo100,
                 Accent.Pink200, TextShade.WHITE );
             //materialSkinManager.ColorScheme = new ColorScheme( Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE );
+        }
+
+        private void InitializeListViewMemory( )
+        {
+            for ( var addr = 0; addr + 3 < 2049; addr += 4 )
+            {
+                ListViewItem item = new ListViewItem( "" );
+                item.SubItems.Add( "" );
+
+                if ( item != null )
+                {
+                    lvMemory.Items.Add( item );
+                }
+            }
         }
 
         private void BtnOpenInstrFile_Click( object sender, EventArgs e )
@@ -466,7 +480,6 @@ namespace PipelineSimulatorMaterial
 
         public void lvMemory_DisplayImmediate( )
         {
-            lvMemory.Items.Clear( );
             lvMemory.Update( );
             Pipeline.DisplyMemory( this );
             lvMemory.EndUpdate( );

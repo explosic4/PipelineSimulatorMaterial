@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 using MaterialSkin;
 
 namespace PipelineSimulatorMaterial
@@ -53,6 +54,8 @@ namespace PipelineSimulatorMaterial
             this.mnuitDisableBreakpoint = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuitSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.tpProcess = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.fcircle = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnReset = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialTabSelector2 = new MaterialSkin.Controls.MaterialTabSelector();
@@ -115,7 +118,6 @@ namespace PipelineSimulatorMaterial
             this.dinstr = new MaterialSkin.Controls.MaterialFlatButton();
             this.tpFetch = new System.Windows.Forms.TabPage();
             this.fstall = new MaterialSkin.Controls.MaterialFlatButton();
-            this.fcircle = new MaterialSkin.Controls.MaterialFlatButton();
             this.fpredPC = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnPlay = new MaterialSkin.Controls.MaterialFlatButton();
             this.rbtn1Hz = new MaterialSkin.Controls.MaterialRadioButton();
@@ -133,7 +135,8 @@ namespace PipelineSimulatorMaterial
             this.chAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpAbout = new System.Windows.Forms.TabPage();
-            this.lblABout = new MaterialSkin.Controls.MaterialLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelMdstm = new MaterialSkin.Controls.MaterialSecondaryLabel();
             this.labelMdste = new MaterialSkin.Controls.MaterialSecondaryLabel();
             this.label5 = new MaterialSkin.Controls.MaterialSecondaryLabel();
@@ -147,12 +150,12 @@ namespace PipelineSimulatorMaterial
             this.tabsNavbar = new MaterialSkin.Controls.MaterialTabSelector();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
             this.tabNavbar.SuspendLayout();
             this.tpFile.SuspendLayout();
             this.tpCode.SuspendLayout();
             this.materialContextMenuStrip1.SuspendLayout();
             this.tpProcess.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabRegister.SuspendLayout();
             this.tpRegister.SuspendLayout();
@@ -165,7 +168,6 @@ namespace PipelineSimulatorMaterial
             this.tpFetch.SuspendLayout();
             this.tpMemory.SuspendLayout();
             this.tpAbout.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabNavbar
@@ -415,6 +417,30 @@ namespace PipelineSimulatorMaterial
             this.tpProcess.Size = new System.Drawing.Size(991, 441);
             this.tpProcess.TabIndex = 2;
             this.tpProcess.Text = "Process";
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.fcircle);
+            this.panel2.Location = new System.Drawing.Point(179, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(533, 50);
+            this.panel2.TabIndex = 13;
+            // 
+            // fcircle
+            // 
+            this.fcircle.AutoSize = true;
+            this.fcircle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.fcircle.Depth = 0;
+            this.fcircle.Location = new System.Drawing.Point(30, 4);
+            this.fcircle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.fcircle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.fcircle.Name = "fcircle";
+            this.fcircle.Primary = false;
+            this.fcircle.Size = new System.Drawing.Size(72, 36);
+            this.fcircle.TabIndex = 1;
+            this.fcircle.Text = "Circle  0";
+            this.fcircle.UseVisualStyleBackColor = true;
             // 
             // btnReset
             // 
@@ -1354,21 +1380,6 @@ namespace PipelineSimulatorMaterial
             this.fstall.Text = "Fstall";
             this.fstall.UseVisualStyleBackColor = true;
             // 
-            // fcircle
-            // 
-            this.fcircle.AutoSize = true;
-            this.fcircle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.fcircle.Depth = 0;
-            this.fcircle.Location = new System.Drawing.Point(30, 4);
-            this.fcircle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.fcircle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.fcircle.Name = "fcircle";
-            this.fcircle.Primary = false;
-            this.fcircle.Size = new System.Drawing.Size(72, 36);
-            this.fcircle.TabIndex = 1;
-            this.fcircle.Text = "Circle  0";
-            this.fcircle.UseVisualStyleBackColor = true;
-            // 
             // fpredPC
             // 
             this.fpredPC.AutoSize = true;
@@ -1583,6 +1594,7 @@ namespace PipelineSimulatorMaterial
             this.btnMemoryOption.TabIndex = 5;
             this.btnMemoryOption.Text = "Options";
             this.btnMemoryOption.UseVisualStyleBackColor = true;
+            this.btnMemoryOption.Visible = false;
             // 
             // lvMemory
             // 
@@ -1604,6 +1616,7 @@ namespace PipelineSimulatorMaterial
             this.lvMemory.TabIndex = 4;
             this.lvMemory.UseCompatibleStateImageBehavior = false;
             this.lvMemory.View = System.Windows.Forms.View.Details;
+
             // 
             // chAddress
             // 
@@ -1617,27 +1630,41 @@ namespace PipelineSimulatorMaterial
             // 
             // tpAbout
             // 
-            this.tpAbout.Controls.Add(this.lblABout);
+            this.tpAbout.BackColor = System.Drawing.Color.White;
+            this.tpAbout.Controls.Add(this.label1);
+            this.tpAbout.Controls.Add(this.materialFlatButton1);
             this.tpAbout.Location = new System.Drawing.Point(4, 24);
             this.tpAbout.Name = "tpAbout";
             this.tpAbout.Padding = new System.Windows.Forms.Padding(3);
             this.tpAbout.Size = new System.Drawing.Size(991, 441);
             this.tpAbout.TabIndex = 4;
             this.tpAbout.Text = "About";
-            this.tpAbout.UseVisualStyleBackColor = true;
             // 
-            // lblABout
+            // label1
             // 
-            this.lblABout.AutoSize = true;
-            this.lblABout.Depth = 0;
-            this.lblABout.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblABout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblABout.Location = new System.Drawing.Point(248, 72);
-            this.lblABout.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblABout.Name = "lblABout";
-            this.lblABout.Size = new System.Drawing.Size(48, 18);
-            this.lblABout.TabIndex = 0;
-            this.lblABout.Text = "About";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.label1.Location = new System.Drawing.Point(341, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(336, 48);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Pipeline Simulator";
+            // 
+            // materialFlatButton1
+            // 
+            this.materialFlatButton1.AutoSize = true;
+            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialFlatButton1.Depth = 0;
+            this.materialFlatButton1.Location = new System.Drawing.Point(350, 230);
+            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton1.Name = "materialFlatButton1";
+            this.materialFlatButton1.Primary = true;
+            this.materialFlatButton1.Size = new System.Drawing.Size(318, 36);
+            this.materialFlatButton1.TabIndex = 0;
+            this.materialFlatButton1.Text = "Han Peiru            13307130337@fudan.edu.cn";
+            this.materialFlatButton1.UseVisualStyleBackColor = true;
             // 
             // labelMdstm
             // 
@@ -1791,15 +1818,6 @@ namespace PipelineSimulatorMaterial
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Controls.Add(this.fcircle);
-            this.panel2.Location = new System.Drawing.Point(179, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(533, 50);
-            this.panel2.TabIndex = 13;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1816,6 +1834,8 @@ namespace PipelineSimulatorMaterial
             this.materialContextMenuStrip1.ResumeLayout(false);
             this.tpProcess.ResumeLayout(false);
             this.tpProcess.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.tabRegister.ResumeLayout(false);
             this.tpRegister.ResumeLayout(false);
@@ -1836,8 +1856,6 @@ namespace PipelineSimulatorMaterial
             this.tpMemory.PerformLayout();
             this.tpAbout.ResumeLayout(false);
             this.tpAbout.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1897,10 +1915,9 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.TabPage tpRegister;
         private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
         private MaterialSkin.Controls.MaterialFlatButton btnMemoryOption;
-        private MaterialSkin.Controls.MaterialListView lvMemory;
+        public MaterialSkin.Controls.MaterialListView lvMemory;
         private System.Windows.Forms.ColumnHeader chAddress;
         private System.Windows.Forms.ColumnHeader chData;
-        private MaterialSkin.Controls.MaterialLabel lblABout;
         public MaterialSkin.Controls.MaterialFlatButton eax;
         public MaterialSkin.Controls.MaterialFlatButton edi;
         public MaterialSkin.Controls.MaterialFlatButton esi;
@@ -1966,6 +1983,8 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.Panel pnlUnderLine;
         private MaterialSkin.Controls.MaterialFlatButton btnDisableBreakpoint;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
 
 
 
