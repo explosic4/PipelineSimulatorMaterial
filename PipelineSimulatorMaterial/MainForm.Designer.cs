@@ -36,8 +36,8 @@ namespace PipelineSimulatorMaterial
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabNavbar = new MaterialSkin.Controls.MaterialTabControl();
             this.tpFile = new System.Windows.Forms.TabPage();
-            this.BtnOpenBinaryFile = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.BtnOpenInstrFile = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnOpenBinaryFile = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnOpenInstrFile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.tpCode = new System.Windows.Forms.TabPage();
             this.btnDisableBreakpoint = new MaterialSkin.Controls.MaterialFlatButton();
             this.pnlUnderLine = new System.Windows.Forms.Panel();
@@ -188,8 +188,8 @@ namespace PipelineSimulatorMaterial
             // 
             // tpFile
             // 
-            this.tpFile.Controls.Add(this.BtnOpenBinaryFile);
-            this.tpFile.Controls.Add(this.BtnOpenInstrFile);
+            this.tpFile.Controls.Add(this.btnOpenBinaryFile);
+            this.tpFile.Controls.Add(this.btnOpenInstrFile);
             this.tpFile.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpFile.Location = new System.Drawing.Point(4, 24);
             this.tpFile.Name = "tpFile";
@@ -199,32 +199,32 @@ namespace PipelineSimulatorMaterial
             this.tpFile.Text = "File";
             this.tpFile.UseVisualStyleBackColor = true;
             // 
-            // BtnOpenBinaryFile
+            // btnOpenBinaryFile
             // 
-            this.BtnOpenBinaryFile.Depth = 0;
-            this.BtnOpenBinaryFile.Location = new System.Drawing.Point(411, 201);
-            this.BtnOpenBinaryFile.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BtnOpenBinaryFile.Name = "BtnOpenBinaryFile";
-            this.BtnOpenBinaryFile.Primary = true;
-            this.BtnOpenBinaryFile.Size = new System.Drawing.Size(172, 44);
-            this.BtnOpenBinaryFile.TabIndex = 3;
-            this.BtnOpenBinaryFile.Text = "Open Binary File";
-            this.BtnOpenBinaryFile.UseVisualStyleBackColor = true;
-            this.BtnOpenBinaryFile.Click += new System.EventHandler(this.BtnOpenBinaryFile_Click);
+            this.btnOpenBinaryFile.Depth = 0;
+            this.btnOpenBinaryFile.Location = new System.Drawing.Point(411, 201);
+            this.btnOpenBinaryFile.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnOpenBinaryFile.Name = "btnOpenBinaryFile";
+            this.btnOpenBinaryFile.Primary = true;
+            this.btnOpenBinaryFile.Size = new System.Drawing.Size(172, 44);
+            this.btnOpenBinaryFile.TabIndex = 3;
+            this.btnOpenBinaryFile.Text = "Open Binary File";
+            this.btnOpenBinaryFile.UseVisualStyleBackColor = true;
+            this.btnOpenBinaryFile.Click += new System.EventHandler(this.btnOpenBinaryFile_Click);
             // 
-            // BtnOpenInstrFile
+            // btnOpenInstrFile
             // 
-            this.BtnOpenInstrFile.Depth = 0;
-            this.BtnOpenInstrFile.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.BtnOpenInstrFile.Location = new System.Drawing.Point(411, 126);
-            this.BtnOpenInstrFile.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BtnOpenInstrFile.Name = "BtnOpenInstrFile";
-            this.BtnOpenInstrFile.Primary = true;
-            this.BtnOpenInstrFile.Size = new System.Drawing.Size(172, 44);
-            this.BtnOpenInstrFile.TabIndex = 2;
-            this.BtnOpenInstrFile.Text = "Open Instruction File";
-            this.BtnOpenInstrFile.UseVisualStyleBackColor = true;
-            this.BtnOpenInstrFile.Click += new System.EventHandler(this.BtnOpenInstrFile_Click);
+            this.btnOpenInstrFile.Depth = 0;
+            this.btnOpenInstrFile.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.btnOpenInstrFile.Location = new System.Drawing.Point(411, 126);
+            this.btnOpenInstrFile.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnOpenInstrFile.Name = "btnOpenInstrFile";
+            this.btnOpenInstrFile.Primary = true;
+            this.btnOpenInstrFile.Size = new System.Drawing.Size(172, 44);
+            this.btnOpenInstrFile.TabIndex = 2;
+            this.btnOpenInstrFile.Text = "Open Instruction File";
+            this.btnOpenInstrFile.UseVisualStyleBackColor = true;
+            this.btnOpenInstrFile.Click += new System.EventHandler(this.btnOpenInstrFile_Click);
             // 
             // tpCode
             // 
@@ -301,7 +301,7 @@ namespace PipelineSimulatorMaterial
             this.btnEnableBreakpoint.TabIndex = 3;
             this.btnEnableBreakpoint.Text = "Enable Breakpoint";
             this.btnEnableBreakpoint.UseVisualStyleBackColor = true;
-            this.btnEnableBreakpoint.Click += new System.EventHandler(this.btnCodeOptions_Click);
+            this.btnEnableBreakpoint.Click += new System.EventHandler(this.btnEnableBreakpoint_Click);
             // 
             // lvCode
             // 
@@ -374,7 +374,7 @@ namespace PipelineSimulatorMaterial
             this.mnuitEnableBreakpoint.ShowShortcutKeys = false;
             this.mnuitEnableBreakpoint.Size = new System.Drawing.Size(165, 22);
             this.mnuitEnableBreakpoint.Text = "Enable BreakPoint";
-            this.mnuitEnableBreakpoint.Click += new System.EventHandler(this.EnableBreakpoint_Click);
+            this.mnuitEnableBreakpoint.Click += new System.EventHandler(this.mnuitEnableBreakpoint_Click);
             // 
             // mnuitDisableBreakpoint
             // 
@@ -383,7 +383,7 @@ namespace PipelineSimulatorMaterial
             this.mnuitDisableBreakpoint.ShowShortcutKeys = false;
             this.mnuitDisableBreakpoint.Size = new System.Drawing.Size(165, 22);
             this.mnuitDisableBreakpoint.Text = "Disable BreakPoint";
-            this.mnuitDisableBreakpoint.Click += new System.EventHandler(this.DisableBreakpoint_Click);
+            this.mnuitDisableBreakpoint.Click += new System.EventHandler(this.mnuitDisableBreakpoint_Click);
             // 
             // mnuitSearch
             // 
@@ -525,7 +525,6 @@ namespace PipelineSimulatorMaterial
             this.edi.TabIndex = 7;
             this.edi.Text = "%edi    0x00000000";
             this.edi.UseVisualStyleBackColor = true;
-            this.edi.Click += new System.EventHandler(this.edi_Click);
             // 
             // esi
             // 
@@ -541,7 +540,6 @@ namespace PipelineSimulatorMaterial
             this.esi.TabIndex = 6;
             this.esi.Text = "%esi     0x00000000";
             this.esi.UseVisualStyleBackColor = true;
-            this.esi.Click += new System.EventHandler(this.esi_Click);
             // 
             // ebp
             // 
@@ -557,7 +555,6 @@ namespace PipelineSimulatorMaterial
             this.ebp.TabIndex = 5;
             this.ebp.Text = "%ebp    0x00000000";
             this.ebp.UseVisualStyleBackColor = true;
-            this.ebp.Click += new System.EventHandler(this.ebp_Click);
             // 
             // esp
             // 
@@ -573,7 +570,6 @@ namespace PipelineSimulatorMaterial
             this.esp.TabIndex = 4;
             this.esp.Text = "%esp    0x00000000";
             this.esp.UseVisualStyleBackColor = true;
-            this.esp.Click += new System.EventHandler(this.esp_Click);
             // 
             // ebx
             // 
@@ -589,7 +585,6 @@ namespace PipelineSimulatorMaterial
             this.ebx.TabIndex = 3;
             this.ebx.Text = "%ebx    0x00000000";
             this.ebx.UseVisualStyleBackColor = true;
-            this.ebx.Click += new System.EventHandler(this.ebx_Click);
             // 
             // edx
             // 
@@ -605,7 +600,6 @@ namespace PipelineSimulatorMaterial
             this.edx.TabIndex = 2;
             this.edx.Text = "%edx    0x00000000";
             this.edx.UseVisualStyleBackColor = true;
-            this.edx.Click += new System.EventHandler(this.edx_Click);
             // 
             // ecx
             // 
@@ -621,7 +615,6 @@ namespace PipelineSimulatorMaterial
             this.ecx.TabIndex = 1;
             this.ecx.Text = "%ecx    0x00000000";
             this.ecx.UseVisualStyleBackColor = true;
-            this.ecx.Click += new System.EventHandler(this.ecx_Click);
             // 
             // eax
             // 
@@ -637,7 +630,6 @@ namespace PipelineSimulatorMaterial
             this.eax.TabIndex = 0;
             this.eax.Text = "%eax    0x00000000";
             this.eax.UseVisualStyleBackColor = true;
-            this.eax.Click += new System.EventHandler(this.eax_Click);
             // 
             // materialTabSelector1
             // 
@@ -1336,7 +1328,6 @@ namespace PipelineSimulatorMaterial
             this.dicode.TabIndex = 1;
             this.dicode.Text = "icode  0";
             this.dicode.UseVisualStyleBackColor = true;
-            this.dicode.Click += new System.EventHandler(this.dicode_Click);
             // 
             // dinstr
             // 
@@ -1566,7 +1557,7 @@ namespace PipelineSimulatorMaterial
             this.btnConfirmSpeed.Text = "Confirm";
             this.btnConfirmSpeed.UseVisualStyleBackColor = true;
             this.btnConfirmSpeed.Visible = false;
-            this.btnConfirmSpeed.Click += new System.EventHandler(this.btnConfirmSpeed_Click);
+            this.btnConfirmSpeed.Click += new System.EventHandler(this.btnProcessOptionConfirm_Click);
             // 
             // tpMemory
             // 
@@ -1616,7 +1607,6 @@ namespace PipelineSimulatorMaterial
             this.lvMemory.TabIndex = 4;
             this.lvMemory.UseCompatibleStateImageBehavior = false;
             this.lvMemory.View = System.Windows.Forms.View.Details;
-
             // 
             // chAddress
             // 
@@ -1645,7 +1635,7 @@ namespace PipelineSimulatorMaterial
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.label1.Location = new System.Drawing.Point(341, 169);
+            this.label1.Location = new System.Drawing.Point(341, 126);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(336, 48);
             this.label1.TabIndex = 2;
@@ -1656,7 +1646,7 @@ namespace PipelineSimulatorMaterial
             this.materialFlatButton1.AutoSize = true;
             this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton1.Depth = 0;
-            this.materialFlatButton1.Location = new System.Drawing.Point(350, 230);
+            this.materialFlatButton1.Location = new System.Drawing.Point(349, 180);
             this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton1.Name = "materialFlatButton1";
@@ -1869,8 +1859,8 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.TabPage tpProcess;
         private System.Windows.Forms.TabPage tpAbout;
 
-        private MaterialSkin.Controls.MaterialRaisedButton BtnOpenInstrFile;
-        private MaterialSkin.Controls.MaterialRaisedButton BtnOpenBinaryFile;
+        private MaterialSkin.Controls.MaterialRaisedButton btnOpenInstrFile;
+        private MaterialSkin.Controls.MaterialRaisedButton btnOpenBinaryFile;
 
         private MaterialSkin.Controls.MaterialListView lvCode;
         private System.Windows.Forms.ColumnHeader chAddr;

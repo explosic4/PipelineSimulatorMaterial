@@ -118,17 +118,9 @@ namespace PipelineSimulatorMaterial
         public static byte[ ] Memory = new byte[ 2049 ];
         public static byte[ ] MemoryClone = new byte[ 2049 ];
         public static bool IsRuning;
-        // public static ArrayList 
-
         public static ArrayList InstrAddrs1
         {
             get { return InstrAddrs; }
-        }
-
-        public static void Reset( )
-        {
-            Init( );
-            Memory = (byte[ ]) MemoryClone.Clone( );
         }
 
         public static void Init( )
@@ -241,6 +233,187 @@ namespace PipelineSimulatorMaterial
             W_dstM = 8;
             W_code = "nop";
             w_stat = Stats.SAOK;
+        }
+
+        public static void Reset( )
+        {
+            Init( );
+            Memory = (byte[ ]) MemoryClone.Clone( );
+        }
+
+        public static byte[ ] GetBytesArray( int addr ) //read a 4 bytes long bytes array from memory at adrress of addr
+        {
+            var ret = new byte[ 4 ];
+            ret[ 0 ] = Memory[ addr ];
+            ret[ 1 ] = Memory[ addr + 1 ];
+            ret[ 2 ] = Memory[ addr + 2 ];
+            ret[ 3 ] = Memory[ addr + 3 ];
+            return ret;
+        }
+
+        public static void DisplayInstr( MainForm mainForm )
+        {
+            Debug.WriteLine( "display instr" );
+
+            for ( var addr = 0; addr < InstrFileLen; )
+            {
+                var icode = (byte) ( Memory[ addr ] / 16 );
+                var ifun = (byte) ( Memory[ addr ] % 16 );
+
+                var instr = GetString.Instr( icode, ifun );
+                var operand = GetString.InstrOperand( icode, addr );
+
+                var len = GetLength.Instr( icode );
+                var bina = "";
+                for ( var i = 0; i < len; i++ )
+                {
+                    bina += new string( PipeConvert.Byte2C_Array( Memory[ addr + i ] ) );
+                }
+                var data = new[ ] { "", "", PipeConvert.BigEnd2S( addr ), bina, instr + " " + operand };
+                mainForm.InsertListViewCode( data );
+
+                foreach ( var s in data )
+                {
+                    Debug.Write( s );
+                }
+                Debug.WriteLine( "" );
+                addr += bina.Length / 2;
+            }
+            var blank = new[ ] { "", "", "", "", "" };
+            for ( var i = 0; i < 10; i++ )
+            {
+                mainForm.InsertListViewCode( blank );
+            }
+        }
+
+        public static void DisplayProcess( MainForm mainForm )
+        {
+            //图表刷新
+
+            mainForm.fpredPC.Text = "predpc    " + PipeConvert.LitEnd2S( F_predPC );
+            mainForm.fcircle.Text = "cycle    " + Convert.ToString( Cycle );
+
+            mainForm.dinstr.Text = "" + Convert.ToString( D_code );
+            mainForm.dstat.Text = "state    " + Convert.ToString( D_stat );
+            mainForm.dicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( D_icode ) );
+            mainForm.difun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( D_ifun ) );
+            mainForm.dra.Text = "ra    " + PipeConvert.Byte2S( (byte) ( D_rA ) );
+            mainForm.drb.Text = "rb    " + PipeConvert.Byte2S( (byte) ( D_rB ) );
+            mainForm.dvalc.Text = "valc    " + PipeConvert.LitEnd2S( D_valC );
+            mainForm.dvalp.Text = "valp    " + PipeConvert.LitEnd2S( D_valP );
+
+
+            mainForm.einstr.Text = "" + Convert.ToString( E_code );
+            mainForm.estat.Text = "stat    " + Convert.ToString( E_stat );
+            mainForm.eicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( E_icode ) );
+            mainForm.eifun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( E_ifun ) );
+
+            mainForm.evalc.Text = "valc    " + PipeConvert.LitEnd2S( E_valC );
+            mainForm.evala.Text = "vala    " + PipeConvert.LitEnd2S( E_valA );
+            mainForm.evalb.Text = "valb    " + PipeConvert.LitEnd2S( E_valB );
+            mainForm.edste.Text = "dste    " + PipeConvert.Byte2S( (byte) ( E_dstE ) );
+            mainForm.edstm.Text = "dstm    " + PipeConvert.Byte2S( (byte) ( E_dstM ) );
+            mainForm.esrca.Text = "srca    " + PipeConvert.Byte2S( (byte) ( E_srcA ) );
+            mainForm.esrcb.Text = "srcb    " + PipeConvert.Byte2S( (byte) ( E_srcB ) );
+
+
+            mainForm.minstr.Text = "" + Convert.ToString( M_code );
+
+            mainForm.mstat.Text = "state    " + Convert.ToString( M_stat );
+            mainForm.mifun.Text = "cnd    " + Convert.ToString( M_Cnd );
+            mainForm.micode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( M_icode ) );
+            mainForm.mvale.Text = "valE    " + PipeConvert.LitEnd2S( M_valE );
+            mainForm.mvala.Text = "valM    " + PipeConvert.LitEnd2S( M_valA );
+            mainForm.mdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( M_dstE ) );
+            mainForm.mdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( M_dstM ) );
+
+            mainForm.mcc.Text = "ZF  " + PipeConvert.Byte2C( (byte) ( zf ) ) + "    SF  " +
+                                PipeConvert.Byte2C( (byte) ( sf ) ) + "    OF  " + PipeConvert.Byte2C( (byte) ( of ) );
+
+            mainForm.winstr.Text = "" + Convert.ToString( W_code );
+            mainForm.wstat.Text = "state    " + Convert.ToString( W_stat );
+            mainForm.wicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( W_icode ) );
+            mainForm.wvale.Text = "valE    " + PipeConvert.LitEnd2S( W_valE );
+            mainForm.wvalm.Text = "valM    " + PipeConvert.LitEnd2S( W_valM );
+            mainForm.wdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( W_dstE ) );
+            mainForm.wdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( W_dstM ) );
+
+            if ( mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ) )
+            {
+                // mainForm.Trigger(mainForm.eax,EventArgs.Empty);//相当于鼠标点击触发
+                //mainForm.eax.OnClick( EventArgs.Empty );
+            } //*/
+
+            mainForm.eax.Text = "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] );
+            mainForm.ecx.Text = "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] );
+            mainForm.edx.Text = "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] );
+            mainForm.ebx.Text = "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] );
+            mainForm.esp.Text = "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] );
+            mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
+            mainForm.esi.Text = "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] );
+            mainForm.edi.Text = "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] );
+
+            mainForm.fstall.Text = "";
+            mainForm.dstall.Text = "";
+            mainForm.estall.Text = "";
+            mainForm.mstall.Text = "";
+            mainForm.wstall.Text = "";
+
+            mainForm.fstall.Hide( );
+            mainForm.dstall.Hide( );
+            mainForm.estall.Hide( );
+            mainForm.mstall.Hide( );
+            mainForm.wstall.Hide( );
+
+            if ( F_stall == 1 )
+            {
+                mainForm.fstall.Text = "stall";
+                mainForm.fstall.Show( );
+            }
+            if ( D_stall == 1 )
+            {
+                mainForm.dstall.Text = "stall";
+                mainForm.dstall.Show( );
+            }
+            else if ( D_bubble == 1 )
+            {
+                mainForm.dstall.Text = "bubble";
+                mainForm.dstall.Show( );
+            }
+            if ( E_bubble == 1 )
+            {
+                mainForm.estall.Text = "bubble";
+                mainForm.estall.Show( );
+            }
+            if ( M_bubble == 1 )
+            {
+                mainForm.mstall.Text = "bubble";
+                mainForm.mstall.Show( );
+            }
+            if ( W_stall == 1 )
+            {
+                mainForm.wstall.Text = "stall";
+                mainForm.wstall.Show( );
+            }
+        }
+
+        public static void DisplyMemory( MainForm mainForm )
+        {
+            var idx = 0;
+            for ( var addr = 0; addr + 3 < 2049; addr += 4, idx++ )
+            {
+                var addr_ = PipeConvert.BigEnd2S( addr );
+                var mem0 = new string( PipeConvert.Byte2C_Array( Memory[ addr ] ) );
+                var mem1 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 1 ] ) );
+                var mem2 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 2 ] ) );
+                var mem3 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 3 ] ) );
+                var mem = mem0 + " " + mem1 + " " + mem2 + " " + mem3;
+                
+                string[ ] data = { addr_, mem };
+                mainForm.EditListViewMemory( data , idx );
+                //mainForm.lvMemory.Items[ idx ].SubItems[ 0 ].Text = addr_;
+                //mainForm.lvMemory.Items[ idx ].SubItems[ 1 ].Text = mem;
+            }
         }
 
         private static void WriteBack( )
@@ -653,16 +826,6 @@ namespace PipelineSimulatorMaterial
             }
         }
 
-        public static byte[ ] GetBytesArray( int addr ) //read a 4 bytes long bytes array from memory at adrress of addr
-        {
-            var ret = new byte[ 4 ];
-            ret[ 0 ] = Memory[ addr ];
-            ret[ 1 ] = Memory[ addr + 1 ];
-            ret[ 2 ] = Memory[ addr + 2 ];
-            ret[ 3 ] = Memory[ addr + 3 ];
-            return ret;
-        }
-
         private static void Fetch( )
         {
             //F->D
@@ -826,42 +989,6 @@ namespace PipelineSimulatorMaterial
             {
                 f_predPC = f_valP;
             }
-        }
-
-        public static void DisplayInstr( MainForm mainForm )
-        {
-            Debug.WriteLine( "display instr" );
-
-            for ( var addr = 0; addr < InstrFileLen; )
-            {
-                var icode = (byte) ( Memory[ addr ] / 16 );
-                var ifun = (byte) ( Memory[ addr ] % 16 );
-
-                var instr = GetString.Instr( icode, ifun );
-                var operand = GetString.InstrOperand( icode, addr );
-
-                var len = GetLength.Instr( icode );
-                var bina = "";
-                for ( var i = 0; i < len; i++ )
-                {
-                    bina += new string( PipeConvert.Byte2C_Array( Memory[ addr + i ] ) );
-                }
-                var data = new[ ] { "", "", PipeConvert.BigEnd2S( addr ), bina, instr + " " + operand };
-                mainForm.InsertListViewCode( data );
-
-                foreach ( var s in data )
-                {
-                    Debug.Write( s );
-                }
-                Debug.WriteLine( "" );
-                addr += bina.Length / 2;
-            }
-            var blank = new[ ] { "", "", "", "", "" };
-            for ( var i = 0; i < 10; i++ )
-            {
-                mainForm.InsertListViewCode( blank );
-            }
-
         }
 
         private static void Bubble( )
@@ -1045,6 +1172,29 @@ namespace PipelineSimulatorMaterial
             W_dstM = m_dstM;
         }
 
+        public static void StartRuning( )
+        {
+            if ( IsRuning )
+            {
+                return;
+            }
+
+            IsRuning = true;
+            Reset( );
+            FileHandler.InitStreamWriter( "out.txt" );
+        }
+
+        public static void StopRunning( )
+        {
+            if ( !IsRuning )
+            {
+                return;
+            }
+
+            IsRuning = false;
+            FileHandler.CloseStreamWriter( );
+        }
+
         private static void Step( )
         {
             WriteBack( );
@@ -1063,14 +1213,14 @@ namespace PipelineSimulatorMaterial
         {
             Step( );
 
-            mainform.Process_Display( );
-            mainform.lvMemory_Display( );
+            mainform.ProcessDisplay( );
+            mainform.MemoryDisplay( );
 
             if ( w_stat == Stats.SAOK && W_icode == Instrs.IHALT )
             {
                 //mainform.timer1.Stop( );
                 mainform.timer1.Enabled = false;
-                mainform.BtnChange( );
+                mainform.ButtonDisplaySwitch( );
 
                 StopRunning( );
 
@@ -1080,145 +1230,11 @@ namespace PipelineSimulatorMaterial
             {
                 //mainform.timer1.Stop( );
                 mainform.timer1.Enabled = false;
-                mainform.BtnChange( );
+                mainform.ButtonDisplaySwitch( );
                 StopRunning( );
 
                 MessageBox.Show( @"Address error. Pipeling info saved as out.txt." );
             }
-        }
-
-        public static void DisplayProcess( MainForm mainForm )
-        {
-            //图表刷新
-
-            mainForm.fpredPC.Text = "predpc    " + PipeConvert.LitEnd2S( F_predPC );
-            mainForm.fcircle.Text = "cycle    " + Convert.ToString( Cycle );
-
-            mainForm.dinstr.Text = "" + Convert.ToString( D_code );
-            mainForm.dstat.Text = "state    " + Convert.ToString( D_stat );
-            mainForm.dicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( D_icode ) );
-            mainForm.difun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( D_ifun ) );
-            mainForm.dra.Text = "ra    " + PipeConvert.Byte2S( (byte) ( D_rA ) );
-            mainForm.drb.Text = "rb    " + PipeConvert.Byte2S( (byte) ( D_rB ) );
-            mainForm.dvalc.Text = "valc    " + PipeConvert.LitEnd2S( D_valC );
-            mainForm.dvalp.Text = "valp    " + PipeConvert.LitEnd2S( D_valP );
-
-
-            mainForm.einstr.Text = "" + Convert.ToString( E_code );
-            mainForm.estat.Text = "stat    " + Convert.ToString( E_stat );
-            mainForm.eicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( E_icode ) );
-            mainForm.eifun.Text = "ifun    " + PipeConvert.Byte2S( (byte) ( E_ifun ) );
-
-            mainForm.evalc.Text = "valc    " + PipeConvert.LitEnd2S( E_valC );
-            mainForm.evala.Text = "vala    " + PipeConvert.LitEnd2S( E_valA );
-            mainForm.evalb.Text = "valb    " + PipeConvert.LitEnd2S( E_valB );
-            mainForm.edste.Text = "dste    " + PipeConvert.Byte2S( (byte) ( E_dstE ) );
-            mainForm.edstm.Text = "dstm    " + PipeConvert.Byte2S( (byte) ( E_dstM ) );
-            mainForm.esrca.Text = "srca    " + PipeConvert.Byte2S( (byte) ( E_srcA ) );
-            mainForm.esrcb.Text = "srcb    " + PipeConvert.Byte2S( (byte) ( E_srcB ) );
-
-
-            mainForm.minstr.Text = "" + Convert.ToString( M_code );
-
-            mainForm.mstat.Text = "state    " + Convert.ToString( M_stat );
-            mainForm.mifun.Text = "cnd    " + Convert.ToString( M_Cnd );
-            mainForm.micode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( M_icode ) );
-            mainForm.mvale.Text = "valE    " + PipeConvert.LitEnd2S( M_valE );
-            mainForm.mvala.Text = "valM    " + PipeConvert.LitEnd2S( M_valA );
-            mainForm.mdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( M_dstE ) );
-            mainForm.mdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( M_dstM ) );
-
-            mainForm.mcc.Text = "ZF  " + PipeConvert.Byte2C( (byte) ( zf ) ) + "    SF  " +
-                                PipeConvert.Byte2C( (byte) ( sf ) ) + "    OF  " + PipeConvert.Byte2C( (byte) ( of ) );
-
-            mainForm.winstr.Text = "" + Convert.ToString( W_code );
-            mainForm.wstat.Text = "state    " + Convert.ToString( W_stat );
-            mainForm.wicode.Text = "icode    " + PipeConvert.Byte2S( (byte) ( W_icode ) );
-            mainForm.wvale.Text = "valE    " + PipeConvert.LitEnd2S( W_valE );
-            mainForm.wvalm.Text = "valM    " + PipeConvert.LitEnd2S( W_valM );
-            mainForm.wdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( W_dstE ) );
-            mainForm.wdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( W_dstM ) );
-
-            if ( mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ) )
-            {
-                // mainForm.Trigger(mainForm.eax,EventArgs.Empty);//相当于鼠标点击触发
-                //mainForm.eax.OnClick( EventArgs.Empty );
-            } //*/
-
-            mainForm.eax.Text = "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] );
-            mainForm.ecx.Text = "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] );
-            mainForm.edx.Text = "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] );
-            mainForm.ebx.Text = "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] );
-            mainForm.esp.Text = "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] );
-            mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
-            mainForm.esi.Text = "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] );
-            mainForm.edi.Text = "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] );
-
-            mainForm.fstall.Text = "";
-            mainForm.dstall.Text = "";
-            mainForm.estall.Text = "";
-            mainForm.mstall.Text = "";
-            mainForm.wstall.Text = "";
-
-            mainForm.fstall.Hide( );
-            mainForm.dstall.Hide( );
-            mainForm.estall.Hide( );
-            mainForm.mstall.Hide( );
-            mainForm.wstall.Hide( );
-
-            if ( F_stall == 1 )
-            {
-                mainForm.fstall.Text = "stall";
-                mainForm.fstall.Show( );
-            }
-            if ( D_stall == 1 )
-            {
-                mainForm.dstall.Text = "stall";
-                mainForm.dstall.Show( );
-            }
-            else if ( D_bubble == 1 )
-            {
-                mainForm.dstall.Text = "bubble";
-                mainForm.dstall.Show( );
-            }
-            if ( E_bubble == 1 )
-            {
-                mainForm.estall.Text = "bubble";
-                mainForm.estall.Show( );
-            }
-            if ( M_bubble == 1 )
-            {
-                mainForm.mstall.Text = "bubble";
-                mainForm.mstall.Show( );
-            }
-            if ( W_stall == 1 )
-            {
-                mainForm.wstall.Text = "stall";
-                mainForm.wstall.Show( );
-            }
-        }
-
-        public static void StopRunning( )
-        {
-            if ( !IsRuning )
-            {
-                return;
-            }
-
-            IsRuning = false;
-            FileHandler.CloseStreamWriter( );
-        }
-
-        public static void StartRuning( )
-        {
-            if ( IsRuning )
-            {
-                return;
-            }
-
-            IsRuning = true;
-            Reset( );
-            FileHandler.InitStreamWriter( "out.txt" );
         }
 
         public static void StepBreakPoint( MainForm mainform )
@@ -1241,7 +1257,7 @@ namespace PipelineSimulatorMaterial
             {
                 //mainform.timer2.Stop( );
                 mainform.timer2.Enabled = false;
-                mainform.BtnChange( );
+                mainform.ButtonDisplaySwitch( );
 
                 MessageBox.Show( @"Breakpoint." );
                 return;
@@ -1250,8 +1266,8 @@ namespace PipelineSimulatorMaterial
             UpdateRegisters( );
             Cycle++;
 
-            mainform.Process_Display( );
-            mainform.lvMemory_Display( );
+            mainform.ProcessDisplay( );
+            mainform.MemoryDisplay( );
 
             FileHandler.WrtiePipeInfo( Cycle );
 
@@ -1259,7 +1275,7 @@ namespace PipelineSimulatorMaterial
             {
                 //mainform.timer2.Stop( );
                 mainform.timer2.Enabled = false;
-                mainform.BtnChange( );
+                mainform.ButtonDisplaySwitch( );
 
                 StopRunning( );
 
@@ -1269,30 +1285,10 @@ namespace PipelineSimulatorMaterial
             {
                 //mainform.timer2.Stop( );
                 mainform.timer2.Enabled = false;
-                mainform.BtnChange( );
+                mainform.ButtonDisplaySwitch( );
                 StopRunning( );
 
                 MessageBox.Show( @"Address error. Pipeling info saved as out.txt." );
-            }
-        }
-
-        public static void DisplyMemory( MainForm mainForm )
-        {
-            var idx = 0;
-            for ( var addr = 0; addr + 3 < 2049; addr += 4, idx++ )
-            {
-                var addr_ = PipeConvert.BigEnd2S( addr );
-                var mem0 = new string( PipeConvert.Byte2C_Array( Memory[ addr ] ) );
-                var mem1 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 1 ] ) );
-                var mem2 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 2 ] ) );
-                var mem3 = new string( PipeConvert.Byte2C_Array( Memory[ addr + 3 ] ) );
-                var mem = mem0 + " " + mem1 + " " + mem2 + " " + mem3;
-               
-                mainForm.lvMemory.Items[ idx ].SubItems[ 0 ].Text = addr_;
-                mainForm.lvMemory.Items[ idx ].SubItems[ 1 ].Text = mem;
-
-                //var data = new[ ] { addr_, mem };
-                // mainForm.InsertListViewMemory( data );
             }
         }
     }
