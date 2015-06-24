@@ -34,7 +34,7 @@ namespace MaterialSkin.Controls
         public void SelectAll() { baseTextBox.SelectAll(); }
         public void Clear() { baseTextBox.Clear(); }
 
-        public void Focus() { baseTextBox.Focus(); }
+        public new void Focus() { baseTextBox.Focus(); }
 
         # region Forwarding events to baseTextBox
         public event EventHandler AcceptsTabChanged

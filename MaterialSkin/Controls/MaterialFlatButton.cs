@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -59,6 +60,21 @@ namespace MaterialSkin.Controls
                     Size = GetPreferredSize();
                 Invalidate();
             }
+        }
+
+
+        public new void Focus( )
+        {
+            /*BeginInvoke( (MethodInvoker) delegate( )
+            {
+                base.Focus( );
+                //base.SelectAll( );
+            } );*/
+            Debug.WriteLine( this.Name );
+            MouseState = MouseState.DOWN;
+            //var animationLocation = new Point(Location.X, Location.Y );
+            animationManager.StartNewAnimation( AnimationDirection.In, Location );
+            Invalidate( );
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
