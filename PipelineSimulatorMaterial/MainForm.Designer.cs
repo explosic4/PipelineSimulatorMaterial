@@ -150,6 +150,7 @@ namespace PipelineSimulatorMaterial
             this.tabsNavbar = new MaterialSkin.Controls.MaterialTabSelector();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.tabNavbar.SuspendLayout();
             this.tpFile.SuspendLayout();
             this.tpCode.SuspendLayout();
@@ -516,14 +517,14 @@ namespace PipelineSimulatorMaterial
             this.edi.AutoSize = true;
             this.edi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.edi.Depth = 0;
-            this.edi.Location = new System.Drawing.Point(16, 257);
+            this.edi.Location = new System.Drawing.Point(18, 257);
             this.edi.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.edi.MouseState = MaterialSkin.MouseState.HOVER;
             this.edi.Name = "edi";
             this.edi.Primary = false;
-            this.edi.Size = new System.Drawing.Size(135, 36);
+            this.edi.Size = new System.Drawing.Size(125, 36);
             this.edi.TabIndex = 7;
-            this.edi.Text = "%edi    0x00000000";
+            this.edi.Text = "edi    0x00000000";
             this.edi.UseVisualStyleBackColor = true;
             // 
             // esi
@@ -531,14 +532,14 @@ namespace PipelineSimulatorMaterial
             this.esi.AutoSize = true;
             this.esi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.esi.Depth = 0;
-            this.esi.Location = new System.Drawing.Point(16, 222);
+            this.esi.Location = new System.Drawing.Point(18, 222);
             this.esi.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.esi.MouseState = MaterialSkin.MouseState.HOVER;
             this.esi.Name = "esi";
             this.esi.Primary = false;
-            this.esi.Size = new System.Drawing.Size(138, 36);
+            this.esi.Size = new System.Drawing.Size(128, 36);
             this.esi.TabIndex = 6;
-            this.esi.Text = "%esi     0x00000000";
+            this.esi.Text = "esi     0x00000000";
             this.esi.UseVisualStyleBackColor = true;
             // 
             // ebp
@@ -546,14 +547,14 @@ namespace PipelineSimulatorMaterial
             this.ebp.AutoSize = true;
             this.ebp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ebp.Depth = 0;
-            this.ebp.Location = new System.Drawing.Point(15, 187);
+            this.ebp.Location = new System.Drawing.Point(17, 187);
             this.ebp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ebp.MouseState = MaterialSkin.MouseState.HOVER;
             this.ebp.Name = "ebp";
             this.ebp.Primary = false;
-            this.ebp.Size = new System.Drawing.Size(140, 36);
+            this.ebp.Size = new System.Drawing.Size(130, 36);
             this.ebp.TabIndex = 5;
-            this.ebp.Text = "%ebp    0x00000000";
+            this.ebp.Text = "ebp    0x00000000";
             this.ebp.UseVisualStyleBackColor = true;
             // 
             // esp
@@ -561,14 +562,14 @@ namespace PipelineSimulatorMaterial
             this.esp.AutoSize = true;
             this.esp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.esp.Depth = 0;
-            this.esp.Location = new System.Drawing.Point(16, 152);
+            this.esp.Location = new System.Drawing.Point(18, 152);
             this.esp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.esp.MouseState = MaterialSkin.MouseState.HOVER;
             this.esp.Name = "esp";
             this.esp.Primary = false;
-            this.esp.Size = new System.Drawing.Size(139, 36);
+            this.esp.Size = new System.Drawing.Size(129, 36);
             this.esp.TabIndex = 4;
-            this.esp.Text = "%esp    0x00000000";
+            this.esp.Text = "esp    0x00000000";
             this.esp.UseVisualStyleBackColor = true;
             // 
             // ebx
@@ -576,14 +577,14 @@ namespace PipelineSimulatorMaterial
             this.ebx.AutoSize = true;
             this.ebx.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ebx.Depth = 0;
-            this.ebx.Location = new System.Drawing.Point(16, 117);
+            this.ebx.Location = new System.Drawing.Point(18, 117);
             this.ebx.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ebx.MouseState = MaterialSkin.MouseState.HOVER;
             this.ebx.Name = "ebx";
             this.ebx.Primary = false;
-            this.ebx.Size = new System.Drawing.Size(140, 36);
+            this.ebx.Size = new System.Drawing.Size(130, 36);
             this.ebx.TabIndex = 3;
-            this.ebx.Text = "%ebx    0x00000000";
+            this.ebx.Text = "ebx    0x00000000";
             this.ebx.UseVisualStyleBackColor = true;
             // 
             // edx
@@ -591,14 +592,14 @@ namespace PipelineSimulatorMaterial
             this.edx.AutoSize = true;
             this.edx.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.edx.Depth = 0;
-            this.edx.Location = new System.Drawing.Point(16, 82);
+            this.edx.Location = new System.Drawing.Point(18, 82);
             this.edx.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.edx.MouseState = MaterialSkin.MouseState.HOVER;
             this.edx.Name = "edx";
             this.edx.Primary = false;
-            this.edx.Size = new System.Drawing.Size(140, 36);
+            this.edx.Size = new System.Drawing.Size(130, 36);
             this.edx.TabIndex = 2;
-            this.edx.Text = "%edx    0x00000000";
+            this.edx.Text = "edx    0x00000000";
             this.edx.UseVisualStyleBackColor = true;
             // 
             // ecx
@@ -606,14 +607,14 @@ namespace PipelineSimulatorMaterial
             this.ecx.AutoSize = true;
             this.ecx.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ecx.Depth = 0;
-            this.ecx.Location = new System.Drawing.Point(16, 47);
+            this.ecx.Location = new System.Drawing.Point(18, 47);
             this.ecx.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ecx.MouseState = MaterialSkin.MouseState.HOVER;
             this.ecx.Name = "ecx";
             this.ecx.Primary = false;
-            this.ecx.Size = new System.Drawing.Size(140, 36);
+            this.ecx.Size = new System.Drawing.Size(130, 36);
             this.ecx.TabIndex = 1;
-            this.ecx.Text = "%ecx    0x00000000";
+            this.ecx.Text = "ecx    0x00000000";
             this.ecx.UseVisualStyleBackColor = true;
             // 
             // eax
@@ -621,14 +622,14 @@ namespace PipelineSimulatorMaterial
             this.eax.AutoSize = true;
             this.eax.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.eax.Depth = 0;
-            this.eax.Location = new System.Drawing.Point(16, 12);
+            this.eax.Location = new System.Drawing.Point(18, 12);
             this.eax.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.eax.MouseState = MaterialSkin.MouseState.HOVER;
             this.eax.Name = "eax";
             this.eax.Primary = false;
-            this.eax.Size = new System.Drawing.Size(140, 36);
+            this.eax.Size = new System.Drawing.Size(130, 36);
             this.eax.TabIndex = 0;
-            this.eax.Text = "%eax    0x00000000";
+            this.eax.Text = "eax    0x00000000";
             this.eax.UseVisualStyleBackColor = true;
             // 
             // materialTabSelector1
@@ -1808,6 +1809,10 @@ namespace PipelineSimulatorMaterial
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timer3
+            // 
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1975,6 +1980,7 @@ namespace PipelineSimulatorMaterial
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
+        private Timer timer3;
 
 
 

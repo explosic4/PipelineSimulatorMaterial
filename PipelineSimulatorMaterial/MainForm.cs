@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MaterialSkin;
@@ -13,8 +14,8 @@ namespace PipelineSimulatorMaterial
         private static ListViewItem foundItem;
 
         private static int timer1Cnt;
-
         private static int timer2Cnt;
+        private static int timer3Cnt;
 
         public MainForm( )
         {
@@ -210,6 +211,24 @@ namespace PipelineSimulatorMaterial
             //btnProcessOptions.Hide( );
             //btnStop.Show( );
 
+            timer3.Interval = 1000;
+            if ( rbtn1Hz.Checked )
+            {
+                timer3.Interval = 1000;
+            }
+            if ( rbtn5Hz.Checked )
+            {
+                timer3.Interval = 200;
+            }
+            if ( rbtn10Hz.Checked )
+            {
+                timer3.Interval = 100;
+            }
+            if ( rbtn50Hz.Checked )
+            {
+                timer3.Interval = 20;
+            }
+
             if ( !Pipeline.IsRuning )
             {
                 Pipeline.StartRuning( );
@@ -218,7 +237,7 @@ namespace PipelineSimulatorMaterial
             Pipeline.Step( this );
             ProcessDisplay( );
             MemoryDisplay( );
-            TabpageAnimation( );
+            timer3.Enabled = true;
         }
 
         private void btnNextBreakpoint_Click( object sender, EventArgs e )
@@ -355,6 +374,10 @@ namespace PipelineSimulatorMaterial
             if ( timer1Cnt == 0 )
             {
                 Pipeline.Step( this );
+                if ( timer1.Interval >= 200 )
+                {
+                  fcircle.Focus( );
+                }
             }
             tabProcess.SelectTab( timer1Cnt );
             timer1Cnt++;
@@ -362,19 +385,40 @@ namespace PipelineSimulatorMaterial
 
         private void timer2_Tick( object sender, EventArgs e )
         {
-            /*if ( timer2Cnt == -1 )
-            {
-               timer1.Enabled = false;
-               return;
-            }*/
 
             timer2Cnt %= 5;
             if ( timer2Cnt == 0 )
             {
                 Pipeline.StepBreakPoint( this );
+                if ( timer1.Interval >= 200 )
+                {
+                    fcircle.Focus( );
+                }
             }
             tabProcess.SelectTab( timer2Cnt );
             timer2Cnt++;
+        }
+
+        private void timer3_Tick( object sender, EventArgs e )
+        {
+
+            if ( timer3Cnt == 5 )
+            {
+                timer3Cnt = 0;
+                timer3.Enabled = false;
+                return;
+            }
+
+            if ( timer3Cnt == 0 )
+            {
+                if ( timer3.Interval >= 200 )
+                {
+                    fcircle.Focus( );
+                }
+            }
+
+            tabProcess.SelectTab( timer3Cnt );
+            timer3Cnt++;
         }
 
         public void TabpageAnimation( )
@@ -384,9 +428,21 @@ namespace PipelineSimulatorMaterial
                 return;
             }
 
-            var index = tabProcess.SelectedIndex;
-            index = ( index + 1 ) % 5;
-            tabProcess.SelectTab( index );
+            for ( var cnt = 0; cnt < 5; cnt ++ )
+            {
+
+
+                if ( cnt == 0 )
+                {
+                    Pipeline.Step( this );
+                    if ( timer1.Interval >= 200 )
+                    {
+                        fcircle.Focus( );
+                    }
+                }
+
+                tabProcess.SelectTab( cnt );
+            }
         }
 
         private void mnuitDisableBreakpoint_Click( object sender, EventArgs e )
@@ -558,6 +614,7 @@ namespace PipelineSimulatorMaterial
                 searchText.Focus( );
             }
         }
+
 
     }
 }

@@ -338,12 +338,48 @@ namespace PipelineSimulatorMaterial
             mainForm.wdste.Text = "dstE    " + PipeConvert.Byte2S( (byte) ( W_dstE ) );
             mainForm.wdstm.Text = "dstM    " + PipeConvert.Byte2S( (byte) ( W_dstM ) );
 
-            if ( mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ) )
+            if(mainForm.eax.Text != "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] ))
             {
-                // mainForm.Trigger(mainForm.eax,EventArgs.Empty);//相当于鼠标点击触发
-                //mainForm.eax.OnClick( EventArgs.Empty );
-            } //*/
-
+                mainForm.eax.Text = "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] );
+                mainForm.eax.Focus( );
+            }
+            if ( mainForm.ecx.Text != "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] ) )
+            {
+                mainForm.ecx.Text = "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] );
+                mainForm.ecx.Focus( );
+            }
+            if ( mainForm.edx.Text != "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] ) )
+            {
+                mainForm.edx.Text = "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] );
+                mainForm.edx.Focus( );
+            }
+            if ( mainForm.ebx.Text != "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] ) )
+            {
+                mainForm.ebx.Text = "ebx    " + PipeConvert.LitEnd2S( Registers[ 3 ] );
+                mainForm.ebx.Focus( );
+            }
+            if ( mainForm.esp.Text != "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] ) )
+            {
+                mainForm.esp.Text = "esp    " + PipeConvert.LitEnd2S( Registers[ 4 ] );
+                mainForm.esp.Focus( );
+                Debug.WriteLine( "esp changed" );
+            }
+            if ( mainForm.ebp.Text != "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] ) )
+            {
+                mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
+                mainForm.ebp.Focus( );
+            }
+            if ( mainForm.esi.Text != "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] ) )
+            {
+                mainForm.esi.Text = "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] );
+                mainForm.esi.Focus( );
+            }
+            if ( mainForm.edi.Text != "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] ) )
+            {
+                mainForm.edi.Text = "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] );
+                mainForm.edi.Focus( );
+            }
+            /*
             mainForm.eax.Text = "eax    " + PipeConvert.LitEnd2S( Registers[ 0 ] );
             mainForm.ecx.Text = "ecx    " + PipeConvert.LitEnd2S( Registers[ 1 ] );
             mainForm.edx.Text = "edx    " + PipeConvert.LitEnd2S( Registers[ 2 ] );
@@ -352,7 +388,7 @@ namespace PipelineSimulatorMaterial
             mainForm.ebp.Text = "ebp    " + PipeConvert.LitEnd2S( Registers[ 5 ] );
             mainForm.esi.Text = "esi     " + PipeConvert.LitEnd2S( Registers[ 6 ] );
             mainForm.edi.Text = "edi     " + PipeConvert.LitEnd2S( Registers[ 7 ] );
-
+            */
             mainForm.fstall.Text = "";
             mainForm.dstall.Text = "";
             mainForm.estall.Text = "";
@@ -396,6 +432,7 @@ namespace PipelineSimulatorMaterial
                 mainForm.wstall.Show( );
             }
         }
+
 
         public static void DisplyMemory( MainForm mainForm )
         {

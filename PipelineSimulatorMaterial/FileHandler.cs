@@ -96,6 +96,11 @@ namespace PipelineSimulatorMaterial
 
         public static void WrtiePipeInfo( int cycle )
         {
+            if ( sw == null )
+            {
+                return;
+            }
+
             sw.WriteLine( "Cycle_" + Convert.ToString( cycle ) );
             sw.WriteLine( "--------------------" );
             sw.WriteLine( "FETCH:" );
